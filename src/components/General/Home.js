@@ -1,9 +1,9 @@
 import React from 'react'
 import {CssBaseline, makeStyles, Button} from '@material-ui/core'
 import Banner from './Banner'
-import RoomCard from './RoomCard'
 import DatePicker from './DatePicker'
 import {useState} from 'react'
+import { Link } from "react-router-dom"
 
 
 const Home = () => {
@@ -24,16 +24,12 @@ const Home = () => {
           {
             showdates && <DatePicker/> 
           }
-          <Banner/>
-          <div className={classes.section}>
-            <RoomCard/>
-            <RoomCard/>
-            <RoomCard/>
-            <RoomCard/>
-          </div>
-         
+          <Banner/>         
       </div>
     </CssBaseline>
+    <div style={{ width : "40%", "background-color": "black"}}>
+      <Link to="/ciudades" style={{ color : "white"}}>Ver todas las ciudades</Link>
+    </div>
     </>
   )
 }

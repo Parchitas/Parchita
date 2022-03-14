@@ -10,86 +10,92 @@ import LoginOrHome from "./components/Intermedios/LoginOrHome"
 import SearchPage from './components/General/SearchPage';
 import {
   BrowserRouter,
-  Route, 
-  Routes } from "react-router-dom"
-import {useState} from "react"
+  Route,
+  Routes
+} from "react-router-dom"
+import { useState } from "react"
 import firebaseApp from './firebase/credenciales';
-import {getAuth, onAuthStateChanged} from "firebase/auth"
-import {getFirestore,doc,getDoc} from "firebase/firestore"
-const auth= getAuth(firebaseApp)
-const firestore= getFirestore(firebaseApp)
+import { getAuth, onAuthStateChanged } from "firebase/auth"
+import { getFirestore, doc, getDoc } from "firebase/firestore"
+import CiudadesLista from './components/CiudadesLista/CiudadesLista';
+import CiudadDetalles from './components/CiudadDetalles/CiudadDetalles';
+import HotelDetalles from './components/HotelDetalles/HotelDetalles';
+const auth = getAuth(firebaseApp)
+const firestore = getFirestore(firebaseApp)
 
 function App() {
-  const [user, setUser]=useState(null)
+  const [user, setUser] = useState(null)
 
-  async function getRol(uid){
-    const docuRef=doc(firestore,`usuarios/${uid}`)
-    const docuCifrada= await getDoc(docuRef)
+  async function getRol(uid) {
+    const docuRef = doc(firestore, `usuarios/${uid}`)
+    const docuCifrada = await getDoc(docuRef)
     const infoFinal = docuCifrada.data().rol
     return infoFinal
 
 
   }
-   function setUserWithFirebaseRol(usuarioFirebase){
+  function setUserWithFirebaseRol(usuarioFirebase) {
     getRol(usuarioFirebase.uid).then(
-      (rol)=>{
-        const userData={
-          uid:usuarioFirebase.uid,
-          email:usuarioFirebase.email,
-          rol:rol,
-       
+      (rol) => {
+        const userData = {
+          uid: usuarioFirebase.uid,
+          email: usuarioFirebase.email,
+          rol: rol,
+
         };
         setUser(userData);
       }
     );
-   }
-  onAuthStateChanged(auth, (usuarioFirebase)=>{
-    if(usuarioFirebase){
-      
-      if (!user){
+  }
+  onAuthStateChanged(auth, (usuarioFirebase) => {
+    if (usuarioFirebase) {
+
+      if (!user) {
         setUserWithFirebaseRol(usuarioFirebase)
       }
-      
-    }else{
+
+    } else {
       setUser(null);
     }
   });
-  
-  function headersDataValor(){
-    
-    if(!user){
-      return <HeaderVisitante/>
-    }else if(user.rol="usuario"){
-      return <HeaderAdmin/>
 
-    }else if(user.rol="admin"){
-      return <HeaderUsuario/>
+  function headersDataValor() {
+
+    if (!user) {
+      return <HeaderVisitante />
+    } else if (user.rol = "usuario") {
+      return <HeaderAdmin />
+
+    } else if (user.rol = "admin") {
+      return <HeaderUsuario />
 
     }
   }
 
- 
+
 
   return (
     <BrowserRouter>
-      
+
       {
         headersDataValor()
 
       }
 
       <Routes>
-        <Route index element={<Home/>}/>
-        <Route path = "/search" element = {<SearchPage />} />
-      
-        <Route path = "/login" element = { user ? <Home/>:<Login/> } /> 
-        
-        
-        <Route path = "*" element = { <NotFound/>} />
-        
+        <Route index element={<Home />} />
+        <Route path="/search" element={<SearchPage />} />
+
+        <Route path="/login" element={user ? <Home /> : <Login />} />
+        <Route path="/ciudades" element={<CiudadesLista/>} />
+        <Route path="/ciudades/:ciudadID" element={<CiudadDetalles/>}/>
+        <Route path="/ciudades/:ciudadID/hoteles/:hotelID" element={<HotelDetalles/>}/>
+
+        <Route path="*" element={<NotFound />} />
+
       </Routes>
-        
-      
+
+
     </BrowserRouter>
   );
 }
