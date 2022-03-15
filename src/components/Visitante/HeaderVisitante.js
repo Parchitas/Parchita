@@ -27,32 +27,21 @@ const HeaderVisitante = () => {
     const handleDrawerOpen = () => {
       setDrawerOpen(true)
     }
+
     const handleDrawerClose= () =>{
       setDrawerOpen(false)
     }
     
-    
-    
-
     const headersData=["Sign in", "Previous bookings"]
-  
     const getDrawerChoices= () =>{
       return headersData.map((data,indice)=>{
-
         return (
           <List>
             <ListItem >{data} </ListItem>
-            
           </List>
         )
-       
-        
       })
-      
-
     }
-
-
 
     return (
       <Toolbar className={classes.toolbar}>
@@ -84,17 +73,10 @@ const HeaderVisitante = () => {
           
             </div>
           </Link>
-
-        
-
       </Toolbar>
 
     )
-
   }
-
-
-
 
   const displayDesktop=()=>( 
     <Toolbar className={classes.toolbar}>
@@ -116,13 +98,13 @@ const HeaderVisitante = () => {
     </Toolbar>
   )
   return (
-    
    
     <AppBar className={classes.root}>
         { 
           tablet? displayTablet():displayDesktop()
         }
     </AppBar>
+    
   )
 }
 

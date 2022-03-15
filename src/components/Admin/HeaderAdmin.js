@@ -5,12 +5,8 @@ import logo from "../../imagenes/parchitaLogo.png"
 import SearchIcon from "@material-ui/icons/Search"
 import MenuIcon from "@material-ui/icons/Menu"
 import { Link } from "react-router-dom"
-import firebaseApp from '../../firebase/credenciales';
-
-import {getAuth, signOut} from "firebase/auth"
-
-const auth= getAuth(firebaseApp)
-
+import {auth} from '../../firebase/credenciales';
+import { signOut} from "firebase/auth"
 
 const HeaderAdmin = () => {
  

@@ -1,21 +1,11 @@
-import React from 'react'
+import React from "react"
 import {makeStyles} from "@material-ui/core"
 import {useState} from "react"
-import firebaseApp from "../../firebase/credenciales"
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
-} from "firebase/auth"
-import {getFirestore, doc, setDoc} from "firebase/firestore"
-
-const auth=getAuth(firebaseApp)
-
-
-
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth"
+import {doc, setDoc} from "firebase/firestore"
+import {auth, db, googleProvider, facebookProvider, twitterProvider, githubProvider} from "../../firebase/credenciales"
 
 const Login = () => {
-  const firestore= getFirestore(firebaseApp)
   const classes=useStyle()
   const [isRegistrando,setIsRegistrando]=useState(false)
   
@@ -31,7 +21,7 @@ const Login = () => {
     console.log(infoUsuario)
 
 
-    const docuRef =  doc(firestore,`usuarios/${infoUsuario.user.uid}`)
+    const docuRef =  doc(db,`usuarios/${infoUsuario.user.uid}`)
     setDoc(docuRef, {correo:email,rol:"usuario"})
 
   } 
@@ -47,6 +37,25 @@ const Login = () => {
     }
 
   }
+
+  // const handleGoogleLogin = async () => {
+  //   const response = await signInWithPopup(auth, googleProvider);
+  //   sessionCheck(response)
+  // };
+  // const handleFacebookLogin = async () => {
+  //   const response = await signInWithPopup(auth, facebookProvider);
+  //   sessionCheck(response)
+  // };
+  // const handleTwitterLogin = async () => {
+  //   const response = await signInWithPopup(auth, twitterProvider);
+  //   sessionCheck(response)
+  // };
+  // const handleGithubLogin = async () => {
+  //   const response = await signInWithPopup(auth, githubProvider);
+  //   sessionCheck(response)
+  // };
+  
+  
   return (
     <div>
       <form onSubmit={submitHandler}>
@@ -62,10 +71,23 @@ const Login = () => {
             value={isRegistrando ? "Registrar" : "Iniciar Sesión"}
           />
         </label>
+        {/* <button className={styles.submits} type="button" onClick={handleGoogleLogin}>
+          <img className={styles.iconPic} src =" "></img>
+        </button>     
+        <button className={styles.submits} type="button" onClick={handleFacebookLogin}>
+          <img className={styles.iconPic} src =" "></img>
+        </button>     
+        <button className={styles.submits} type="button" onClick={handleTwitterLogin}>
+          <img className={styles.iconPic} src =" "></img>
+        </button>     
+        <button className={styles.submits} type="button" onClick={handleGithubLogin}>
+          <img className={styles.iconPic} src =" "></img>
+        </button>      */}
       </form>
       <button onClick={()=> setIsRegistrando(!isRegistrando)}>
         {isRegistrando ? "Ya Tengo Una Cuenta" : "Quiero Registrarme"}
       </button>
+
 
     </div>
     
