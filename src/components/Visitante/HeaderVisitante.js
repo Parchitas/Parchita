@@ -37,7 +37,7 @@ const HeaderVisitante = () => {
       return headersData.map((data,indice)=>{
         return (
           <List>
-            <ListItem >{data} </ListItem>
+            <ListItem key={Math.random()*10} >{data} </ListItem>
           </List>
         )
       })

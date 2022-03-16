@@ -13,9 +13,9 @@ import { useState } from "react"
 import {auth, db} from './firebase/credenciales';
 import { onAuthStateChanged } from "firebase/auth"
 import { doc, getDoc } from "firebase/firestore"
-import CiudadesLista from './components/CiudadesLista/CiudadesLista';
 import CiudadDetalles from './components/CiudadDetalles/CiudadDetalles';
 import HotelDetalles from './components/HotelDetalles/HotelDetalles';
+import CiudadesPage from './pages/CiudadesPage';
 
 
 function App() {
@@ -82,7 +82,7 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
 
         <Route path="/login" element={user ? <Home /> : <Login />} />
-        <Route path="/ciudades" element={<CiudadesLista/>} />
+        <Route path="/ciudades" element={<CiudadesPage/>} />
         <Route path="/ciudades/:ciudadID" element={<CiudadDetalles/>}/>
         <Route path="/ciudades/:ciudadID/hoteles/:hotelID" element={<HotelDetalles/>}/>
 
