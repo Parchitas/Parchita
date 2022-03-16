@@ -8,26 +8,21 @@ import Login from "./components/Logueo/Login"
 import DashBoard from "./components/Admin/DashBoard"
 import LoginOrHome from "./components/Intermedios/LoginOrHome"
 import SearchPage from './components/General/SearchPage';
-import {
-  BrowserRouter,
-  Route,
-  Routes
-} from "react-router-dom"
+import {BrowserRouter, Route, Routes} from "react-router-dom"
 import { useState } from "react"
-import firebaseApp from './firebase/credenciales';
-import { getAuth, onAuthStateChanged } from "firebase/auth"
-import { getFirestore, doc, getDoc } from "firebase/firestore"
-import CiudadesLista from './components/CiudadesLista/CiudadesLista';
+import {auth, db} from './firebase/credenciales';
+import { onAuthStateChanged } from "firebase/auth"
+import { doc, getDoc } from "firebase/firestore"
 import CiudadDetalles from './components/CiudadDetalles/CiudadDetalles';
 import HotelDetalles from './components/HotelDetalles/HotelDetalles';
-const auth = getAuth(firebaseApp)
-const firestore = getFirestore(firebaseApp)
+import CiudadesPage from './pages/CiudadesPage';
+
 
 function App() {
+  
   const [user, setUser] = useState(null)
-
   async function getRol(uid) {
-    const docuRef = doc(firestore, `usuarios/${uid}`)
+    const docuRef = doc(db, `usuarios/${uid}`)
     const docuCifrada = await getDoc(docuRef)
     const infoFinal = docuCifrada.data().rol
     return infoFinal
@@ -87,7 +82,7 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
 
         <Route path="/login" element={user ? <Home /> : <Login />} />
-        <Route path="/ciudades" element={<CiudadesLista/>} />
+        <Route path="/ciudades" element={<CiudadesPage/>} />
         <Route path="/ciudades/:ciudadID" element={<CiudadDetalles/>}/>
         <Route path="/ciudades/:ciudadID/hoteles/:hotelID" element={<HotelDetalles/>}/>
 

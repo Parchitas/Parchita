@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles, Typography, InputBase, Button} from "@material-ui/core"
+import { makeStyles, Typography, Button} from "@material-ui/core"
 import background_image from "../../imagenes/Banner.jpg"
 
 
