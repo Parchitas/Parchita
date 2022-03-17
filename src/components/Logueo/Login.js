@@ -1,5 +1,5 @@
 import React from 'react'
-import {makeStyles} from "@material-ui/core"
+import {makeStyles, Card, CardActions, CardContent, Button, Box, TextField, Divider} from "@material-ui/core"
 import {useState} from "react"
 import firebaseApp from "../../firebase/credenciales"
 import {
@@ -48,27 +48,30 @@ const Login = () => {
 
   }
   return (
-    <div>
-      <form onSubmit={submitHandler}>
-        <label>
-          Correo Electronico: 
-          <input type="email" id='email'/>
-        </label>
-        <label>
-          Contraseña: 
-          <input type="password" id='password'/>
-          <input
-            type="submit"
-            value={isRegistrando ? "Registrar" : "Iniciar Sesión"}
-          />
-        </label>
-      </form>
-      <button onClick={()=> setIsRegistrando(!isRegistrando)}>
-        {isRegistrando ? "Ya Tengo Una Cuenta" : "Quiero Registrarme"}
-      </button>
-
-    </div>
-    
+    <>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      
+      <Card>
+        <CardContent>
+              <form onSubmit={submitHandler}>
+              <div>
+              <TextField id="email" type="email" label="Correo" variant="standard" />
+              <br/>
+              <TextField id="password" label="Contraseña" type="password" autoComplete="current-password" variant="standard" />
+              </div>
+            <CardActions>
+              <Button
+                type="submit"
+              >{isRegistrando ? "Registrar" : "Iniciar Sesión"}</Button>
+              <div><Button placement="bottom" onClick={() => setIsRegistrando(!isRegistrando)}>
+                {isRegistrando ? "Ya Tengo Una Cuenta" : "Quiero Registrarme"}
+              </Button></div>
+            </CardActions>
+          </form>
+        </CardContent>
+      </Card>
+  
+      </div></>
   )
 
 }

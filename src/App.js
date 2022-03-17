@@ -29,6 +29,7 @@ function App() {
   async function getRol(uid) {
     const docuRef = doc(firestore, `usuarios/${uid}`)
     const docuCifrada = await getDoc(docuRef)
+    console.log(docuCifrada.data)
     const infoFinal = docuCifrada.data().rol
     return infoFinal
 
