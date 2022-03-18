@@ -1,3 +1,5 @@
+//Aqui llegarian desde el login???
+
 import Register from "../components/Register/Register"
 
 
