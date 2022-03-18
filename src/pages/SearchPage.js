@@ -1,3 +1,5 @@
+//Tenemos una Search Page no se como la usariamos en verdad
+
 import React from 'react'
 
 const SearchPage = () => {

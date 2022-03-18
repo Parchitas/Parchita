@@ -1,21 +1,24 @@
+//React
 import React from 'react';
+import { useState } from "react"
+
+//Pages
 import HeaderAdmin from './components/Admin/HeaderAdmin';
 import HeaderVisitante from './components/Visitante/HeaderVisitante';
 import HeaderUsuario from './components/Usuario/HeaderUsuario';
-import Home from './components/General/Home';
-import NotFound from './components/General/Home';
-import Login from "./components/Logueo/Login"
-import DashBoard from "./components/Admin/DashBoard"
-import LoginOrHome from "./components/Intermedios/LoginOrHome"
-import SearchPage from './components/General/SearchPage';
+import SearchPage from './pages/SearchPage';
 import {BrowserRouter, Route, Routes} from "react-router-dom"
-import { useState } from "react"
-import {auth, db} from './firebase/credenciales';
-import { onAuthStateChanged } from "firebase/auth"
-import { doc, getDoc } from "firebase/firestore"
 import CiudadDetalles from './components/CiudadDetalles/CiudadDetalles';
 import HotelDetalles from './components/HotelDetalles/HotelDetalles';
 import CiudadesPage from './pages/CiudadesPage';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import NotFound from './components/NotFound/NotFound';
+
+//Esto lo quiero mover de aqui y que manejemos todo esto con context
+import {auth, db} from './firebase/credenciales';
+import { onAuthStateChanged } from "firebase/auth"
+import { doc, getDoc } from "firebase/firestore"
 
 
 function App() {
@@ -78,14 +81,12 @@ function App() {
       }
 
       <Routes>
-        <Route index element={<Home />} />
+        <Route index element={<HomePage />} />
         <Route path="/search" element={<SearchPage />} />
-
-        <Route path="/login" element={user ? <Home /> : <Login />} />
+        <Route path="/login" element={user ? <HomePage /> : <LoginPage />} />
         <Route path="/ciudades" element={<CiudadesPage/>} />
         <Route path="/ciudades/:ciudadID" element={<CiudadDetalles/>}/>
         <Route path="/ciudades/:ciudadID/hoteles/:hotelID" element={<HotelDetalles/>}/>
-
         <Route path="*" element={<NotFound />} />
 
       </Routes>

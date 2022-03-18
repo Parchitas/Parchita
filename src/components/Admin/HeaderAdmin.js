@@ -31,30 +31,20 @@ const HeaderAdmin = () => {
       setDrawerOpen(false)
     }
     
-    
-    
-
     const headersData=["My Account", "Previous bookings", "Dashboard", "Log out"]
   
     const getDrawerChoices= () =>{
-     
-
-        return (
-          <List>
-            <ListItem >My Account </ListItem>
-            <ListItem >Previous bookings </ListItem>
-            <ListItem >Dashboard </ListItem>
-            <ListItem ><button onClick={()=>signOut(auth)}>Log out</button> </ListItem>
-          </List>
-        )
+  
+      return (
+        <List>
+          <ListItem >My Account </ListItem>
+          <ListItem >Previous bookings </ListItem>
+          <ListItem >Dashboard </ListItem>
+          <ListItem ><button onClick={()=>signOut(auth)}>Log out</button> </ListItem>
+        </List>
+      )
        
-        
-      
-      
-
     }
-
-
 
     return (
       <Toolbar className={classes.toolbar}>
@@ -83,11 +73,7 @@ const HeaderAdmin = () => {
             <Avatar className={classes.avatar}/>
 
           </div>
-
-        
-
       </Toolbar>
-
     )
 
   }
@@ -172,7 +158,6 @@ const useStyle=makeStyles((theme)=>({
     marginLeft: theme.spacing(2),
 
   }
-  
 
 }))
 
