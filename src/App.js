@@ -87,7 +87,6 @@ function App() {
         <Route path="/ciudades/:ciudadID/hoteles/:hotelID" element={<HotelDetalles/>}/>
 
         <Route path="*" element={<NotFound />} />
-
       </Routes>
 
 
