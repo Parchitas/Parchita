@@ -5,6 +5,7 @@ import logo from "../../imagenes/parchitaLogo.png"
 import SearchIcon from "@material-ui/icons/Search"
 import MenuIcon from "@material-ui/icons/Menu"
 import { Link } from "react-router-dom"
+
 const HeaderUsuario = () => {
  
   const [tablet,setTablet]=useState(true)
@@ -33,6 +34,7 @@ const HeaderUsuario = () => {
     const headersData=["My Account", "Previous bookings", "Log out"]
   
     const getDrawerChoices= () =>{
+
       return headersData.map((data,indice)=>{
 
         return (
@@ -40,24 +42,21 @@ const HeaderUsuario = () => {
             <ListItem >{data} </ListItem>
           </List>
         )
-       
-        
+
       })
-      
-
     }
-
-
 
     return (
       <Toolbar className={classes.toolbar}>
+
         <IconButton {...{edge:"start",
           "aria-label":"menu",
           "aria-haspopup":"true",
           onClick: handleDrawerOpen,
-
           }}>
+
           <MenuIcon fontSize='large'/>
+
         </IconButton>
           <Drawer {...{
             anchor:"left",
@@ -68,17 +67,17 @@ const HeaderUsuario = () => {
             <div>{getDrawerChoices()}</div>
 
           </Drawer> 
+
           <Link to="/">
             <img src={logo} className={classes.logo} alt="logo"/>
           </Link>
+
           <div className={classes.right}>
+
             <Typography>Sign in</Typography>
             <Avatar className={classes.avatar}/>
 
           </div>
-
-        
-
       </Toolbar>
 
     )
@@ -105,17 +104,18 @@ const HeaderUsuario = () => {
     </Toolbar>
   )
   return (
-    
-   
+
     <AppBar className={classes.root}>
         { 
           tablet? displayTablet():displayDesktop()
         }
     </AppBar>
+
   )
 }
 
 const useStyle=makeStyles((theme)=>({
+
   root:{
     position:"sticky",
     top: "0",
@@ -145,7 +145,6 @@ const useStyle=makeStyles((theme)=>({
     minWidth:"300px",
     padding : theme.spacing(1),
     margin: theme.spacing(1),
-
 
   },
   input : {
