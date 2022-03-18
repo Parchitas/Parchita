@@ -13,7 +13,7 @@ const Home = () => {
     <>
     <CssBaseline>
       <div className={classes.root}>
-          <div className={classes.dates}>
+         {/* <div className={classes.dates}>
             <Button onClick={()=>setShowdates(!showdates)}>
               {
                 showdates ? "Hide" : "Search Dates"
@@ -23,7 +23,7 @@ const Home = () => {
           </div>
           {
             showdates && <DatePicker/> 
-          }
+          }*/}
           <Banner/>         
       </div>
     </CssBaseline>

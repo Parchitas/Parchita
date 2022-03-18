@@ -5,21 +5,20 @@ import HeaderUsuario from './components/Usuario/HeaderUsuario';
 import Home from './components/General/Home';
 import NotFound from './components/General/Home';
 import Login from "./components/Logueo/Login"
-import DashBoard from "./components/Admin/DashBoard"
-import LoginOrHome from "./components/Intermedios/LoginOrHome"
 import SearchPage from './components/General/SearchPage';
-import {BrowserRouter, Route, Routes} from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useState } from "react"
-import {auth, db} from './firebase/credenciales';
+import { auth, db } from './firebase/credenciales';
 import { onAuthStateChanged } from "firebase/auth"
 import { doc, getDoc } from "firebase/firestore"
 import CiudadDetalles from './components/CiudadDetalles/CiudadDetalles';
 import HotelDetalles from './components/HotelDetalles/HotelDetalles';
 import CiudadesPage from './pages/CiudadesPage';
+import ReservaPage from './pages/ReservaPage';
 
 
 function App() {
-  
+
   const [user, setUser] = useState(null)
   async function getRol(uid) {
     const docuRef = doc(db, `usuarios/${uid}`)
@@ -82,10 +81,10 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
 
         <Route path="/login" element={user ? <Home /> : <Login />} />
-        <Route path="/ciudades" element={<CiudadesPage/>} />
-        <Route path="/ciudades/:ciudadID" element={<CiudadDetalles/>}/>
-        <Route path="/ciudades/:ciudadID/hoteles/:hotelID" element={<HotelDetalles/>}/>
-
+        <Route path="/ciudades" element={<CiudadesPage />} />
+        <Route path="/ciudades/:ciudadID" element={<CiudadDetalles />} />
+        <Route path="/ciudades/:ciudadID/hoteles/:hotelID" element={<HotelDetalles />} />
+        <Route path="/reservar" element={<ReservaPage />} />
         <Route path="*" element={<NotFound />} />
 
       </Routes>

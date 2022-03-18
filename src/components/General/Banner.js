@@ -9,11 +9,11 @@ const Banner = () => {
   return (
     
     <div className={classes.root }>
-      <div className={classes.info }>
+      {/*<div className={classes.info }>
         <Typography variant="h2"> Have Fun</Typography>
         <Button variant="contained">Check our Rooms</Button>
       </div>
-      
+      */}
     </div>
   )
 }
@@ -30,7 +30,7 @@ const useStyle=makeStyles((theme)=>({
     info: {
       backgroundColor: "#000",
       color: "#fff",
-      width: "350px",
+      width: "700px",
       padding: theme.spacing(2),
   
       "& h2":{
