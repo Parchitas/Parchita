@@ -1,12 +1,12 @@
 import React from 'react'
 import {CssBaseline, makeStyles, Button} from '@material-ui/core'
-import Banner from './Banner'
-import DatePicker from './DatePicker'
+import Banner from '../components/Banner/Banner'
+import DatePicker from '../components/General/DatePicker'
 import {useState} from 'react'
 import { Link } from "react-router-dom"
 
 
-const Home = () => {
+const HomePage = () => {
   const classes=useStyle()
   const [showdates, setShowdates]= useState(false)
   return (
@@ -67,4 +67,4 @@ const useStyle=makeStyles((theme)=>({
 
 }))
 
-export default Home
+export default HomePage
