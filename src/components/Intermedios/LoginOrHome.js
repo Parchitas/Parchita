@@ -1,13 +1,13 @@
 import React from 'react'
-import Login from "../Logueo/Login"
-import Home from "../General/Home"
+import Login from "../../pages/LoginPage"
+import HomePage from '../../pages/HomePage';
 const LoginOrHome = (props) => {
     const user = props.user;
     function LogHom(){
         if (user==null){
             return <Login/>
         }else{
-            return <Home/>
+            return <HomePage/>
     
         }
 
@@ -17,10 +17,6 @@ const LoginOrHome = (props) => {
         
         LogHom()
      )
-    
-   
-  
   }
-
 
 export default LoginOrHome

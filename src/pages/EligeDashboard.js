@@ -1,0 +1,1 @@
+//Pantalla para elegir a que dashboard el admin quiere ir si al de hoteles o al de ciudades
