@@ -1,5 +1,5 @@
 import React from 'react'
-import Login from "../Logueo/Login"
+import Login from "../../pages/LoginPage"
 import HomePage from '../../pages/HomePage';
 const LoginOrHome = (props) => {
     const user = props.user;
