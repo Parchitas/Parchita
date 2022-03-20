@@ -5,25 +5,24 @@ import PayWithPaypal from './Paypal'
 import TipoHabitacion from '../TipoHabitacion/TipoHabitacion'
 
 
-class pago extends React.Component {
-
-    state = {
+function pago (props) {
+    
+    props = {
         total: 0.00,
         checkoutList:[],
         isCheckout: false,
-        name: this.props.name
     }
     
     
-    onAdd = (name, value) =>{
+    function onAdd(name, value){
         console.log(name, value)
         this.setState({
-            total: this.state.total + value,
-            checkoutList: [...this.state.checkoutList, {name, value}]
+            total: props.total + value,
+            checkoutList: [...props.checkoutList, {name, value}]
         })
     }
-    render () {
-        const {total, checkoutList, isCheckout} = this.state
+
+        const {total, checkoutList, isCheckout} = props
         console.log(total)
         console.log(this.state.name);
         if (isCheckout){
@@ -43,7 +42,7 @@ class pago extends React.Component {
                         <div className='checkout-total'>Total: USD {total}/-</div>
                         <Button className='checkout-button' onClick={() => {
                     if (checkoutList.length){
-                        this.setState({ isCheckout:true })
+                        props.setState({ isCheckout:true })
                     }}
                 }>
                     Checkout {`${checkoutList.length}`}
@@ -52,11 +51,11 @@ class pago extends React.Component {
                     </div>
                 </div>
                 <Home
-                onAdd={this.onAdd}/>
+                onAdd={props.onAdd}/>
                 
                 
             </React.Fragment>
         )
     }
-}
+
 export default pago
