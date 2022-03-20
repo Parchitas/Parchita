@@ -1,69 +1,71 @@
-const express = require('express');
-const cors = require('cors');
-const { json, response } = require('express');
-const request = requires('request');
+import React, {useState, useRef, useEffect} from "react";
+import { ListGroup, ListGroupItem } from "reactstrap";
+//import ReactDOM from "react-dom"
 
-const app = express();
-app.use(cors())
+//const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
+function PayWithPaypal(props) {
+    const {items, total} = props;
+    const [paidFor, setPaidFor] = useState(false)
+    const [error, setError] = useState(null)
+    const paypalRef = useRef()
 
-const CLIENT = 'AfPJMQBHFBvmDRPv2fqRdq4_mLlJhhIUdoeOADVTOlB1hntHqB2nTMhDKvACIai2R3MYE4C6CPNKn01i'
-const SECRET = 'EGnCQkfv0qah69-Ro8cMw5P3_eNQ2PwPVmQGzOKvvR7_T653nQDU75v6eQpkHt-PqyL8sklP0hVnrmKI'
-const PAYPAL_API = 'https://api-m.sandbox.paypal.com'; //'https://api-m.paypal.com'
-
-const auth = {user: CLIENT, pass: SECRET} 
-
-
-const createPayment = (req,res) =>{
-
-    const body = {
-        intent: 'CAPTURE',
-        purchase_units: [{
-            amount: {
-                currency_code: 'USD',
-                value:'80'
+    useEffect(() => {
+        window.paypal
+        .Buttons({
+            createOrder:(data, actions)=>{
+                return actions.order.create({
+                    intent: "CAPTURE",
+                    purchase_units: [{
+                        description: 'Reserve room checkout',
+                        amount: {
+                            currency_code: "USD",
+                            value: 10.00
+                        }
+                    }]
+                })
+            },
+            onApprove: async (data, actions) => {
+                const order = await actions.order.capture();
+                setPaidFor(true);
+                console.log(order)
+            },
+            onError: err => {
+                setError(err)
+                console.error(err)
             }
-        }],
-        application_context:{
-            brand_name: 'Parchita.com',
-            landind_page: 'NO PREFERENCE',
-            user_action: 'PAY_NOW',
-            return_url: 'http://localhost:3000/execute-payment',
-            cancel_url: 'http://localhost:3000/cancel-payment'
-        }
+        }).render(paypalRef.current)
+    },[items])
+
+    if (paidFor){
+        return(
+            <div>
+                Thanks for making the purchase
+            </div>
+        )
     }
 
-    request.post(`${PAYPAL_API}/v2/checkout/orders`,{
-        auth,
-        body,
-        json: true
-    }, (err,response) => {
-        res.json({ data: response.body })
-    })
+    if(error){
+        return(
+            <div>
+                Error in procesing payment.Please try again
+            </div>
+        )
+    }
+
+    return(
+        <div>
+            <ListGroup>
+                {items.map((item,index)=> 
+                    <ListGroupItem key={index}>{item.name} - USD. {item.value}</ListGroupItem>
+                )}
+                <div>Total - USD. {total}</div>
+                <div ref={paypalRef}/>
+            </ListGroup>
+        </div>
+    )
 }
 
-const executePayment = (req, res) => {
-    const token = req.query.token;
-    console.log(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`)
-
-    request.post(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`,{
-        auth,
-        body: {},
-        json: true
-    }, (err,response) => {
-        res.json({ data: response.body})
-    })
-}
-    
+export default PayWithPaypal
 
 
-//     http://localhost:3000/create-payment [POST]
-app.post(`/create-payment`, createPayment)
-
-
-app.get(`/execute-payment`, executePayment)
-
-
-app.listen(3000, () =>{
-console.log(`Comenzamos a generar dinero ---> http://localhost:3000`)
-})

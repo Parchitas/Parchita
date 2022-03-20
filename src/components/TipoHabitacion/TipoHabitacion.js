@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react"
 import { collection, getDoc, getDocs, doc } from "firebase/firestore";
 import { db } from "../../firebase/credenciales"
 import { useNavigate } from "react-router-dom"
+import pago from "../Pagos/CallPaypal";
+// import { useNavigation } from '@react-navigation/native';
+
+
 
 function TipoHabitacion(props) {
 
@@ -10,6 +14,7 @@ function TipoHabitacion(props) {
     console.log(tipo)
     const { id } = tipo
     const navigate = useNavigate()
+    // const navigation = useNavigation();
 
     const [tipoHab, setTipoHab] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -29,11 +34,16 @@ function TipoHabitacion(props) {
     const { nombre, camas, capacidad, comodidades, precioNoche} = tipoHab
 
     const handleClick = () => {
-        console.log("Reservando...")
-        console.log( id)
-        navigate("../reservar" )
-    }
 
+        console.log("Reservando...")
+        console.log( nombre)
+        props.navigation.navigate("/Pagos/CallPaypal", {
+            name: nombre,
+            valor: precioNoche,
+          });
+        //navigate("/Pagos/CallPaypal" )
+    }
+    
     return (<div>
         {loading ? <div></div> :
             <li style={{margin: "20px"}}>

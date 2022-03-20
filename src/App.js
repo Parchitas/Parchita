@@ -12,6 +12,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import NotFound from './components/NotFound/NotFound';
 import ReservaPage from './pages/ReservaPage';
+import CallPaypal from './components/Pagos/CallPaypal'
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/reservar" element={<ReservaPage/>} />
         <Route path="/ciudades/:ciudadID" element={<CiudadDetalles/>}/>
         <Route path="/ciudades/:ciudadID/hoteles/:hotelID" element={<HotelDetalles/>}/>
+        <Route path="/Pagos/CallPaypal" element={<CallPaypal/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
 
