@@ -13,7 +13,7 @@ const Navbar = () => {
     const classes=useStyle()
     const {session, isLoggedIn} = useContext(sessionContext)
     const userName = isLoggedIn ? session.name : "Sign in"
-  
+    const ruta = isLoggedIn ? "/perfil" : "/login"
     useEffect(()=>{
       const responsive = () => window.innerWidth < 900 ? setTablet(true): setTablet(false)
       responsive();
@@ -63,7 +63,7 @@ const Navbar = () => {
             <Link to="/">
               <img src={logo} className={classes.logo} alt="logo"/>
             </Link>
-            <Link to="/login">
+            <Link to={ruta}>
               <div className={classes.right}>
             
                 <Typography>{userName}</Typography>
@@ -85,12 +85,12 @@ const Navbar = () => {
             <InputBase fullWidth inputProps={{className: classes.input}} placeholder="Search here .."/>
             <SearchIcon/>
         </div>
-        <Link to="/login">
+        <Link to={ruta}>
           <div className={classes.right}>
-            
+
               <Typography>{userName}</Typography>
               <Avatar className={classes.avatar}/>
-            
+              
           </div>
         </Link>
       </Toolbar>

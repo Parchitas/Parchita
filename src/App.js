@@ -14,6 +14,7 @@ import RegisterPage from './pages/RegisterPage';
 import NotFound from './components/NotFound/NotFound';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import ReservaPage from './pages/ReservaPage';
+import PerfilUsuarioPage from './pages/PerfilUsuarioPage';
 import {sessionContext} from "../src/context/SessionContext"
 
 
@@ -38,6 +39,14 @@ function App() {
           element={
             <PrivateRoute isAllowed={isLoggedIn}>
               <ReservaPage/>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/perfil"
+          element={
+            <PrivateRoute isAllowed={isLoggedIn}>
+              <PerfilUsuarioPage/>
             </PrivateRoute>
           }
         />
