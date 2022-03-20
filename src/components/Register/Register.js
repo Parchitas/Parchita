@@ -5,20 +5,22 @@ import { sessionContext } from '../../context/SessionContext';
 function Register(){
     
     const navigate = useNavigate();
-    const {register,session} = React.useContext(sessionContext)
+    const {register,session, isLoading} = React.useContext(sessionContext)
 
     const submitHandler = (e) => {
         e.preventDefault()
         const [name, email, password] = e.target
-        register(name.value, email.value, password.value, "usuario")
-        navigate("/");
+        register(name.value, email.value, password.value, "usuario").then(() => {
+            navigate("/")
+          })
     }
 
     
     return(
-        
-        <form onSubmit={submitHandler}>
 
+        <>
+        {isLoading ? <h1>Cargando...</h1> : null}
+        <form onSubmit={submitHandler}>
         <label htmlFor="name">
             Name: 
             <input type="name" id='name'/>
@@ -37,7 +39,7 @@ function Register(){
         <input type="submit" value={"Registrar"}/>
 
         </form>
-
+        </>
     )
 }
 

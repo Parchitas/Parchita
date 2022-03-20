@@ -1,31 +1,45 @@
 import React, { useState, createContext } from 'react';
 import { signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 import { auth, db, googleProvider, facebookProvider, twitterProvider, githubProvider} from '../../src/firebase/credenciales';
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
+const usersCollection = "usuarios";
 export const sessionContext = createContext();
 
 export default function SessionProvider (props){
 
     const [session, setSession] = useState(null);
 
-    const login = (event) => {
-        
-        console.log(event)
+    const [isLoading, setLoading] = useState(false);
 
-        // try {
-        //     const infoUsuario = await signInWithEmailAndPassword(auth, email, password)
-        //     setSession({
-        //         id: infoUsuario.user.uid,
-        //         correo: email,
-        //     })
+    const login = async (email,password) => {
 
-        // } catch (e) {
-        //     console.error("Error: ", e)
-        // }
+        setLoading(true);
+
+        try {
+
+            const infoUsuario = await signInWithEmailAndPassword(auth, email, password);
+            const docRef = doc(db, usersCollection, infoUsuario.user.uid);
+            const docSnap = await getDoc(docRef);
+            const userData = docSnap.data();
+
+            setSession({
+                id: infoUsuario.user.uid,
+                correo: email,
+                name: userData.name,
+                rol: userData.rol
+            })
+
+        } catch (e) {
+            console.error("Error: ", e)
+        }
+
+        setLoading(false);
     }
 
     const register = async (name,email,password,rol) => {
+        
+        setLoading(true);
         
         try {
             const infoUsuario = await createUserWithEmailAndPassword(auth, email, password)
@@ -42,6 +56,8 @@ export default function SessionProvider (props){
         } catch (e) {
             console.error("Error adding document: ", e);
         }
+
+        setLoading(false);
         
     }
 
@@ -49,9 +65,10 @@ export default function SessionProvider (props){
 
     const isAdmin = isLoggedIn && session.rol === "admin";
 
+
     return(
 
-        <sessionContext.Provider  value={{session, setSession, login, register, isLoggedIn, isAdmin}}>
+        <sessionContext.Provider  value={{session, setSession, login, register, isLoggedIn, isAdmin, isLoading}}>
             {props.children}
         </sessionContext.Provider>
 
