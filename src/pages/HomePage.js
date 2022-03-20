@@ -2,28 +2,21 @@ import React from 'react'
 import {CssBaseline, makeStyles, Button} from '@material-ui/core'
 import Banner from '../components/Banner/Banner'
 import DatePicker from '../components/General/DatePicker'
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import { Link } from "react-router-dom"
+import { sessionContext } from "../context/SessionContext"
 
 
 const HomePage = () => {
+
+  const {isAdmin} = useContext(sessionContext)
   const classes=useStyle()
-  const [showdates, setShowdates]= useState(false)
+
   return (
     <>
     <CssBaseline>
+    {isAdmin ? <button>Soy ADMIN</button> : null}
       <div className={classes.root}>
-         {/* <div className={classes.dates}>
-            <Button onClick={()=>setShowdates(!showdates)}>
-              {
-                showdates ? "Hide" : "Search Dates"
-              }
-            </Button> 
-              
-          </div>
-          {
-            showdates && <DatePicker/> 
-          }*/}
           <Banner/>         
       </div>
     </CssBaseline>
