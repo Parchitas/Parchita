@@ -8,14 +8,16 @@ const Login = () => {
 
   const navigate = useNavigate()
   const classes=useStyle()
-  // const {session, login} = sessionContext()
+  const {session, login, isLoading} = React.useContext(sessionContext)
 
   const submitHandler = (e) => {
     e.preventDefault()
     const [email, password] = e.target
-    navigate("/")
+    login(email.value,password.value).then(() => {
+      navigate("/")
+    })
   }
-
+  
   // const handleGoogleLogin = async () => {
   //   const response = await signInWithPopup(auth, googleProvider);
   //   sessionCheck(response)
@@ -35,6 +37,7 @@ const Login = () => {
   
   return (
     <div>
+      {isLoading ? <h1>Cargando...</h1> : null}
       <form onSubmit={submitHandler}>
         <label>
           Correo Electronico: 
