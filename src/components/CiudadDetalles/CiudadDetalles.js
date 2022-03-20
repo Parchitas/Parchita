@@ -1,13 +1,11 @@
 import React from "react"
 import { useParams, useLocation } from "react-router-dom";
 import Hotel from "../Hotel/Hotel"
-import info from "../CiudadesLista/CiudadesLista.json"
 
 function CiudadDetalles() {
     const { ciudadID } = useParams();
     const location = useLocation()
     const { ciudad } = location.state
-    console.log(ciudad.props.ciudad)
     const { id, nombre, descripcion, ambiente, ranking, lugaresInteres, imagenes, hoteles } = ciudad.props.ciudad
     return (<div>
         <h1>{nombre}</h1>
@@ -21,12 +19,13 @@ function CiudadDetalles() {
 
         <div>
             <h2>Hoteles</h2>
-            <ul>
+            {hoteles ?
+                <ul>
 
-                {hoteles.map((hotel) =>
-                    <Hotel key={hotel.id} hotel={hotel} />
-                )}
-            </ul>
+                    {hoteles.map((hotel) =>
+                        <Hotel key={hotel.id} hotel={hotel} />
+                    )}
+                </ul> : <div>No se encuentran hoteles disponibles actualmente en esta ciudad</div>}
         </div>
     </div>);
 }

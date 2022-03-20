@@ -34,9 +34,13 @@ export default function SessionProvider (props){
 
             setSession({
                 id: infoUsuario.user.uid,
+                //id: "17cgV8GIFEPIKuMqEMdr3zGFNFp2",
                 name,
+                //name: "Lionel Andrés",
                 correo: email,
+                //correo: "app@gmail.com",
                 rol,
+                //rol: "usuario"
             })
             
         } catch (e) {
