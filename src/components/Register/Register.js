@@ -1,3 +1,4 @@
+import { Card, CardContent, TextField, CardActions, Button } from "@material-ui/core";
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { sessionContext } from '../../context/SessionContext';
@@ -19,27 +20,22 @@ function Register(){
     return(
 
         <>
-        {isLoading ? <h1>Cargando...</h1> : null}
-        <form onSubmit={submitHandler}>
-        <label htmlFor="name">
-            Name: 
-            <input type="name" id='name'/>
-        </label>
+            {isLoading ? <h1>Cargando...</h1> : null}
+            <br/><div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Card><CardContent>                
+                    <form onSubmit={submitHandler}>
+                        <div>
+        <TextField htmlFor="name" id="name" type="name" label="Nombre" variant="standard" /><br/>             
+        <TextField htmlFor="email" id="email" type="email" label="Correo Electronico" variant="standard" /><br/>               
+        <TextField htmlFor="password" id="password" label="Contraseña" type="password" autoComplete="current-password" variant="standard" />
+                            </div>
+        <CardActions style={{ display: 'flex', justifyContent: 'center' }}>
+                            <Button type="submit" >Registrar</Button>
+                            </CardActions>
 
-        <label htmlFor="email">
-            Correo Electronico: 
-            <input type="email" id='email'/>
-        </label>
-
-        <label htmlFor="password">
-            Contraseña: 
-            <input type="password" id='password'/>
-        </label>
-
-        <input type="submit" value={"Registrar"}/>
-
-        </form>
-        </>
+                    </form>
+                    </CardContent></Card>
+        </div></>
     )
 }
 
