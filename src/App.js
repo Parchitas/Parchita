@@ -14,13 +14,10 @@ import RegisterPage from './pages/RegisterPage';
 import NotFound from './components/NotFound/NotFound';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import ReservaPage from './pages/ReservaPage';
-<<<<<<< HEAD
-import CallPaypal from './components/Pagos/CallPaypal'
-=======
 import PerfilUsuarioPage from './pages/PerfilUsuarioPage';
 import {sessionContext} from "../src/context/SessionContext"
+import CallPaypal from "./components/Pagos/CallPaypal"
 
->>>>>>> main
 
 function App() {
 

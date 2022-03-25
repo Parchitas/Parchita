@@ -5,6 +5,14 @@ import PayWithPaypal from './Paypal'
 import TipoHabitacion from '../TipoHabitacion/TipoHabitacion'
 
 
+function onAdd(name, value){
+    console.log(name, value)
+    this.setState({
+        total: pago.total + value,
+        checkoutList: [...pago.checkoutList, {name, value}]
+    })
+}
+
 function pago (props) {
     
     props = {
@@ -13,14 +21,6 @@ function pago (props) {
         isCheckout: false,
     }
     
-    
-    function onAdd(name, value){
-        console.log(name, value)
-        this.setState({
-            total: props.total + value,
-            checkoutList: [...props.checkoutList, {name, value}]
-        })
-    }
 
         const {total, checkoutList, isCheckout} = props
         console.log(total)
