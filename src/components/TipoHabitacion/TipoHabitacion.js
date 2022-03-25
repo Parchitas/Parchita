@@ -10,8 +10,6 @@ import pago from "../Pagos/CallPaypal";
 function TipoHabitacion(props) {
 
     const { tipo } = props
-    console.log(props)
-    console.log(tipo)
     const { id } = tipo
     const navigate = useNavigate()
     // const navigation = useNavigation();
