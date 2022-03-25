@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom"
 function TipoHabitacion(props) {
 
     const { tipo } = props
-    console.log(props)
-    console.log(tipo)
     const { id } = tipo
     const navigate = useNavigate()
 

@@ -11,18 +11,16 @@ const Login = () => {
   const {session, login, isLoading} = React.useContext(sessionContext)
   const fromPrivateRoute = searchParams.get("fromPrivateRoute")
   const location = useLocation()
-  console.log(location)
-
   const submitHandler = (e) => {
 
     e.preventDefault()
-    const from = location.state?.from?.pathname || "/";
+    console.log(location)
+    const from = (location.state ? location.state.from.pathname :  "/");
     const [email, password] = e.target
-
     login(email.value,password.value).then(() => {
-      navigate(from)
+    navigate(from)
     })
-
+   
   }
   
   // const handleGoogleLogin = async () => {

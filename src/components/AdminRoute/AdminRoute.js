@@ -8,7 +8,6 @@ export default function AdminRoute({children}){
     const {isAdmin} = useContext(sessionContext);
     const location = useLocation();
     if (!isAdmin) {
-        console.log(location)
         return <Navigate to="/login?fromPrivateRoute=true" state={{ from: location }} replace/>
     }
 
