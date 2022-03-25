@@ -1,21 +1,30 @@
 import React from "react";
 import {makeStyles} from "@material-ui/core"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 import { sessionContext } from '../../context/SessionContext';
-//Falta manejar esto por context
 
 const Login = () => {
 
+  const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
-  const classes=useStyle()
-  // const {session, login} = sessionContext()
+  const classes = useStyle()
+  const {session, login, isLoading} = React.useContext(sessionContext)
+  const fromPrivateRoute = searchParams.get("fromPrivateRoute")
+  const location = useLocation()
+  console.log(location)
 
   const submitHandler = (e) => {
-    e.preventDefault()
-    const [email, password] = e.target
-    navigate("/")
-  }
 
+    e.preventDefault()
+    const from = location.state?.from?.pathname || "/";
+    const [email, password] = e.target
+
+    login(email.value,password.value).then(() => {
+      navigate(from)
+    })
+
+  }
+  
   // const handleGoogleLogin = async () => {
   //   const response = await signInWithPopup(auth, googleProvider);
   //   sessionCheck(response)
@@ -35,6 +44,8 @@ const Login = () => {
   
   return (
     <div>
+      {fromPrivateRoute ? <h1>Por favor, inicia sesion para seguir navegando</h1> : null}
+      {isLoading ? <h1>Cargando...</h1> : null}
       <form onSubmit={submitHandler}>
         <label>
           Correo Electronico: 
@@ -65,9 +76,6 @@ const Login = () => {
     </div>
   )
 }
-
 const useStyle=makeStyles((theme)=>({
 }))
-
-
 export default Login;

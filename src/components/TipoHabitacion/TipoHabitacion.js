@@ -37,7 +37,7 @@ function TipoHabitacion(props) {
 
         console.log("Reservando...")
         console.log( nombre)
-        props.navigation.navigate("/Pagos/CallPaypal", {
+        navigate("/Pagos/CallPaypal", {
             name: nombre,
             valor: precioNoche,
           });
