@@ -6,7 +6,6 @@ export default function PrivateRoute({children,isAllowed}){
     const location = useLocation();
 
     if (!isAllowed) {
-        console.log(location)
         return <Navigate to="/login?fromPrivateRoute=true" state={{ from: location }} replace/>
     }
 

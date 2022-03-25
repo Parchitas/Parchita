@@ -12,7 +12,6 @@ const LoginOrHome = (props) => {
         }
 
     }
-    console.log("Mensaje"+user)
      return(
         
         LogHom()
