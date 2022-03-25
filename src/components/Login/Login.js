@@ -1,5 +1,5 @@
 import React from "react";
-import {makeStyles} from "@material-ui/core"
+import {makeStyles, Card, CardActions, CardContent, Button, Box, TextField, Divider} from "@material-ui/core"
 import { useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 import { sessionContext } from '../../context/SessionContext';
 import "../../css/Login.css"
@@ -42,8 +42,6 @@ const Login = () => {
   // };
   
   return (
-   
-
       
       <div className="pagina">
         <div id="contenedor">
@@ -152,6 +150,7 @@ const Login = () => {
       </div>
   
   )
+
 }
 
 const useStyle=makeStyles((theme)=>({
