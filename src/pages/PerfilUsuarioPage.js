@@ -6,7 +6,7 @@ function PerfilUsuarioPage(){
     const {session} = React.useContext(sessionContext)
 
     return(
-        <div>Nombre: {session.name}, Correo: {session.email}</div>
+        <div>Nombre: {session.name}, Correo: {session.correo}</div>
     )
 }
 

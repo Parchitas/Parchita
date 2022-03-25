@@ -21,6 +21,7 @@
     align-items: center;
     justify-content: center;
     height: auto;
+    max-width: 800px;
     width: 80%;
     background-color: rgba(0, 0, 0, 0.418);
     border-radius: 15px;
@@ -48,6 +49,12 @@
     align-items: center;
     border-radius:15em;
 
+}
+
+.error{
+    font-size: 15px;
+    color: red;
+    padding: 5px;
 }
 
 .Formulario{

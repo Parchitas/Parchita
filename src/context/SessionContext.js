@@ -1,6 +1,6 @@
 import React, { useState, createContext } from 'react';
 import { signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
-import { auth, db, googleProvider, facebookProvider, twitterProvider, githubProvider} from '../../src/firebase/credenciales';
+import { auth, db} from '../../src/firebase/credenciales';
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
 const usersCollection = "usuarios";
@@ -61,6 +61,36 @@ export default function SessionProvider (props){
         
     }
 
+    const sessionCheckLogin = async (response) => {
+ 
+        setLoading(true);
+
+        setSession({
+            id: response.user.uid,
+            correo: response.user.email,
+            name: response.user.displayName,
+        })
+
+        setLoading(false);
+        
+    }
+    
+    const sessionCheckRegister = async (response) => {
+        
+        setLoading(true);
+
+        // await setDoc(doc(db, "usuarios", response.user.uid), {name, correo:email, rol});
+
+        // setSession({
+        //     id: response.user.uid,
+        //     correo: response.user.email,
+        //     name: response.user.displayName,
+        //     rol: "usuario",
+        // })
+            
+        setLoading(false);
+    }
+
     const isLoggedIn = session !== null;
 
     const isAdmin = isLoggedIn && session.rol === "admin";
@@ -68,7 +98,7 @@ export default function SessionProvider (props){
 
     return(
 
-        <sessionContext.Provider  value={{session, setSession, login, register, isLoggedIn, isAdmin, isLoading}}>
+        <sessionContext.Provider  value={{session, setSession, login, register, isLoggedIn, sessionCheckLogin, sessionCheckRegister, isAdmin, isLoading}}>
             {props.children}
         </sessionContext.Provider>
 
