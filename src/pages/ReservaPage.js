@@ -1,7 +1,8 @@
-import React, { useState } from "react"
-import { collection, doc, setDoc } from "firebase/firestore";
+import React, { useState, useContext } from "react"
+import { collection, doc, setDoc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { db } from "./../firebase/credenciales";
-import { useLocation } from "react-router-dom"
+import { Navigate, useLocation, useNavigate } from "react-router-dom"
+import { sessionContext } from "../context/SessionContext";
 import moment from "moment"
 
 
@@ -10,11 +11,16 @@ function ReservaPage() {
 
     const location = useLocation()
     const { tipoHabitacion } = location.state
+    const { session } = useContext(sessionContext)
     console.log(tipoHabitacion)
+    console.log(tipoHabitacion.id)
+    const navigate = useNavigate()
+
 
     const [values, setValues] = useState({
         fechaEntrada: "",
         fechaSalida: "",
+        idCliente: session.id
     });
 
     const [mensaje, setMensaje] = useState("");
@@ -42,10 +48,19 @@ function ReservaPage() {
 
         e.preventDefault();
         console.log(values)
-        //const newReservacionRef = doc(collection(db, "reservaciones"));
-        //await setDoc(newReservacionRef, values);
         if (checkDisponibilidad()) {
-            setMensaje("Disponible. (Aquí se redirigía a PagoPage)")
+            const newReservacionRef = await doc(db, 'tipohabitaciones', tipoHabitacion.id)
+            await updateDoc(newReservacionRef, {
+                reservaciones: arrayUnion(values)
+            });
+            navigate("../pago", {
+                state: {
+                    reserva: values,
+                    tipoHabitacion: tipoHabitacion
+                }
+            })
+
+            //setMensaje("Disponible. (Aquí se redirigía a PagoPage)")
         } else {
             setMensaje("La fecha no está disponible. Por favor, selecciona otra.")
         }

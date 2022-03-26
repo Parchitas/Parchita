@@ -18,6 +18,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import ReservaPage from './pages/ReservaPage';
 import PerfilUsuarioPage from './pages/PerfilUsuarioPage';
 import {sessionContext} from "../src/context/SessionContext"
+import PagoPage from './pages/PagoPage';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/register" element={<RegisterPage/>} />
         <Route path="/ciudades" element={<CiudadesPage/>} />
+        <Route path="/pago" element={<PagoPage/>}/>
         <Route
           path="/reservar"
           element={

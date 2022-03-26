@@ -36,7 +36,7 @@ function HotelDetalles() {
                     <div>
                     <h2>Habitaciones disponibles</h2>
                     <ul>
-                            {tipoHabitaciones.map(tipo => <TipoHabitacion key={tipo.id} tipo={tipo} />)}
+                            {tipoHabitaciones.map(tipo => <TipoHabitacion key={tipo.id} tipo={{...tipo, nombreHotel: nombre}} />)}
                         </ul>
 
                     </div>
