@@ -10,6 +10,8 @@ import HomePage from './pages/HomePage';
 import Navbar from './components/Navbar/Navbar';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
+import DashboardCiudadesPage from './pages/DashboardCiudadesPage';
+import DashboardHotelesPage from './pages/DashboardHotelesPage';
 import RegisterPage from './pages/RegisterPage';
 import NotFound from './components/NotFound/NotFound';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
@@ -55,6 +57,22 @@ function App() {
           element={
             <PrivateRoute isAllowed={isAdmin}>
               <DashboardPage/>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashboardCiudades"
+          element={
+            <PrivateRoute isAllowed={isAdmin}>
+              <DashboardCiudadesPage/>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashboardHoteles"
+          element={
+            <PrivateRoute isAllowed={isAdmin}>
+              <DashboardHotelesPage/>
             </PrivateRoute>
           }
         />

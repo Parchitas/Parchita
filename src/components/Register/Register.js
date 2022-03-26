@@ -138,7 +138,7 @@ function Register(){
               
             
               <div id="contenedorRegistro">
-                <button id ="botonRegistrarse" onClick={()=> navigate("/login")}> Sig In</button>
+                <button id ="botonRegistrarse" onClick={()=> navigate("/login")}> Sign In</button>
               </div>
             </div>
           </div>
