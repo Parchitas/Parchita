@@ -18,7 +18,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import ReservaPage from './pages/ReservaPage';
 import PerfilUsuarioPage from './pages/PerfilUsuarioPage';
 import {sessionContext} from "../src/context/SessionContext"
-import PagoPage from './pages/PagoPage';
+import PagoPage from "./pages/PagoPage"
 
 
 function App() {
@@ -81,7 +81,6 @@ function App() {
         <Route path="/ciudades/:ciudadID" element={<CiudadDetalles/>}/>
         <Route path="/ciudades/:ciudadID/hoteles/:hotelID" element={<HotelDetalles/>}/>
         <Route path="*" element={<NotFound />} />
-
       </Routes>
 
     </BrowserRouter>
