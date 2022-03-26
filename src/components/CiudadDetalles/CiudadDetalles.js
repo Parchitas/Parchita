@@ -3,12 +3,16 @@ import { useParams, useLocation } from "react-router-dom";
 import Hotel from "../Hotel/Hotel"
 import info from "../CiudadesLista/CiudadesLista.json"
 import { Card, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
+import '../../css/CiudadDetalles.css'
 
 function CiudadDetalles() {
     const { ciudadID } = useParams();
     const location = useLocation()
     const { ciudad } = location.state
+    console.log("Location : ",location.state)
     const { id, nombre, descripcion, ambiente, ranking, lugaresInteres, imagenes, hoteles } = ciudad.props.ciudad
+    
+
     return (<><br /><div style={{ display: 'block', paddingInline: '15px', }}>
         <Card sx={{ maxWidth: 345 }}>
             <CardMedia
@@ -30,19 +34,25 @@ function CiudadDetalles() {
           Lugares Importantes: {lugaresInteres.join(", ")}
                 </Typography><br />
         
-        <div>
-            {imagenes.map(imagen => <img src={imagen} width="300px"></img>)}
+        <div className="seccionImagenes">
+            {imagenes.map(imagen =><div className="imagen"><img src={imagen} height ="300px" width="300px"></img></div> )}
         </div></CardContent></Card>
 
         <div>
-            <h2>Hoteles</h2>
-            {hoteles ?
-                <ul>
+            <div className="tituloHoteles">
+                <h1>Hoteles</h1>
+            </div>
+            <div className="listaHoteles">
+                {hoteles ?
+                    
 
-                    {hoteles.map((hotel) =>
-                        <Hotel key={hotel.id} hotel={hotel} />
-                    )}
-                </ul> : <div>No se encuentran hoteles disponibles actualmente en esta ciudad</div>}
+                        hoteles.map((hotel) =>
+                            <Hotel key={hotel.id} hotel={hotel}  />
+                        )
+                       
+                        
+                     : <div>No se encuentran hoteles disponibles actualmente en esta ciudad</div>}
+            </div>
         </div>
     </div></>);
 }
