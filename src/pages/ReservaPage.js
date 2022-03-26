@@ -1,67 +1,72 @@
-import React, { useContext, useState } from "react"
-import { collection, doc, setDoc, query, where, onSnapshot } from "firebase/firestore";
+import React, { useState, useContext } from "react"
+import { collection, doc, setDoc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { db } from "./../firebase/credenciales";
-import { useLocation } from "react-router-dom"
-import { sessionContext } from '../context/SessionContext'
+import { Navigate, useLocation, useNavigate } from "react-router-dom"
+import { sessionContext } from "../context/SessionContext";
+import moment from "moment"
+
 
 function ReservaPage() {
 
-
-    const { session } = useContext(sessionContext)
-    console.log(session.id)
     const location = useLocation()
-    const habitacion = location.state.habitacion
-    console.log(habitacion)
+    const { tipoHabitacion } = location.state
+    const { session } = useContext(sessionContext)
+    console.log(tipoHabitacion)
+    console.log(tipoHabitacion.id)
+    const navigate = useNavigate()
+
 
     const [values, setValues] = useState({
         fechaEntrada: "",
         fechaSalida: "",
-        idCliente: session.id,
-        idHabitacion: habitacion.id
+        idCliente: session.id
     });
 
+    const [mensaje, setMensaje] = useState("");
+
     const handleOnChange = (event) => {
+        setMensaje("")
         const { value, name: inputName } = event.target;
         setValues({ ...values, [inputName]: value });
     }
 
-    function intercept(start1, end1, start2, end2) {
-        return (Math.max(0, Math.min(end2, end1) - Math.max(start1, start2) + 1)) > 0
-    }
+    const checkDisponibilidad = () => {
+        const reservaciones = tipoHabitacion.reservaciones
+        for (let i = 0; i < reservaciones.length; i++) {
 
-    const checkDisponible = async () => {
-        const q = query(collection(db, "reservaciones"), where("idHabitacion", "==", habitacion.id));
-        const habitaciones = [];
-        const disponible = true
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                habitaciones.push(doc.data());
-            });
-        });;
-
-        console.log(habitaciones)
-        for (let i = 0; i < habitaciones.length; i++) {
-            if (intercept(new Date(values.fechaEntrada), new Date(values.fechaSalida), habitaciones[i].fechaEntrada, habitaciones[i].fechaSalida)) {
-                disponible = false
-                console.log(disponible)
-                break
+            if (moment(reservaciones[i].fechaEntrada).isBetween(moment(values.fechaEntrada), moment(values.fechaSalida), undefined, "[)") ||
+                moment(reservaciones[i].fechaSalida).isBetween(moment(values.fechaEntrada), moment(values.fechaSalida), undefined, "(]")
+            ) {
+                return false
             }
-            console.log(disponible)
         }
-
-        return disponible
+        return true
     }
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
         console.log(values)
-        if (checkDisponible()) {
-            const newReservacionRef = doc(collection(db, "reservaciones"));
-            await setDoc(newReservacionRef, values)
+        if (checkDisponibilidad()) {
+            const newReservacionRef = await doc(db, 'tipohabitaciones', tipoHabitacion.id)
+            await updateDoc(newReservacionRef, {
+                reservaciones: arrayUnion(values)
+            });
+            navigate("../pago", {
+                state: {
+                    reserva: values,
+                    tipoHabitacion: tipoHabitacion
+                }
+            })
+
+            //setMensaje("Disponible. (Aquí se redirigía a PagoPage)")
+        } else {
+            setMensaje("La fecha no está disponible. Por favor, selecciona otra.")
         }
+
     };
 
-    return (<div>
+    return (<>
         <h1>Pagina reserva</h1>
         <form onSubmit={handleSubmit}>
             <div>
@@ -70,6 +75,7 @@ function ReservaPage() {
                     name="fechaEntrada"
                     id="fechaEntrada"
                     type="date"
+                    min={moment().format("YYYY-MM-DD")}
                     value={values.fechaEntrada}
                     onChange={handleOnChange}
                 />
@@ -81,9 +87,13 @@ function ReservaPage() {
                     name="fechaSalida"
                     id="fechaSalida"
                     type="date"
+                    min={moment(values.fechaEntrada).add(1, 'days').format("YYYY-MM-DD")}
                     value={values.fechaSalida}
                     onChange={handleOnChange}
                 />
+            </div>
+            <div>
+                {mensaje}
             </div>
             <div>
                 <button type="submit" onClick={handleSubmit}>
@@ -92,7 +102,7 @@ function ReservaPage() {
             </div>
 
         </form>
-    </div>);
+    </>);
 }
 
 export default ReservaPage;

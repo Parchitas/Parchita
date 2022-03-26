@@ -10,12 +10,15 @@ import HomePage from './pages/HomePage';
 import Navbar from './components/Navbar/Navbar';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
+import DashboardCiudadesPage from './pages/DashboardCiudadesPage';
+import DashboardHotelesPage from './pages/DashboardHotelesPage';
 import RegisterPage from './pages/RegisterPage';
 import NotFound from './components/NotFound/NotFound';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import ReservaPage from './pages/ReservaPage';
 import PerfilUsuarioPage from './pages/PerfilUsuarioPage';
 import {sessionContext} from "../src/context/SessionContext"
+import PagoPage from "./pages/PagoPage"
 
 
 function App() {
@@ -34,6 +37,7 @@ function App() {
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/register" element={<RegisterPage/>} />
         <Route path="/ciudades" element={<CiudadesPage/>} />
+        <Route path="/pago" element={<PagoPage/>}/>
         <Route
           path="/reservar"
           element={
@@ -58,10 +62,25 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/dashboardCiudades"
+          element={
+            <PrivateRoute isAllowed={isAdmin}>
+              <DashboardCiudadesPage/>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashboardHoteles"
+          element={
+            <PrivateRoute isAllowed={isAdmin}>
+              <DashboardHotelesPage/>
+            </PrivateRoute>
+          }
+        />
         <Route path="/ciudades/:ciudadID" element={<CiudadDetalles/>}/>
         <Route path="/ciudades/:ciudadID/hoteles/:hotelID" element={<HotelDetalles/>}/>
         <Route path="*" element={<NotFound />} />
-
       </Routes>
 
     </BrowserRouter>

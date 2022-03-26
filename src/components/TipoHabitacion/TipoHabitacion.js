@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 function TipoHabitacion(props) {
 
     const { tipo } = props
-    const { id } = tipo
+    const { id, nombreHotel } = tipo
     const navigate = useNavigate()
 
     const [tipoHab, setTipoHab] = useState([]);
@@ -23,28 +23,31 @@ function TipoHabitacion(props) {
     useEffect(() => {
         fetchTipoHab();
     }, []);
-    const { nombre, camas, capacidad, comodidades, precioNoche } = tipoHab
+    console.log(tipoHab)
+    const { nombre, camas, capacidad, comodidades, precioNoche, reservaciones } = tipoHab
 
     const handleClick = () => {
         console.log("Reservando...")
+        console.log(id)
         navigate("../reservar", {
             state: {
-                habitacion: {...tipoHab, id: id}
+                tipoHabitacion: { ...tipoHab, id: id, nombreHotel: nombreHotel }
             }
         })
     }
 
-    return (<div>
-        {loading ? <div></div> :
-            <li style={{ margin: "20px" }}>
-                <h3><strong>{nombre}</strong></h3>
-                <p>$ {precioNoche}</p>
-                <p>{camas}</p>
-                <p>Capacidad: {capacidad}</p>
-                <p>Comodidades: {comodidades.join(", ")}</p>
-                <button onClick={handleClick}>Reservar</button>
-            </li>}
-    </div>);
+    return (
+        <div>
+            {loading ? <div></div> :
+                <li style={{ margin: "20px" }}>
+                    <h3><strong>{nombre}</strong></h3>
+                    <h3>$ {precioNoche}</h3>
+                    <h3>{camas}</h3>
+                    <h3>Capacidad: {capacidad}</h3>
+                    <h3>Comodidades: {comodidades.join(", ")}</h3>
+                    <button onClick={handleClick}>Reservar</button>
+                </li>}
+        </div>);
 }
 
 export default TipoHabitacion;
