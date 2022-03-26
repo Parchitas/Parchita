@@ -10,8 +10,7 @@ ReactDOM.render(
   <React.StrictMode>
     <SessionProvider>
       <App />
-    </SessionProvider>
-  </React.StrictMode>,
+    </SessionProvider></React.StrictMode>,
   document.getElementById('root')
 );
 
