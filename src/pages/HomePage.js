@@ -15,7 +15,7 @@ const HomePage = () => {
   return (
     <>
     <CssBaseline>
-    {isAdmin ? <button>Soy ADMIN</button> : null}
+    {isAdmin ? <Link to="/dashboard" >Ver Dashboards AQUI</Link> : null}
       <div className={classes.root}>
           <Banner/>         
       </div>
