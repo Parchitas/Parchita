@@ -21,7 +21,6 @@
     align-items: center;
     justify-content: center;
     height: auto;
-    max-width: 800px;
     width: 80%;
     background-color: rgba(0, 0, 0, 0.418);
     border-radius: 15px;
@@ -37,7 +36,7 @@
 
 
 }
-#sigIn{
+#sigInOrRegister{
     border-width: 1px;
     border-style: solid;
     border-color: black;
@@ -49,12 +48,6 @@
     align-items: center;
     border-radius:15em;
 
-}
-
-.error{
-    font-size: 15px;
-    color: red;
-    padding: 5px;
 }
 
 .Formulario{
@@ -95,7 +88,7 @@
     border-radius: 10%;
     
 }
-#email,#password{
+#email,#password,#name{
     font-size: large;
     display: flex;
     height: 30px;
@@ -105,9 +98,9 @@
     margin: 2px;
 
 }
-/* #contenedorRegistro{
+#contenedorRegistro{
 
-} */
+}
 #botonRegistrarse{
     background-color: white;
     border-color: white;
@@ -164,15 +157,13 @@
 .iniciar{
     border-radius:15em;
     display: block;
-    height: 40px;
+    height: 30px;
     width: 100%;
     background-color: aqua;
     margin-top: 30px;
     align-items: center;
-    font-size: large;
 
 }
-
 .modosDeInicio{
     height: auto;
     width: auto;
