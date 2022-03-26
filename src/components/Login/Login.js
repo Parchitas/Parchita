@@ -48,7 +48,7 @@ const Login = () => {
       <div className="pagina">
         <div id="contenedor">
           <div id="conte">
-            <div id="sigIn">
+            <div id="sigInOrRegister">
               <h1>Sign in</h1>
             </div>
           
