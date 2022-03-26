@@ -24,12 +24,16 @@ function TipoHabitacion(props) {
         fetchTipoHab();
     }, []);
     console.log(tipoHab)
-    const { nombre, camas, capacidad, comodidades, precioNoche} = tipoHab
+    const { nombre, camas, capacidad, comodidades, precioNoche, reservaciones} = tipoHab
 
     const handleClick = () => {
         console.log("Reservando...")
         console.log( id)
-        navigate("../reservar" )
+        navigate("../reservar",  {
+            state: {
+                tipoHabitacion : {...tipoHab, id: id}
+            }
+        })
     }
 
     return (<div>

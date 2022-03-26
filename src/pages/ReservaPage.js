@@ -6,6 +6,9 @@ import { useLocation } from "react-router-dom"
 
 
 function ReservaPage() {
+
+    const location = useLocation()
+    const {tipoHabitacion} = location.state
     
     const [values, setValues] = useState({
         fechaEntrada: "",
