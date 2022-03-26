@@ -2,3 +2,11 @@
 // en las mismas paginas de hotel y ciudades
 import React from "react";
 
+function DashboardHotelesPage(){
+
+    return(
+        <div>dashboards Hoteles</div>
+    );
+}
+
+export default DashboardHotelesPage;
