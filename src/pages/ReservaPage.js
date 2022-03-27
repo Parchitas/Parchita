@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react"
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { collection, doc, setDoc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { db } from "./../firebase/credenciales";
-import { useLocation, useNavigate } from "react-router-dom"
+import { Navigate, useLocation, useNavigate } from "react-router-dom"
 import { sessionContext } from "../context/SessionContext";
 import moment from "moment"
 

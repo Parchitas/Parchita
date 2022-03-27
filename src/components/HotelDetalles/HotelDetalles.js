@@ -22,6 +22,7 @@ function HotelDetalles() {
     useEffect(() => {
         fetchHotel();
     }, []);
+    
     const { nombre, ranking, instalaciones, imagen, tipoHabitaciones } = hotel
     return (
         <div>

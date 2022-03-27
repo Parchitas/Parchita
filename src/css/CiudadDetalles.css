@@ -1,0 +1,30 @@
+.seccionImagenes{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.imagen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3px;
+    border: 1px;
+    border-color: black;
+
+}
+.tituloHoteles{
+    font-size: large;
+    display: flex;
+}
+.listaHoteles{
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.linkCard{
+    margin: 5px;
+
+}
+.card{
+    width: 100%;
+}
