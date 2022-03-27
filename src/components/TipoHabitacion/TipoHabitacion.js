@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react"
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/credenciales"
 import { useNavigate } from "react-router-dom"
-import { CircularProgress } from "@material-ui/core"
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Box, Grid, Button, CircularProgress } from '@mui/material'
+import { Col } from "react-bootstrap";
 
 function TipoHabitacion(props) {
 
@@ -37,18 +38,38 @@ function TipoHabitacion(props) {
         })
     }
 
-    return (
-        <div>
-            {loading ? <CircularProgress /> :
-                <li style={{ margin: "20px" }}>
+    return (<div>
+        {loading ? <CircularProgress /> :
+            <><br /><Col sm>
+
+                <Card>
+                    <CardActionArea>
+                        <CardContent>
+                            <Typography gutterBottom variant="h4" component="div">
+                                {nombre}
+                            </Typography>
+                            <Typography variant="h6" color="text.secondary" align="left">
+                                <p>{camas}</p>
+                                <p>Capacidad: {capacidad} personas</p>
+                                <p>Comodidades: {comodidades.join(", ")}</p>
+                                <p>Precio total por noche: ${precioNoche}</p>
+                            </Typography>
+                            <button onClick={handleClick}>Reservar</button>
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
+            </Col></>}
+    </div>);
+}
+
+//Codigo de Michelle (respaldo)
+/*<li style={{ margin: "20px" }}>
                     <h3><strong>{nombre}</strong></h3>
                     <h3>$ {precioNoche}</h3>
                     <h3>{camas}</h3>
                     <h3>Capacidad: {capacidad}</h3>
                     <h3>Comodidades: {comodidades.join(", ")}</h3>
                     <button onClick={handleClick}>Reservar</button>
-                </li>}
-        </div>);
-}
+                </li>} */
 
 export default TipoHabitacion;

@@ -4,6 +4,7 @@ import logo from "../../imagenes/parchitaLogo.png"
 import SearchIcon from "@material-ui/icons/Search"
 import Search from "../Search/Search"
 import MenuIcon from "@material-ui/icons/Menu"
+import { amber } from "@mui/material/colors"
 import { Link } from "react-router-dom"
 import { sessionContext } from '../../context/SessionContext';
 
@@ -68,7 +69,7 @@ const Navbar = () => {
               <div className={classes.right}>
             
                 <Typography>{userName}</Typography>
-                <Avatar className={classes.avatar}/>
+              {isLoggedIn ? <Avatar src={"session.image"} className="classes.avatar" alt={userName} sx={{ bgcolor: amber[500] }} /> : <Avatar className={classes.avatar} />}
             
               </div>
             </Link>
@@ -83,7 +84,7 @@ const Navbar = () => {
           <img src={logo} className={classes.logo} alt="logo"/>
         </Link>
         {/* <div className={classes.center}>
-            <InputBase fullWidth inputProps={{className: classes.input}} placeholder="Search here .."/>
+            <InputBase fullWidth inputProps={{className: classes.input}} placeholder="Buscar ciudad..."/>
             <SearchIcon/>
         </div> */}
         <div>
@@ -93,7 +94,7 @@ const Navbar = () => {
           <div className={classes.right}>
 
               <Typography>{userName}</Typography>
-              <Avatar className={classes.avatar}/>
+            {isLoggedIn ? <Avatar src={"session.image"} className="classes.avatar" alt={userName} sx={{ bgcolor: amber[500] }} /> : <Avatar className={classes.avatar} />}
               
           </div>
         </Link>

@@ -54,7 +54,7 @@ const Login = () => {
           
             <div className="Formulario">
               {fromPrivateRoute ? <h1 className = "error">Por favor, inicia sesion para seguir navegando</h1> : null}
-              {isLoading ? <h1 className = "error">Cargando...</h1> : null}
+              {isLoading ? <h1 className="error">Cargando...</h1> : null}
               <form onSubmit={submitHandler} id="login">
                 <div>
                   <label >

@@ -1,5 +1,7 @@
 //React
 import React, { useContext } from 'react';
+//Bootstrap
+import "bootstrap/dist/css/bootstrap.min.css";
 //Pages
 import SearchPage from './pages/SearchPage';
 import {BrowserRouter, Route, Routes} from "react-router-dom"
@@ -23,7 +25,8 @@ import PagoPage from "./pages/PagoPage"
 
 function App() {
 
-  const {isLoggedIn, isAdmin} = useContext(sessionContext)
+  const { isLoggedIn, isAdmin } = useContext(sessionContext)
+  
 
   return (
     <BrowserRouter>
@@ -38,10 +41,7 @@ function App() {
         <Route path="/register" element={<RegisterPage/>} />
         <Route path="/ciudades" element={<CiudadesPage/>} />
         <Route path="/pago" element={<PagoPage/>}/>
-<<<<<<< HEAD
         <Route path="/ciudades?search=" element={<CiudadesPage/>}/>
-=======
->>>>>>> michelle
         <Route
           path="/reservar"
           element={

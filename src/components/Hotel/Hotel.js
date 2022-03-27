@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-import React from "react"
-import { useParams, Link } from "react-router-dom"
-=======
 import React, { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom";
 import {Card, CardMedia,CardActionArea,CardContent,Typography} from "@material-ui/core";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/credenciales"
 import "../../css/CiudadDetalles.css"
->>>>>>> michelle
 
 function Hotel(props) {
     const { ciudadID } = useParams()
