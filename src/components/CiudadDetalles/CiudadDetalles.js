@@ -1,7 +1,7 @@
 import React from "react"
 import { useParams, useLocation } from "react-router-dom";
 import Hotel from "../Hotel/Hotel"
-import { Card, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
+import { Card, CardActions, CardContent, CardMedia, Typography, Grid } from "@material-ui/core";
 import '../../css/CiudadDetalles.css'
 import { Rating } from "@mui/material";
 import { Carousel } from "react-bootstrap";
@@ -33,21 +33,19 @@ function CiudadDetalles() {
                     Lugares Importantes: {lugaresInteres.join(", ")}
                 </Typography><br />
         
-        <div className="seccionImagenes">
-            {imagenes.map(imagen =><div className="imagen"><img src={imagen} height ="300px" width="300px"></img></div> )}
-        </div></CardContent></Card>
+        </CardContent></Card>
 
         <div>
             <div className="tituloHoteles">
                 <h1>Hoteles</h1>
             </div>
-            <div className="listaHoteles" style={{ display: 'block', paddingInline: '100px', }}>
+            <div className="listaHoteles" >
                 {hoteles ?
                     
-
-                        hoteles.map((hotel) =>
-                            <Hotel key={hotel.id} hotel={hotel}  />
-                        )
+                        <div style={{ display: 'flexbox', justifyContent: 'center' }}>
+                <Grid container justifyContent="center" spacing={1}>
+                                {hoteles.map((hotel) => <Hotel key={hotel.id} hotel={hotel} />)}
+                        </Grid></div>
                        
                         
                      : <div>No se encuentran hoteles disponibles actualmente en esta ciudad</div>}

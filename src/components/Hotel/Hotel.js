@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom";
-import {Card, CardMedia,CardActionArea,CardContent,Typography} from "@material-ui/core";
+import {Card, CardMedia, CardActionArea, CardContent, Typography, Grid, Box } from "@material-ui/core";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/credenciales"
 import "../../css/CiudadDetalles.css"
+import Rating from '@mui/material/Rating';
 
 function Hotel(props) {
     const { ciudadID } = useParams()
@@ -26,9 +27,14 @@ function Hotel(props) {
 
     return ( 
     
-      
+      <Grid item><br />
                 <Link className="linkCard" to={"/ciudades/" + ciudadID + "/hoteles/" + id}>
-                    <Card className="card">
+                    <Box
+                    sx={{
+                        width: 300,
+                        height: 400,
+                    }}
+                ><Card className="card">
                         <CardActionArea>
                             <CardMedia
                                 component="img"
@@ -40,13 +46,13 @@ function Hotel(props) {
                                     {hotel.nombre}
                                 </Typography>
                                 <Typography variant="h6" color="text.secondary" align="right">
+                                    <Rating name="Ranking" defaultValue={`${hotel.ranking}`} precision={0.5} readOnly />
                                     <p>Ranking: {hotel.ranking}</p>
-                                 
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
-                    </Card>
-                </Link>
+                    </Card></Box>
+                </Link></Grid>
         
     );
 }
