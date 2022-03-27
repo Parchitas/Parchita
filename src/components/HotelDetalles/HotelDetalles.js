@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/credenciales"
 import TipoHabitacion from "../TipoHabitacion/TipoHabitacion";
+import { CircularProgress } from "@material-ui/core";
 
 function HotelDetalles() {
     const { ciudadID, hotelID } = useParams()
@@ -21,11 +22,10 @@ function HotelDetalles() {
     useEffect(() => {
         fetchHotel();
     }, []);
-    
     const { nombre, ranking, instalaciones, imagen, tipoHabitaciones } = hotel
     return (
         <div>
-            {loading ? <div>Cargando... </div> :
+            {loading ? <CircularProgress/> :
                 <div>
                     <h1>{nombre}</h1>
                     <p>Ranking: {ranking}</p>

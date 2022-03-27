@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/credenciales"
 import { useNavigate } from "react-router-dom"
+import { CircularProgress } from "@material-ui/core"
 
 function TipoHabitacion(props) {
 
@@ -23,12 +24,10 @@ function TipoHabitacion(props) {
     useEffect(() => {
         fetchTipoHab();
     }, []);
-    console.log(tipoHab)
-    const { nombre, camas, capacidad, comodidades, precioNoche, reservaciones } = tipoHab
+
+    const { nombre, camas, capacidad, comodidades, precioNoche } = tipoHab
 
     const handleClick = () => {
-        console.log("Reservando...")
-        console.log(id)
         navigate("../reservar", {
             state: {
                 tipoHabitacion: { ...tipoHab, id: id, nombreHotel: nombreHotel }
@@ -38,7 +37,7 @@ function TipoHabitacion(props) {
 
     return (
         <div>
-            {loading ? <div></div> :
+            {loading ? <CircularProgress /> :
                 <li style={{ margin: "20px" }}>
                     <h3><strong>{nombre}</strong></h3>
                     <h3>$ {precioNoche}</h3>

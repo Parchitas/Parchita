@@ -1,7 +1,6 @@
 import React from "react"
 import { useParams, useLocation } from "react-router-dom";
 import Hotel from "../Hotel/Hotel"
-import info from "../CiudadesLista/CiudadesLista.json"
 import { Card, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
 
 function CiudadDetalles() {
