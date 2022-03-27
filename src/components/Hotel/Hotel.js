@@ -1,6 +1,5 @@
 import React from "react"
 import { useParams, Link } from "react-router-dom"
-import HotelDetalles from "../HotelDetalles/HotelDetalles"
 
 function Hotel(props) {
     const { ciudadID } = useParams()

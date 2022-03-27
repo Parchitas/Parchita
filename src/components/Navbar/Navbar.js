@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext} from "react"
 import {AppBar,  InputBase, makeStyles, Toolbar, Typography, Avatar, IconButton, Drawer, List, ListItem} from "@material-ui/core"
 import logo from "../../imagenes/parchitaLogo.png"
 import SearchIcon from "@material-ui/icons/Search"
+import Search from "../Search/Search"
 import MenuIcon from "@material-ui/icons/Menu"
 import { Link } from "react-router-dom"
 import { sessionContext } from '../../context/SessionContext';
@@ -30,7 +31,7 @@ const Navbar = () => {
         setDrawerOpen(false)
       }
       
-      const headersData=["Sign in", "Previous bookings"]
+      const headersData=["Sign in"]
       const getDrawerChoices= () =>{
         return headersData.map((data,indice)=>{
           return (
@@ -81,9 +82,12 @@ const Navbar = () => {
         <Link to="/">
           <img src={logo} className={classes.logo} alt="logo"/>
         </Link>
-        <div className={classes.center}>
+        {/* <div className={classes.center}>
             <InputBase fullWidth inputProps={{className: classes.input}} placeholder="Search here .."/>
             <SearchIcon/>
+        </div> */}
+        <div>
+          <Search/>
         </div>
         <Link to={ruta}>
           <div className={classes.right}>

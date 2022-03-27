@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react"
-import { collection, doc, setDoc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "./../firebase/credenciales";
-import { Navigate, useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { sessionContext } from "../context/SessionContext";
 import moment from "moment"
 
@@ -47,8 +47,8 @@ function ReservaPage() {
     const handleSubmit = async (e) => {
 
         e.preventDefault();
-        console.log(values)
-        if (checkDisponibilidad()) {
+
+        if (checkDisponibilidad() && (moment(values.fechaEntrada) < moment(values.fechaSalida))) {
             const newReservacionRef = await doc(db, 'tipohabitaciones', tipoHabitacion.id)
             await updateDoc(newReservacionRef, {
                 reservaciones: arrayUnion(values)
@@ -59,8 +59,6 @@ function ReservaPage() {
                     tipoHabitacion: tipoHabitacion
                 }
             })
-
-            //setMensaje("Disponible. (Aquí se redirigía a PagoPage)")
         } else {
             setMensaje("La fecha no está disponible. Por favor, selecciona otra.")
         }
