@@ -20,7 +20,8 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
     "reactstrap": "^9.0.1",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "sweetalert": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
