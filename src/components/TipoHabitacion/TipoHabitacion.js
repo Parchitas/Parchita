@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react"
 import { collection, getDoc, getDocs, doc } from "firebase/firestore";
 import { db } from "../../firebase/credenciales"
 import { useNavigate } from "react-router-dom"
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Box, Grid, Button } from '@mui/material'
+import Col from "react-bootstrap/esm/Col";
 
 function TipoHabitacion(props) {
 
@@ -34,14 +36,24 @@ function TipoHabitacion(props) {
 
     return (<div>
         {loading ? <div></div> :
-            <li style={{margin: "20px"}}>
-                <h3><strong>{nombre}</strong></h3>
-                <h3>$ {precioNoche}</h3>
-                <h3>{camas}</h3>
-                <h3>Capacidad: {capacidad}</h3>
-                <h3>Comodidades: {comodidades.join(", ")}</h3>
-                <button onClick={handleClick}>Reservar</button>
-            </li>}
+            <><br /><Col sm>
+
+                <Card>
+                    <CardActionArea onClick={handleClick}>
+                        <CardContent>
+                            <Typography gutterBottom variant="h4" component="div">
+                                {nombre}
+                            </Typography>
+                            <Typography variant="h6" color="text.secondary" align="left">
+                                <p>{camas}</p>
+                                <p>Capacidad: {capacidad} personas</p>
+                                <p>Comodidades: {comodidades.join(", ")}</p>
+                                <p>Precio total por noche: ${precioNoche}</p>
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
+            </Col></>}
     </div>);
 }
 

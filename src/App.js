@@ -1,5 +1,7 @@
 //React
 import React, { useContext } from 'react';
+//Bootstrap
+import "bootstrap/dist/css/bootstrap.min.css";
 //Pages
 import SearchPage from './pages/SearchPage';
 import {BrowserRouter, Route, Routes} from "react-router-dom"
