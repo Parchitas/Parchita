@@ -1,21 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
-<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
 
-=======
->>>>>>> michelle
 
 function PayWithPaypal(props) {
     const { items, total } = props;
     const [paidFor, setPaidFor] = useState(false)
     const [error, setError] = useState(null)
     const paypalRef = useRef()
-<<<<<<< HEAD
     const navigate = useNavigate()
 
-=======
->>>>>>> michelle
 
     useEffect(() => {
         window.paypal
@@ -45,7 +39,6 @@ function PayWithPaypal(props) {
     }, [items])
 
     if (paidFor) {
-<<<<<<< HEAD
         swal("¡Éxito!", "Su pago ha sido procesado correctamente", "success").then(
             navigate("/")
         )
@@ -54,21 +47,6 @@ function PayWithPaypal(props) {
 
     if (error) {
         swal("Error", "Algo salió mal. Por favor, intente de nuevo.", "error")
-=======
-        return (
-            <div>
-                Gracias por la compra.
-            </div>
-        )
-    }
-
-    if (error) {
-        return (
-            <div>
-                Error en el proceso de compra. Por favor, intente de nuevo.
-            </div>
-        )
->>>>>>> michelle
     }
 
     return (
