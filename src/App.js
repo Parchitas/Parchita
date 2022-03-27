@@ -22,7 +22,8 @@ import {sessionContext} from "../src/context/SessionContext"
 
 function App() {
 
-  const {isLoggedIn, isAdmin} = useContext(sessionContext)
+  const { isLoggedIn, isAdmin } = useContext(sessionContext)
+  
 
   return (
     <BrowserRouter>

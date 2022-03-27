@@ -3,6 +3,7 @@ import {AppBar,  InputBase, makeStyles, Toolbar, Typography, Avatar, IconButton,
 import logo from "../../imagenes/parchitaLogo.png"
 import SearchIcon from "@material-ui/icons/Search"
 import MenuIcon from "@material-ui/icons/Menu"
+import { amber } from "@mui/material/colors"
 import { Link } from "react-router-dom"
 import { sessionContext } from '../../context/SessionContext';
 
@@ -67,7 +68,7 @@ const Navbar = () => {
               <div className={classes.right}>
             
                 <Typography>{userName}</Typography>
-                <Avatar className={classes.avatar}/>
+              {isLoggedIn ? <Avatar src={"session.image"} className="classes.avatar" alt={userName} sx={{ bgcolor: amber[500] }} /> : <Avatar className={classes.avatar} />}
             
               </div>
             </Link>
@@ -89,7 +90,7 @@ const Navbar = () => {
           <div className={classes.right}>
 
               <Typography>{userName}</Typography>
-              <Avatar className={classes.avatar}/>
+            {isLoggedIn ? <Avatar src={"session.image"} className="classes.avatar" alt={userName} sx={{ bgcolor: amber[500] }} /> : <Avatar className={classes.avatar} />}
               
           </div>
         </Link>
