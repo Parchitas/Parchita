@@ -83,7 +83,7 @@ const Navbar = () => {
           <img src={logo} className={classes.logo} alt="logo"/>
         </Link>
         <div className={classes.center}>
-            <InputBase fullWidth inputProps={{className: classes.input}} placeholder="Search here .."/>
+            <InputBase fullWidth inputProps={{className: classes.input}} placeholder="Buscar ciudad..."/>
             <SearchIcon/>
         </div>
         <Link to={ruta}>

@@ -12,9 +12,10 @@ function CiudadesLista({ ciudades }) {
 
       return (
  
-            <Grid container spacing={0.5}>
+            <div style={{ display: 'flexbox', justifyContent: 'center' }}>
+                <Grid container justifyContent="center" spacing={1}>
                   {ciudades.map(ciudad => <Ciudad key={ciudad.id} ciudad={ciudad} />)}
-            </Grid>
+            </Grid></div>
 
       )
 }
