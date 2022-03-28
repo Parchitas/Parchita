@@ -1,7 +1,7 @@
 import React from "react"
 import { useParams, useLocation } from "react-router-dom";
 import Hotel from "../Hotel/Hotel"
-import { Card, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
+import { Card, CardActions, CardContent, CardMedia, Typography, Grid } from "@material-ui/core";
 import '../../css/CiudadDetalles.css'
 import { Rating } from "@mui/material";
 import { Carousel } from "react-bootstrap";
