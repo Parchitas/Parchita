@@ -13,6 +13,8 @@ import Navbar from './components/Navbar/Navbar';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import DashboardCiudadesPage from './pages/DashboardCiudadesPage';
+import DashboardEditCiudadPage from './pages/DashboardEditCiudadPage';
+import DashboardEditHotelPage from './pages/DashboardEditHotelPage';
 import DashboardHotelesPage from './pages/DashboardHotelesPage';
 import RegisterPage from './pages/RegisterPage';
 import NotFound from './components/NotFound/NotFound';
@@ -66,22 +68,26 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route
+        {/* <Route
           path="/dashboardCiudades"
           element={
             <PrivateRoute isAllowed={isAdmin}>
               <DashboardCiudadesPage/>
             </PrivateRoute>
           }
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="/dashboardHoteles"
           element={
             <PrivateRoute isAllowed={isAdmin}>
               <DashboardHotelesPage/>
             </PrivateRoute>
           }
-        />
+        /> */}
+        <Route path="/dashboardHoteles" element={<DashboardHotelesPage/>}/>
+        <Route path="/dashboardHoteles/:hotelID" element={<DashboardEditHotelPage/>}/>
+        <Route path="/dashboardCiudades" element={<DashboardCiudadesPage/>}/>
+        <Route path="/dashboardCiudades/:ciudadID" element={<DashboardEditCiudadPage/>}/>
         <Route path="/ciudades/:ciudadID" element={<CiudadDetalles/>}/>
         <Route path="/ciudades/:ciudadID/hoteles/:hotelID" element={<HotelDetalles/>}/>
         <Route path="*" element={<NotFound />} />

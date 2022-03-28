@@ -1,0 +1,29 @@
+.container {
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: auto;
+}
+
+.ciudades {
+    width: 200px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: brown;
+}
+
+.botonesAqui{
+    display: block;
+    
+}
+
+.botonesContainer{
+    width: 200px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.data {
+    display: flex;
+}
