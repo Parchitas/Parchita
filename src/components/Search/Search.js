@@ -15,8 +15,8 @@ function Search() {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <input  type="text" value={text} onChange={(event) => setText(event.target.value)} />
-                <button type="submit" >Buscar ciudad</button>
+                <input  type="text" placeholder="Busca una ciudad" value={text} onChange={(event) => setText(event.target.value)} />
+                <button type="submit" >Buscar</button>
             </div>
         </form>);
 }

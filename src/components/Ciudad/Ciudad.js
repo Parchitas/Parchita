@@ -30,7 +30,7 @@ function Ciudad(props) {
                                 </Typography>
                                 <Typography variant="h6" color="text.secondary" align="right">
                                     <Rating name="Ranking" defaultValue={`${ranking}`} precision={0.5} size="big" readOnly />
-                                    <p>Ambiente: {ambiente}</p>
+                                    <p>{ambiente}</p>
                                 </Typography>
                             </CardContent>
                         </CardActionArea>

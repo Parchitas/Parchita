@@ -40,7 +40,7 @@ function HotelDetalles() {
                     <CardContent>
                         <Typography gutterBottom variant="h3" component="div">
                             {nombre}  
-                            <Rating name="Ranking" defaultValue={`${ranking}`} precision={0.5} size="small" readOnly />
+                            <Rating name="Ranking" defaultValue={`${ranking}`} precision={0.5} size="large" readOnly />
                         </Typography>
                         <Typography variant="h6" color="text.secondary">
                             

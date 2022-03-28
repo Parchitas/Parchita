@@ -10,50 +10,52 @@ function CiudadDetalles() {
     const { ciudadID } = useParams();
     const location = useLocation()
     const { ciudad } = location.state
-    console.log("Location : ",location.state)
+    console.log("Location : ", location.state)
     const { id, nombre, descripcion, ambiente, ranking, lugaresInteres, imagenes, hoteles } = ciudad.props.ciudad
     return (
-        <><br /><div style={{ display: 'block', paddingInline: '100px', }/*paddingInline: '15px'*/}>
-        <Card sx={{ maxWidth: 345 }}>
-            <CardMedia>
-        <Carousel variant="dark">
-      {imagenes.map(imagen => <Carousel.Item><img src={imagen} className="d-block w-80 mx-auto" alt='Fotos mostrando la ciudad'></img></Carousel.Item>)} 
-</Carousel>
-            </ CardMedia >
-            <CardContent>
-        <Typography gutterBottom variant="h3" component="div">
-          {nombre} <Rating name="Ranking" defaultValue={`${ranking}`} precision={0.5} size="small" readOnly />
-                </Typography>
-                <Typography variant="body1" color="text.secondary" align="right">
-          {descripcion}
-                </Typography><br />
-                <Typography variant="caption" color="text.secondary">
-          
-                    Ambiente: {ambiente} <br />
-                    Lugares Importantes: {lugaresInteres.join(", ")}
-                </Typography><br />
-        
-        <div className="seccionImagenes">
-            {imagenes.map(imagen =><div className="imagen"><img src={imagen} height ="300px" width="300px"></img></div> )}
-        </div></CardContent></Card>
+        <>
+            <br />
+            <div style={{ display: 'block', paddingInline: '100px', }/*paddingInline: '15px'*/}>
+                <Card sx={{ maxWidth: 345 }}>
+                    <CardMedia>
+                        <Carousel variant="dark">
+                            {imagenes.map(imagen => <Carousel.Item><img src={imagen} className="d-block w-80 mx-auto" alt='Fotos mostrando la ciudad'></img></Carousel.Item>)}
+                        </Carousel>
+                    </ CardMedia >
+                    <CardContent>
+                        <Typography gutterBottom variant="h3" component="div">
+                            {nombre} <Rating name="Ranking" defaultValue={`${ranking}`} precision={0.5} size="large" readOnly />
+                        </Typography>
+                        <Typography variant="body1" color="text.secondary" align="right">
+                            {descripcion}
+                        </Typography><br />
+                        <Typography variant="caption" color="text.secondary">
 
-        <div>
-            <div className="tituloHoteles">
-                <h1>Hoteles</h1>
-            </div>
-            <div className="listaHoteles" style={{ display: 'block', paddingInline: '100px', }}>
-                {hoteles ?
-                    
+                            Ambiente: {ambiente} <br />
+                            Lugares Importantes: {lugaresInteres.join(", ")}
+                        </Typography><br />
 
-                        hoteles.map((hotel) =>
-                            <Hotel key={hotel.id} hotel={hotel}  />
-                        )
-                       
-                        
-                     : <div>No se encuentran hoteles disponibles actualmente en esta ciudad</div>}
+                    </CardContent>
+                </Card>
+
+                <div>
+                    <div className="tituloHoteles">
+                        <h1>Hoteles</h1>
+                    </div>
+                    <div className="listaHoteles" style={{ display: 'block', paddingInline: '100px', }}>
+                        {hoteles ?
+
+
+                            hoteles.map((hotel) =>
+                                <Hotel key={hotel.id} hotel={hotel} />
+                            )
+
+
+                            : <div>No se encuentran hoteles disponibles actualmente en esta ciudad</div>}
+                    </div>
+                </div>
             </div>
-        </div>
-    </div></>);
+        </>);
 }
 
 export default CiudadDetalles;

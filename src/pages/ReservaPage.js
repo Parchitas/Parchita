@@ -91,7 +91,7 @@ function ReservaPage() {
                 />
             </div>
             <div>
-                {mensaje}
+                <p style={{ color: "red" }}>{mensaje}</p>
             </div>
             <div>
                 <button type="submit" onClick={handleSubmit}>

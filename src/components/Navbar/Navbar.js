@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useContext} from "react"
 import {AppBar,  InputBase, makeStyles, Toolbar, Typography, Avatar, IconButton, Drawer, List, ListItem} from "@material-ui/core"
 import logo from "../../imagenes/parchitaLogo.png"
-import SearchIcon from "@material-ui/icons/Search"
 import Search from "../Search/Search"
 import MenuIcon from "@material-ui/icons/Menu"
 import { amber } from "@mui/material/colors"
