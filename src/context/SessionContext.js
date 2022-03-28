@@ -82,15 +82,15 @@ export default function SessionProvider (props){
     const sessionCheckRegister = async (response) => {
         
         setLoading(true);
+        console.log(response)
+        await setDoc(doc(db, "usuarios", response.user.uid), {name: response.user.displayName, correo: response.user.email, rol: "usuario"});
 
-        // await setDoc(doc(db, "usuarios", response.user.uid), {name, correo:email, rol});
-
-        // setSession({
-        //     id: response.user.uid,
-        //     correo: response.user.email,
-        //     name: response.user.displayName,
-        //     rol: "usuario",
-        // })
+        setSession({
+            id: response.user.uid,
+            correo: response.user.email,
+            name: response.user.displayName,
+            rol: "usuario",
+        })
             
         setLoading(false);
     }
