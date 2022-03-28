@@ -4,7 +4,7 @@ import { map } from "@firebase/util";
 import React from "react";
 import CiudadesLista from "../components/CiudadesLista/CiudadesLista";
 import '../css/dashboardCiudades.css'
-import {queryCiudades, deleteCiudad} from "../services/ciudades"
+import {queryCiudades, deleteCiudad, createCiudad} from "../services/ciudades"
 import { useNavigate } from 'react-router-dom';
 
 
@@ -32,6 +32,14 @@ function DashboardCiudadesPage(){
         })
     }
 
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        createCiudad(e.target[0].value, e.target[1].value)
+    }
+    if (loading) return (
+        <h3>Cargando</h3>
+    )
     return (
         <div className="container">
             {loading ? <div>cargando</div> : null}
@@ -46,6 +54,18 @@ function DashboardCiudadesPage(){
                     </div>
                 </>
             ))}
+            <div className="title">Agrega una nueva Ciudad SUUU</div>
+            <form onSubmit={handleSubmit}>
+            <label >
+                Nombre: 
+                <input type="text" id='nombre' name ="nombre"/>
+            </label>
+            <label >
+                Descripcion: 
+                <input type="text" id='text' name="descripcion"/>
+            </label> 
+            <button>Submit</button>
+        </form> 
         </div>
     );
 

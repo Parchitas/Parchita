@@ -1,9 +1,10 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import {queryHotel} from "../services/hoteles"
+import { useParams, useNavigate } from "react-router-dom";
+import {queryHotel, updateHoteles} from "../services/hoteles"
 
 function DashboardEditHotelPage (){
-    
+   
+    const navigate = useNavigate()
     const { hotelID } = useParams();
     const [hotel, setHotel] = React.useState()
     const [loading, setLoading] = React.useState(false)
@@ -12,16 +13,42 @@ function DashboardEditHotelPage (){
 
         setLoading(true)
         queryHotel(hotelID).then((response) => {
-            console.log(response)
             setHotel(response)
             setLoading(false)
         })
 
     }, [])
+
+    function onChange(e) {
+        const formName = e.target.name;
+        const formValue = e.target.value;
+
+        setHotel(prevHotel => ({ ...prevHotel, [formName]: formValue }));
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        updateHoteles(hotel,hotelID).then(() => {
+            navigate("/dashboardHoteles");
+        }).catch(e => console.error({ error: e, msg: "ta malardo" }));
+    }
     
-    
+    if (loading) return (
+        <div> cargando </div>
+    )
+
     return(
-        <div>{hotel.nombre}</div>
+        <form onSubmit={handleSubmit}>
+            <label >
+                Nombre: 
+                <input type="text" id="nombre" name ="nombre" value= {hotel.nombre ?? ""} onChange={onChange} />
+            </label>
+            <label >
+                Ranking: 
+                <input type="text" id='text' name="ranking" value= {hotel.ranking ?? ""} onChange={onChange} />
+            </label> 
+            <button>Submit</button>
+        </form> 
     )
 }
 

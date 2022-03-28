@@ -1,5 +1,5 @@
 import {db} from '../firebase/credenciales';
-import { getDocs, collection, doc, deleteDoc, getDoc } from "firebase/firestore";
+import { getDocs, collection, doc, deleteDoc, getDoc, updateDoc } from "firebase/firestore";
 
 const collectionHoteles = "hoteles"
 
@@ -34,4 +34,12 @@ const queryHotel = async (id) => {
 
 }
 
-export {queryHoteles, deleteHotel, queryHotel};
+const updateHoteles = async (hotel,hotelID) => {
+    const cityRef = doc(db, collectionHoteles, hotelID)
+    await updateDoc(cityRef, {
+        nombre: hotel.nombre,
+        ranking: hotel.ranking
+    });
+}
+
+export {queryHoteles, deleteHotel, queryHotel, updateHoteles};
