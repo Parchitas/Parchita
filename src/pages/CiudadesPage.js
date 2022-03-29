@@ -53,12 +53,14 @@ function CiudadesPage() {
     }, [search]);
 
 
-    return (<div>
+    return (<div className="contenedorCiudades">
         {loading ? <CircularProgress /> :
-            <div>
+            <div className="contenedorInterno">
                 {(ciudades.length === 0) ? <div className="noSeEncuentra"><div className="centro">No se encontraron ciudades</div></div> :
-                    <div>
-                        <h1>Ciudades</h1>
+                    <div >
+                        <div className="titulo">
+                            <h1>CIUDADES</h1>
+                        </div>
                         <CiudadesLista ciudades={ciudades} />
                     </div>}
 
