@@ -41,19 +41,39 @@ function DashboardCiudadesPage(){
         <h3>Cargando</h3>
     )
     return (
+        <>
         <div className="container">
-            {loading ? <div>cargando</div> : null}
-            {ciudades.map(({ id, nombre }) => (
-                <>
-                    <div className="data">
-                        <div className="ciudades">{nombre}</div>
-                        <div className="botonesContainer">
-                            <button onClick={() => navigate(`/dashboardCiudades/${id}`)}> Editar </button>
-                            <button onClick={(() => {handleDelete(id)})}> Eliminar </button>
-                        </div>
-                    </div>
-                </>
-            ))}
+            <table className="default">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Accion</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    {loading ? <div>cargando</div> : null}
+                     
+                            {ciudades.map(({id,nombre}) =>(
+
+                                <>
+                                <tr>
+                                    <td>
+                                    {nombre}
+                                    </td>
+                                    <td>
+                                        <button onClick={() => navigate(`/dashboardCiudades/${id}`)}> Editar </button>
+                                        <button onClick={(() => {handleDelete(id)})}> Eliminar </button>
+                                    </td>
+                                </tr>
+                                </>
+
+
+                            ) )}
+                    
+                
+                </tbody>
+            </table>
             <div className="title">Agrega una nueva Ciudad SUUU</div>
             <form onSubmit={handleSubmit}>
             <label >
@@ -67,6 +87,7 @@ function DashboardCiudadesPage(){
             <button>Submit</button>
         </form> 
         </div>
+    </>
     );
 
 }

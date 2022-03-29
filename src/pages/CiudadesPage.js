@@ -4,6 +4,7 @@ import { db } from "../firebase/credenciales"
 import CiudadesLista from "../components/CiudadesLista/CiudadesLista";
 import { useSearchParams } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core"
+import "../css/ciudadesPage.css"
 
 
 function CiudadesPage() {
@@ -55,7 +56,7 @@ function CiudadesPage() {
     return (<div>
         {loading ? <CircularProgress /> :
             <div>
-                {(ciudades.length === 0) ? <div>No se encontraron ciudades.</div> :
+                {(ciudades.length === 0) ? <div className="noSeEncuentra"><div className="centro">No se encontraron ciudades</div></div> :
                     <div>
                         <h1>Ciudades</h1>
                         <CiudadesLista ciudades={ciudades} />
