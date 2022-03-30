@@ -24,6 +24,8 @@ function DashboardCiudadesPage(){
 
     }, [])
 
+    
+
     const handleDelete = (ciudadId) =>{
         setLoading(true)
         deleteCiudad(ciudadId).then(() => {
@@ -35,13 +37,23 @@ function DashboardCiudadesPage(){
 
     function handleSubmit(e) {
         e.preventDefault();
-        createCiudad(e.target[0].value, e.target[1].value)
+        setLoading(true)
+        createCiudad(e.target[0].value, e.target[1].value).then(() => {
+            queryCiudades().then((response) => {
+                setCiudades(response)
+                setLoading(false)
+            })
+        })
     }
+
     if (loading) return (
         <h3>Cargando</h3>
     )
+
     return (
+        <>
         <div className="container">
+
             {loading ? <div>cargando</div> : null}
             {ciudades.map(({ id, nombre }) => (
                 <>
@@ -54,19 +66,16 @@ function DashboardCiudadesPage(){
                     </div>
                 </>
             ))}
-            <div className="title">Agrega una nueva Ciudad SUUU</div>
+            <div className="title">Agregar una nueva Ciudad AQUI</div>
+
             <form onSubmit={handleSubmit}>
-            <label >
-                Nombre: 
-                <input type="text" id='nombre' name ="nombre"/>
-            </label>
-            <label >
-                Descripcion: 
-                <input type="text" id='text' name="descripcion"/>
-            </label> 
-            <button>Submit</button>
+            
+            <button onClick = {() => navigate(`/dashboardCiudades/create`)}>Submit</button>
         </form> 
+        <div>Aqui para Devolverse al Dashboard</div>
+        <button onClick={() => navigate(`/dashboard`)}>Click!!!</button>
         </div>
+    </>
     );
 
 }

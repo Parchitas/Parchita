@@ -1,0 +1,21 @@
+.searchContent{
+    display: flex;
+    border: 1px;
+    width: auto;
+
+   
+
+
+}
+.search{
+    border-radius: 50em;
+    padding: 2px;
+    width: 500px;
+}
+.buscar{
+    border-radius: 100pc;
+    background-color: #fff;
+    margin-left: 20px;
+   
+
+}

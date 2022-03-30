@@ -58,12 +58,12 @@ const Login = () => {
               <form onSubmit={submitHandler} id="login">
                 <div>
                   <label >
-                    Correo Electronico: 
+                    Correo Electrónico
                     <input type="email" id='email'/>
                   </label>
                 </div>
                 <label>
-                  Contraseña: 
+                  Contraseña
                   <input type="password" id='password'/>
                   
                   <input className="iniciar"
