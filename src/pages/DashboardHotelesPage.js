@@ -48,7 +48,8 @@ function DashboardHotelesPage(){
         
         <div>Aqui para Devolverse al Dashboard</div>
         <button className="BotonesNormales" onClick={() => navigate(`/dashboard`)}>Click!!!</button>
-        
+        <div>Aqui para Modificar las habitaciones de tus Hoteles</div>
+        <button className="BotonesNormales" onClick={() => navigate(`/dashboardHabitaciones`)}>Habitaciones</button>
         </div>
     );
 }

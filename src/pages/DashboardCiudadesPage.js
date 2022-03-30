@@ -1,5 +1,3 @@
-// No estoy seguro de esta Pagina porque quizas podamos poner los dashboards 
-// en las mismas paginas de hotel y ciudades
 import { map } from "@firebase/util";
 import React from "react";
 import CiudadesLista from "../components/CiudadesLista/CiudadesLista";
