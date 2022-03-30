@@ -2,6 +2,7 @@
 // a
 import React, { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
+import { Card, CardContent, Box, Button, Typography, TextField } from "@mui/material";
 import moment from "moment"
 
 import PayWithPaypal from '../components/Pagos/Paypal'
@@ -12,20 +13,45 @@ function PagoPage() {
 
     const totalReserva = tipoHabitacion.precioNoche * (moment(reserva.fechaSalida).diff(moment(reserva.fechaEntrada), 'days')) 
 
-    return (<div>
-        <p>Reservación exitosa. (Ahora se procede a pagar por paypal) </p>
-        <h1>Detalles Reservación</h1>
-        <p>Hotel: {tipoHabitacion.nombreHotel}</p>
-        <p>Tipo de habitación:{tipoHabitacion.nombre}</p>
-        <p>Precio por noche: {tipoHabitacion.precioNoche}</p>
-        <p>Fecha de entrada: {reserva.fechaEntrada}</p>
-        <p>Fecha de salida: {reserva.fechaSalida}</p>
-        <p>Total a pagar: {totalReserva}</p>
-        <PayWithPaypal
-            total={totalReserva}
-            items={[tipoHabitacion.nombre]}
-        />
-    </div>);
-}
+    return (<><p>Reservación exitosa.(Ahora se procede a pagar por paypal) </p>
+        <br /><div>
+        <Box
+            sx={{
+                mx: "auto",
+                width: 400,
+                height: 400,
+            }}
+        >
+                <Card>
+                    <CardContent>
+                        <div>
+                            <Typography align="right">
+                                <h1>Reservación</h1>
+                            </Typography>
+                            <Typography variant="h6" align="left">
+                                <Box sx={{ lineHeight: 2}}>
+                                    Hotel: {tipoHabitacion.nombreHotel}<br />
+                                    
+                                    Tipo de habitación:{tipoHabitacion.nombre}<br />
+                                    
+                                    Precio por noche: ${tipoHabitacion.precioNoche}<br />
+                                    
+                                    Fecha de entrada: {reserva.fechaEntrada}<br />
+                                    
+                                    Fecha de salida: {reserva.fechaSalida}<br />
+                                    
+                                    Total a pagar: ${totalReserva}<br />
+                                </Box><br />
+                            
+                                <PayWithPaypal
+                                    total={totalReserva}
+                                    items={[tipoHabitacion.nombre]} />
+                            </Typography>
+                        </div>
+                    </CardContent>
+                </Card>
+        </Box></div>
+                            </>);
+                    }
 
 export default PagoPage;
