@@ -1,10 +1,10 @@
 import React from "react";
 import { sessionContext } from "../context/SessionContext";
 import { Card, CardMedia, CardContent, Typography, Avatar, Button, Grid } from "@mui/material";
-import { amber} from "@mui/material/colors"
-import {Modal} from "react-bootstrap"
+import { amber } from "@mui/material/colors"
+import { Modal } from "react-bootstrap"
 import { useState } from "react";
-import firebaseApp from "../firebase/credenciales.js";
+import {firebaseApp} from "../firebase/credenciales.js";
 import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
 
 
@@ -35,7 +35,7 @@ function PerfilUsuarioPage() {
   }
   function editarUsuario(infoUsuario) {
     const db = getFirestore(firebaseApp);
-    const collectionRef = collection(db, "productos");
+    const collectionRef = collection(db, "usuarios");
     const docRef = doc(collectionRef, infoUsuario.id);
     setDoc(docRef, infoUsuario);
   
