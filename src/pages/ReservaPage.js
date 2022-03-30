@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react"
 import { collection, doc, setDoc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { db } from "./../firebase/credenciales";
+import { Card, CardContent, Box, Button, Typography, TextField } from "@mui/material";
 import { Navigate, useLocation, useNavigate } from "react-router-dom"
 import { sessionContext } from "../context/SessionContext";
 import moment from "moment"
@@ -11,8 +12,6 @@ function ReservaPage() {
     const location = useLocation()
     const { tipoHabitacion } = location.state
     const { session } = useContext(sessionContext)
-    console.log(tipoHabitacion)
-    console.log(tipoHabitacion.id)
     const navigate = useNavigate()
 
 
@@ -64,12 +63,21 @@ function ReservaPage() {
 
     };
 
-    return (<>
-        <h1>Pagina reserva</h1>
-        <form onSubmit={handleSubmit}>
+    return (<><br /><div >
+        <Box 
+            sx={{
+                mx: "auto",
+                width: 400,
+                height: 400,
+                        
+                    }}
+                >
+        <Card><CardContent>
+        <h1>Pagina reserva</h1><br/>
+        <form onSubmit={handleSubmit}><Typography align="center">
             <div>
-                <label for="fechaEntrada">Fecha Entrada: </label>
-                <input
+                <label for="fechaEntrada">Fecha Entrada: </label><br/>
+                <TextField variant="outlined" 
                     name="fechaEntrada"
                     id="fechaEntrada"
                     type="date"
@@ -78,10 +86,10 @@ function ReservaPage() {
                     onChange={handleOnChange}
                 />
 
-            </div>
+            </div><br/>
             <div>
-                <label for="fechaSalida">Fecha Salida: </label>
-                <input
+                <label for="fechaSalida">Fecha Salida: </label><br/>
+                <TextField variant="outlined" 
                     name="fechaSalida"
                     id="fechaSalida"
                     type="date"
@@ -93,13 +101,14 @@ function ReservaPage() {
             <div>
                 <p style={{ color: "red" }}>{mensaje}</p>
             </div>
-            <div>
-                <button type="submit" onClick={handleSubmit}>
+            <div><br/><Typography align="right">
+                <Button variant="contained" type="submit" onClick={handleSubmit}>
                     Reservar
-                </button>
+                </Button>
+            </Typography>
             </div>
-
-        </form>
+        </Typography>
+        </form></CardContent></Card></Box></div>
     </>);
 }
 

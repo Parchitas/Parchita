@@ -27,6 +27,7 @@ export default function SessionProvider (props){
                 id: infoUsuario.user.uid,
                 correo: email,
                 name: userData.name,
+                telefono:userData.telefono,
                 rol: userData.rol
             })
 

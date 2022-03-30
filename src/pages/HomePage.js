@@ -1,5 +1,5 @@
 import React from 'react'
-import {CssBaseline, makeStyles, Button} from '@material-ui/core'
+import {CssBaseline, makeStyles, Button, Typography} from '@material-ui/core'
 import Banner from '../components/Banner/Banner'
 import DatePicker from '../components/General/DatePicker'
 import {useState, useContext} from 'react'
@@ -19,10 +19,12 @@ const HomePage = () => {
       <div className={classes.root}>
           <Banner/>         
       </div>
-    </CssBaseline>
-    <div style={{ width : "40%", "background-color": "black"}}>
-      <Link to="/ciudades" style={{ color : "white"}}>Ver todas las ciudades</Link>
-    </div>
+      </CssBaseline>
+      <Typography></Typography>
+      <Link to="/ciudades">
+        <Button size="large" variant='contained' color='error'>Explora tus ciudades</Button>
+      </Link>
+
     </>
   )
 }
@@ -37,22 +39,6 @@ const useStyle=makeStyles((theme)=>({
   dates:{
     display: "flex",
     flexDirection: "column",
-    "& button":{
-      border: "1px solid #cccccc",
-      backgroundColor:"#fff",
-      color:"rgba(255,103,31,0.4)",
-      textTransform:"inherit",
-      fontSize:"1.2rem",
-      fontWeight:"bold",
-
-    },
-    "& button:hover" :{
-      
-      backgroundColor:"rgba(255,103,31,0.4)",
-      color:"#fff",
-   
-
-    }
 
   },
 
