@@ -7,7 +7,7 @@ function DashboardEditHotelPage (){
     const navigate = useNavigate()
     const { hotelID } = useParams();
     const [hotel, setHotel] = React.useState()
-    const [loading, setLoading] = React.useState(false)
+    const [loading, setLoading] = React.useState(true)
     
     React.useEffect(() => {
 

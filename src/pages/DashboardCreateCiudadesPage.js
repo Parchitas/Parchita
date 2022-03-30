@@ -1,23 +1,22 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { queryCiudad, updateCiudad } from "../services/ciudades"
+import { createCiudad } from "../services/ciudades"
+import '../css/DashboardCreateCiudadesPage.css';
+import { useNavigate } from "react-router-dom";
 
-function DashboardEditCiudadPage (){
-    const navigate = useNavigate()
-    const { ciudadID } = useParams();
-    const [ciudad, setCiudad] = React.useState()
+function DashboardCreateCiudades(){
+    
+    const [ciudad, setCiudad] = React.useState({ ranking: "0", lugaresInteres: [], imagenes: [] })
     const [loading, setLoading] = React.useState(true)
     const [lugarInteresInput, setLugarInteresInput] = React.useState("");
     const [imagenesInput, setImagenesInput] = React.useState("");
-    React.useEffect(() => {
+    const navigate = useNavigate()
 
-        setLoading(true)
-        queryCiudad(ciudadID).then((response) => {
-            setCiudad(response)
-            setLoading(false)
-        })
+    function onChange(e) {
+        const formName = e.target.name;
+        const formValue = e.target.value;
 
-    }, [])
+        setCiudad(prevCiudad => ({ ...prevCiudad, [formName]: formValue }));
+    }
 
     function deleteLugarInteres(idx) {
         setCiudad({ ...ciudad, lugaresInteres: ciudad.lugaresInteres.filter((lugarInteres, index) => idx !== index )})
@@ -37,25 +36,17 @@ function DashboardEditCiudadPage (){
         setImagenesInput("");
     }
 
-    function onChange(e) {
-        const formName = e.target.name;
-        const formValue = e.target.value;
-
-        setCiudad(prevCiudad => ({ ...prevCiudad, [formName]: formValue }));
-    }
-
-    function handleSubmit(e) {
+    function handleSubmit(e){
         e.preventDefault();
-        updateCiudad(ciudad,ciudadID).then(() => {
-            navigate("/dashboardCiudades");
-        }).catch(e => console.error({ error: e, msg: "ta malardo" }));
+        createCiudad(ciudad).then(() => {
+            navigate("/dashboardCiudades")
+        })
     }
 
-    if (loading) return (
-        <div> cargando </div>
-    )
 
-    return(
+
+    return (    
+
         <form onSubmit={handleSubmit}>
             <label > 
                 Nombre:
@@ -111,9 +102,11 @@ function DashboardEditCiudadPage (){
                 ))}
             </div>
 
-            <button>SUUU</button>
-        </form>
+            <button>Submit</button>
+        </form> 
     )
 }
 
-export default DashboardEditCiudadPage; 
+
+
+export default DashboardCreateCiudades;

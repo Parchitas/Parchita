@@ -1,5 +1,5 @@
 import {db} from '../firebase/credenciales';
-import { getDocs, collection, doc, deleteDoc, getDoc, createId, updateDoc } from "firebase/firestore";
+import { getDocs, collection, doc, deleteDoc, getDoc, addDoc, updateDoc } from "firebase/firestore";
 
 const collectionCiudades = "ciudades"
 
@@ -35,21 +35,24 @@ const queryCiudad = async (id) => {
 }
 
 const updateCiudad = async (ciudad,ciudadID) => {
-    console.log(ciudad)
     const cityRef = doc(db, collectionCiudades, ciudadID)
     await updateDoc(cityRef, {
         nombre: ciudad.nombre,
-        descripcion: ciudad.descripcion
+        descripcion: ciudad.descripcion,
+        ranking: ciudad.ranking,
+        nombrelower: ciudad.nombre.toLowerCase(),
+        ambiente: ciudad.ambiente,
+        imagenes: ciudad.imagenes,
+        lugaresInteres: ciudad.lugaresInteres
     });
 }
 
-const createCiudad = (nombre, descripcion) => {
+const createCiudad = async (ciudad) => {
 
-    const newId = db.createId();
-    db.collection(collectionCiudades).doc(newId).set({
-    nombre,
-    descripcion
-    })
+    const newCiudad = {...ciudad, nombrelower: ciudad.nombre.toLowerCase()}
+    const nuevaCiudad = await addDoc(collection(db, collectionCiudades), newCiudad)
+    return nuevaCiudad
+
 }
 
 export {createCiudad, queryCiudades, deleteCiudad, queryCiudad, updateCiudad};
