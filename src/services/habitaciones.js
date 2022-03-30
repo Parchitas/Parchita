@@ -12,4 +12,10 @@ const queryHabitacion = async (id) => {
 
 }
 
-export { queryHabitacion }
+const createHab = async (tipoHabitaciones) => {
+    
+    const nuevaHabitacion = await addDoc(collection(db, collectionHab), tipoHabitaciones)
+    return nuevaHabitacion
+}
+
+export { queryHabitacion, createHab }

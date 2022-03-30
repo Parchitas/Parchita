@@ -7,18 +7,18 @@ import { createHotel } from "../services/hoteles";
 function DashboardCreateHotelesPage (){
    
     const navigate = useNavigate()
-    const [hotel, setHotel] = React.useState({ranking: "0", instalaciones: [], tipoHabitaciones: []})
+    const [hotel, setHotel] = React.useState({ ranking: "0", instalaciones: [], tipoHabitaciones: []})
     const [loading, setLoading] = React.useState(true)
     const [instalacionesInput, setInstalacionesInput] = React.useState("");
     const [tipoHabitacionesInput, setTipoHabitacionesInput] = React.useState("");
     const [ciudades, setCiudades] = React.useState([])
-    const [ciudadID, setCiudadID] = React.useState("")
-
+    const [cityID, setCiudadID] = React.useState("")
+    
     function onChange(e) {
         const formName = e.target.name;
         const formValue = e.target.value;
 
-        setHotel(prevHotel => ({ ...prevHotel, [formName]: formValue }));
+        setHotel(prevHotel => ({ ...prevHotel, "ciudadID": cityID, [formName]: formValue }));
     }
 
     React.useEffect(() => {
@@ -64,7 +64,7 @@ function DashboardCreateHotelesPage (){
     function handleSubmit(e){
         e.preventDefault();
         createHotel(hotel).then((response) => {
-            updateNewHotel(ciudadID,response.id)
+            updateNewHotel(cityID,response.id)
             navigate("/dashboardHoteles")           
         })
     }
