@@ -42,15 +42,16 @@ function CiudadDetalles() {
                     <div className="tituloHoteles">
                         <h1>Hoteles</h1>
                     </div>
-                    <div className="listaHoteles" style={{ display: 'block', paddingInline: '100px', }}>
+                    <div className="listaHoteles">
+                        
                         {hoteles ?
 
 
                             hoteles.map((hotel) =>
-                                <Hotel key={hotel.id} hotel={hotel} />
+                                <Grid container justifyContent="center" spacing={1}><Hotel key={hotel.id} hotel={hotel} /></Grid>
                             )
 
-
+                            
                             : <div>No se encuentran hoteles disponibles actualmente en esta ciudad</div>}
                     </div>
                 </div>

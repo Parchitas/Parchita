@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import { useSearchParams, useNavigate } from "react-router-dom"
-import "../../css/Search.css"
-import SearchIcon from "@material-ui/icons/Search";
+import { ButtonGroup, Button, TextField, Typography } from "@mui/material"
+
+
 function Search() {
     const [text, setText] = useState("");
     const [query, setQuery] = useSearchParams();
@@ -15,10 +16,14 @@ function Search() {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <div className="searchContent">
-                <input className="search" type="text" placeholder="  🔍    Buscar ciudad"value={text} onChange={(event) => setText(event.target.value)} />
-                <button className="buscar" type="submit" ><SearchIcon/></button>
-            </div>
+
+            <Typography>
+                <ButtonGroup  variant="outlined" size="small" aria-label="outlined button group">
+                    <TextField label="Buscar ciudad" variant="filled" onChange={(event) => setText(event.target.value)}  />
+                    <Button size="small" type="submit">Buscar ciudad</Button>      
+                </ButtonGroup>
+            </Typography>
+
         </form>);
 }
 

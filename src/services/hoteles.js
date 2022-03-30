@@ -1,5 +1,5 @@
 import {db} from '../firebase/credenciales';
-import { getDocs, collection, doc, deleteDoc, getDoc, updateDoc } from "firebase/firestore";
+import { getDocs, collection, doc, deleteDoc, getDoc, updateDoc, addDoc } from "firebase/firestore";
 
 const collectionHoteles = "hoteles"
 
@@ -34,12 +34,36 @@ const queryHotel = async (id) => {
 
 }
 
-const updateHoteles = async (hotel,hotelID) => {
+const updateHoteles = async (hotel,hotelID,ciudadID) => {
     const cityRef = doc(db, collectionHoteles, hotelID)
     await updateDoc(cityRef, {
+        ciudadID: ciudadID,
         nombre: hotel.nombre,
-        ranking: hotel.ranking
+        imagen: hotel.imagen,
+        tipoHabitaciones: hotel.tipoHabitaciones,
+        nombre: hotel.nombre,
+        instalaciones: hotel.instalaciones
     });
 }
 
-export {queryHoteles, deleteHotel, queryHotel, updateHoteles};
+const updateNewHabitacion = async (tipoHabitaciones,tipoHabitacionesID,hotelID) => {
+    const hotelRef = doc(db, collectionHoteles, hotelID)
+    const docSnap = await getDoc(hotelRef);
+    const hotel = docSnap.data();
+    await updateDoc(hotelRef, {
+        ciudadID: hotelID,
+        nombre: hotel.nombre,
+        imagen: hotel.imagen,
+        nombre: hotel.nombre,
+        tipoHabitaciones: [...hotel.tipoHabitaciones, {id: tipoHabitacionesID}]
+    });
+}
+
+const createHotel = async (hotel) => {
+
+    const nuevoHotel = await addDoc(collection(db, collectionHoteles), hotel)
+    return nuevoHotel
+
+}
+
+export {queryHoteles, deleteHotel, queryHotel, updateHoteles,createHotel, updateNewHabitacion};

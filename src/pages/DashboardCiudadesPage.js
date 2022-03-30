@@ -24,6 +24,8 @@ function DashboardCiudadesPage(){
 
     }, [])
 
+    
+
     const handleDelete = (ciudadId) =>{
         setLoading(true)
         deleteCiudad(ciudadId).then(() => {
@@ -35,57 +37,43 @@ function DashboardCiudadesPage(){
 
     function handleSubmit(e) {
         e.preventDefault();
-        createCiudad(e.target[0].value, e.target[1].value)
+        setLoading(true)
+        createCiudad(e.target[0].value, e.target[1].value).then(() => {
+            queryCiudades().then((response) => {
+                setCiudades(response)
+                setLoading(false)
+            })
+        })
     }
+
     if (loading) return (
         <h3>Cargando</h3>
     )
+
     return (
         <>
         <div className="container">
-            <table className="default">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Accion</th>
-                    </tr>
 
-                </thead>
-                <tbody>
-                    {loading ? <div>cargando</div> : null}
-                     
-                            {ciudades.map(({id,nombre}) =>(
+            {loading ? <div>cargando</div> : null}
+            {ciudades.map(({ id, nombre }) => (
+                <>
+                    <div className="data">
+                        <div className="ciudades">{nombre}</div>
+                        <div className="botonesContainer">
+                            <button onClick={() => navigate(`/dashboardCiudades/${id}`)}> Editar </button>
+                            <button onClick={(() => {handleDelete(id)})}> Eliminar </button>
+                        </div>
+                    </div>
+                </>
+            ))}
+            <div className="title">Agregar una nueva Ciudad AQUI</div>
 
-                                <>
-                                <tr>
-                                    <td>
-                                    {nombre}
-                                    </td>
-                                    <td>
-                                        <button onClick={() => navigate(`/dashboardCiudades/${id}`)}> Editar </button>
-                                        <button onClick={(() => {handleDelete(id)})}> Eliminar </button>
-                                    </td>
-                                </tr>
-                                </>
-
-
-                            ) )}
-                    
-                
-                </tbody>
-            </table>
-            <div className="title">Agrega una nueva Ciudad SUUU</div>
             <form onSubmit={handleSubmit}>
-            <label >
-                Nombre: 
-                <input type="text" id='nombre' name ="nombre"/>
-            </label>
-            <label >
-                Descripcion: 
-                <input type="text" id='text' name="descripcion"/>
-            </label> 
-            <button>Submit</button>
+            
+            <button onClick = {() => navigate(`/dashboardCiudades/create`)}>Submit</button>
         </form> 
+        <div>Aqui para Devolverse al Dashboard</div>
+        <button onClick={() => navigate(`/dashboard`)}>Click!!!</button>
         </div>
     </>
     );

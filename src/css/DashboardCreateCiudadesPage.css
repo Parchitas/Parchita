@@ -1,0 +1,7 @@
+.arrayContainer {
+    display: flex;
+    flex-direction: column;
+}
+.arraysInput {
+    display: flex;
+}

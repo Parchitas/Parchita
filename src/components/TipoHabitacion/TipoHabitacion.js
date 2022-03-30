@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react"
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/credenciales"
 import { useNavigate } from "react-router-dom"
-import { Card, CardActionArea, CardContent, CardMedia, Typography, Box, Grid, Button, CircularProgress } from '@mui/material'
-import { Col } from "react-bootstrap";
+import { Card, CardContent, Typography, Box, Grid, Button, CircularProgress } from '@mui/material'
 
 function TipoHabitacion(props) {
 
@@ -40,25 +39,25 @@ function TipoHabitacion(props) {
 
     return (<div>
         {loading ? <CircularProgress /> :
-            <><br /><Col sm>
-
-                <Card>
-                    <CardActionArea>
+            
+                <Grid item sx><br />
+                <div style={{ display: 'block', paddingInline: '30px', }}>
+                <Card sx={{ maxWidth: 345 }}>
                         <CardContent>
                             <Typography gutterBottom variant="h4" component="div">
                                 {nombre}
                             </Typography>
-                            <Typography variant="h6" color="text.secondary" align="left">
+                            <Typography variant="h6" color="text.secondary" align="center">
                                 <p>{camas}</p>
                                 <p>Capacidad: {capacidad} personas</p>
-                                <p>Comodidades: {comodidades.join(", ")}</p>
-                                <p>Precio total por noche: ${precioNoche}</p>
-                            </Typography>
-                            <button onClick={handleClick}>Reservar</button>
+                                    <p>Comodidades: {comodidades.join(", ")}</p>
+                                    <p>Precio total por noche: ${precioNoche}</p>    
+                                </Typography><Typography align="right">
+                                                       
+                                <Button variant="contained" onClick={handleClick}>Reservar</Button></Typography>
                         </CardContent>
-                    </CardActionArea>
                 </Card>
-            </Col></>}
+            </div></Grid>}
     </div>);
 }
 
