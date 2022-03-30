@@ -112,6 +112,9 @@ function DashboardEditCiudadPage (){
             </div>
 
             <button>SUUU</button>
+            
+            <div>Porsia te equivocaste de Ciudad</div>
+            <button className="BotonesNormales" onClick={() => navigate(`/dashboardCiudades`)}>Regreso al DashboardHoteles</button>    
         </form>
     )
 }

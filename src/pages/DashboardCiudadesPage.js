@@ -24,6 +24,8 @@ function DashboardCiudadesPage(){
 
     }, [])
 
+    
+
     const handleDelete = (ciudadId) =>{
         setLoading(true)
         deleteCiudad(ciudadId).then(() => {
@@ -67,6 +69,8 @@ function DashboardCiudadesPage(){
             
             <button onClick = {() => navigate(`/dashboardCiudades/create`)}>Submit</button>
         </form> 
+        <div>Aqui para Devolverse al Dashboard</div>
+        <button onClick={() => navigate(`/dashboard`)}>Click!!!</button>
         </div>
     );
 

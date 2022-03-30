@@ -43,6 +43,12 @@ function DashboardHotelesPage(){
                     </div>
                 </>
             ))}
+        <div>Aqui para agregar Nuevo Hotel</div>
+        <button onClick={() => navigate(`/dashboardHoteles/create`)}>Click!!!</button>
+        
+        <div>Aqui para Devolverse al Dashboard</div>
+        <button className="BotonesNormales" onClick={() => navigate(`/dashboard`)}>Click!!!</button>
+        
         </div>
     );
 }

@@ -4,8 +4,8 @@ import '../css/DashboardCreateCiudadesPage.css';
 import { useNavigate } from "react-router-dom";
 
 function DashboardCreateCiudades(){
-    
-    const [ciudad, setCiudad] = React.useState({ ranking: "0", lugaresInteres: [], imagenes: [] })
+
+    const [ciudad, setCiudad] = React.useState({ ranking: "0", lugaresInteres: [], imagenes: [], hoteles: []})
     const [loading, setLoading] = React.useState(true)
     const [lugarInteresInput, setLugarInteresInput] = React.useState("");
     const [imagenesInput, setImagenesInput] = React.useState("");
@@ -42,8 +42,6 @@ function DashboardCreateCiudades(){
             navigate("/dashboardCiudades")
         })
     }
-
-
 
     return (    
 
@@ -103,6 +101,8 @@ function DashboardCreateCiudades(){
             </div>
 
             <button>Submit</button>
+            <div>Aqui para Devolverse al Dashboard de Ciudades</div>
+        <button className="BotonesNormales" onClick={() => navigate(`/dashboardCiudades`)}>Click!!!</button>
         </form> 
     )
 }

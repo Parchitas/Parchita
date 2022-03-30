@@ -12,8 +12,6 @@ function ReservaPage() {
     const location = useLocation()
     const { tipoHabitacion } = location.state
     const { session } = useContext(sessionContext)
-    console.log(tipoHabitacion)
-    console.log(tipoHabitacion.id)
     const navigate = useNavigate()
 
 

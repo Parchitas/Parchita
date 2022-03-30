@@ -35,6 +35,7 @@ const queryCiudad = async (id) => {
 }
 
 const updateCiudad = async (ciudad,ciudadID) => {
+    
     const cityRef = doc(db, collectionCiudades, ciudadID)
     await updateDoc(cityRef, {
         nombre: ciudad.nombre,
@@ -43,9 +44,28 @@ const updateCiudad = async (ciudad,ciudadID) => {
         nombrelower: ciudad.nombre.toLowerCase(),
         ambiente: ciudad.ambiente,
         imagenes: ciudad.imagenes,
-        lugaresInteres: ciudad.lugaresInteres
+        lugaresInteres: ciudad.lugaresInteres,
+        hoteles: ciudad.hoteles
     });
 }
+
+const updateNewHotel = async (ciudadID,hotelID) => {
+    
+    const cityRef = doc(db, collectionCiudades, ciudadID)
+    const docSnap = await getDoc(cityRef);
+    const ciudad = docSnap.data();
+    await updateDoc(cityRef, {
+        nombre: ciudad.nombre,
+        descripcion: ciudad.descripcion,
+        ranking: ciudad.ranking,
+        nombrelower: ciudad.nombre.toLowerCase(),
+        ambiente: ciudad.ambiente,
+        imagenes: ciudad.imagenes,
+        lugaresInteres: ciudad.lugaresInteres,
+        hoteles: [...ciudad.hoteles, {id: hotelID}]
+    });
+}
+
 
 const createCiudad = async (ciudad) => {
 
@@ -55,4 +75,4 @@ const createCiudad = async (ciudad) => {
 
 }
 
-export {createCiudad, queryCiudades, deleteCiudad, queryCiudad, updateCiudad};
+export {createCiudad, queryCiudades, deleteCiudad, queryCiudad, updateCiudad, updateNewHotel};

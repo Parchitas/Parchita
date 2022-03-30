@@ -15,6 +15,8 @@ import DashboardPage from './pages/DashboardPage';
 import DashboardCiudadesPage from './pages/DashboardCiudadesPage';
 import DashboardEditCiudadPage from './pages/DashboardEditCiudadPage';
 import DashboardCreateCiudadesPage from './pages/DashboardCreateCiudadesPage';
+import DashboardCreateHotelesPage from './pages/DashboardCreateHotelesPage';
+import DashboardCreateHabPage from './pages/DashboardCreateHabPage';
 import DashboardEditHotelPage from './pages/DashboardEditHotelPage';
 import DashboardHotelesPage from './pages/DashboardHotelesPage';
 import RegisterPage from './pages/RegisterPage';
@@ -89,6 +91,8 @@ function App() {
         <Route path="/dashboardHoteles/:hotelID" element={<DashboardEditHotelPage/>}/>
         <Route path="/dashboardCiudades" element={<DashboardCiudadesPage/>}/>
         <Route path="/dashboardCiudades/create" element={<DashboardCreateCiudadesPage/>}/>
+        <Route path="/dashboardHoteles/create" element={<DashboardCreateHotelesPage/>}/>
+        <Route path="/dashboardHabitaciones" element={<DashboardCreateHabPage/>}/>
         <Route path="/dashboardCiudades/:ciudadID" element={<DashboardEditCiudadPage/>}/>
         <Route path="/ciudades/:ciudadID" element={<CiudadDetalles/>}/>
         <Route path="/ciudades/:ciudadID/hoteles/:hotelID" element={<HotelDetalles/>}/>
