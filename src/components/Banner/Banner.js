@@ -1,5 +1,6 @@
 import React from 'react'
-import { makeStyles, Typography, Button, Card, CardContent, Grid, Box} from "@material-ui/core"
+import { makeStyles, Typography, Button, Card, CardContent, Grid, Box } from "@material-ui/core"
+import { Stack } from '@mui/material'
 import background_image from "../../imagenes/Banner.jpg"
 import { Link } from "react-router-dom"
 import { useState, useContext } from 'react'
@@ -19,7 +20,7 @@ const Banner = () => {
       </div>
       */}<br/>
       <div>
-        <Grid container justifyContent="center" alignItems="center" spacing={1}><br />
+        <Grid container justifyContent="center" alignItems="center" spacing={5}><br />
           <Grid item><Box
                     sx={{
                         width: 400,
@@ -28,7 +29,7 @@ const Banner = () => {
                 ><Card>
           <CardContent>
             <Typography variant="h5" align="center">¿Que es Parchita?</Typography><br />
-      <Typography variant="body1" align="justify">Sabemos que cuando visitas un hotel puedes llevarte una experiencia tanto ácida como dulce ¡¡¡COMO LA PARCHITA!!!. Por eso mismo ponemos a su disposición una plataforma donde podrás obtener información útil de las ciudades listadas, así como sitios de interés y te ofrecemos también la posibilidad de reservar una habitación en uno de los grandes hoteles con los que poseemos contacto, para que disfrutes de ese viaje que tanto desean.</Typography>
+      <Typography variant="body1" align="justify">Sabemos que cuando visitas un hotel puedes llevarte una experiencia tanto ácida como dulce ¡¡¡COMO LA PARCHITA!!!.<br/><br/> Por eso mismo ponemos a su disposición una plataforma donde podrás obtener información útil de las ciudades listadas, así como sitios de interés y te ofrecemos también la posibilidad de reservar una habitación en uno de los grandes hoteles con los que poseemos contacto, para que disfrutes de ese viaje que tanto desean.</Typography>
         </CardContent>
             </Card></Box></Grid>
         <Grid item sx>    
@@ -37,7 +38,7 @@ const Banner = () => {
           
                     <Button component={Link} to="/dashboard" size="large" variant='contained' color='error' >Editar Base de Datos</Button>
           : null}</Grid></Grid>
-        </div>
+      </div>
     </div>
   )
 }
