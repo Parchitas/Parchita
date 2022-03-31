@@ -63,11 +63,11 @@ function DashboardEditHotelPage() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (validarArrays()) {
-            updateHoteles(hotel, hotelID, hotel.ciudadID).then(() => {
-                navigate("/dashboardHoteles");
-            }).catch(e => console.error({ error: e, msg: "ta malardo" }));
-        }
+
+        updateHoteles(hotel, hotelID, hotel.ciudadID).then(() => {
+            navigate("/dashboardHoteles");
+        }).catch(e => console.error({ error: e, msg: "ta malardo" }));
+
     }
 
     const getNombreHab = async (id) => {
