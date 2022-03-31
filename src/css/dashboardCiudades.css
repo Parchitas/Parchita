@@ -1,28 +1,106 @@
-.container {
+.imagenFondo{
+
     display: flex;
-    flex-direction: column;
+    background-image: url(../imagenes/FondoDashboardCiudad.jpeg);
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 960px;
+    align-items: center;
+    justify-content: center; 
+
+
+}
+.cont{
+    background-color: rgba(0, 0, 0, 0.521);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: auto;
     height: auto;
-}
-
-.ciudades {
-    width: 200px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    background-color: brown;
-}
-
-.botonesAqui{
-    display: block;
+    padding:30px;
     
+    border-radius: 30px;
+
 }
+.tr{width:200px;}
+.contenedor{
+    margin-top: 10px;
+    display: inline-flex;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.tabla{
+    width: 100%;
+
+
+}
+.head th{
+    
+    font-size: 50px;
+
+}
+.Nombre{
+    font-size: 25px;
+
+
+}
+.title{
+    width: auto;
+    height: auto;
+
+}
+
 
 .botonesContainer{
     width: 200px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
+.button {
+    display: inline-block;
+    padding: 1px 20px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;	
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  
+  .button:hover {background-color: #3e8e41}
+  
+  .button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+  .buttonE {
+    display: inline-block;
+    padding: 1px 20px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;	
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #ff0000;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  
+  .buttonE:hover {background-color: #cc2c2c}
+  
+  .buttonE:active {
+    background-color: #a52020;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
 
-.data {
-    display: flex;
-}
