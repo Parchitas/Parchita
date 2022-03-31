@@ -1,5 +1,5 @@
 import {db} from '../firebase/credenciales';
-import { getDocs, collection, doc, deleteDoc, getDoc, addDoc, updateDoc } from "firebase/firestore";
+import {  collection, doc,  getDoc, addDoc } from "firebase/firestore";
 
 const collectionHab = "tipohabitaciones"
 
