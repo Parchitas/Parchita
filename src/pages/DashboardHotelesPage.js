@@ -1,9 +1,10 @@
 import React from "react";
 import { map } from "@firebase/util";
-import '../css/dashboardHoteles.css'
+import '../css/dashboardCiudades.css'
 import { queryHoteles, deleteHotel } from "../services/hoteles"
 import { useNavigate } from 'react-router-dom';
 import swal from "sweetalert";
+import { Button, Grid, Typography } from "@mui/material";
 
 function DashboardHotelesPage() {
 
@@ -49,27 +50,27 @@ function DashboardHotelesPage() {
     }
 
     return (
+        <div className="imagenFondo">
+            <div className="cont">
+                <div className="contenedor">
         <div className="container">
-            {loading ? <div>cargando</div> : null}
+            {loading ? <div>cargando</div> : null}<br/><div><Grid container justifyContent='center' spacing={20}><Grid item>
             {hoteles.map(({ id, nombre }) => (
                 <>
                     <div className="data">
                         <div className="hoteles">{nombre}</div>
-                        <div className="botonesContainer">
-                            <button onClick={() => navigate(`/dashboardHoteles/${id}`)}> Editar </button>
-                            <button onClick={(() => { handleDelete(id) })}> Eliminar </button>
-                        </div>
+                        <div className="botonesContainer"><Grid container justifyContent='center' spacing={0.5}>
+                            <Grid item><Button variant="contained" onClick={() => navigate(`/dashboardHoteles/${id}`)}> Editar </Button></Grid>
+                            <Grid item><Button variant="contained" onClick={(() => { handleDelete(id) })}> Eliminar </Button></Grid>
+                        </Grid></div>
                     </div>
                 </>
-            ))}
-            <div>Aqui para agregar Nuevo Hotel</div>
-            <button onClick={() => navigate(`/dashboardHoteles/create`)}>Click!!!</button>
-
-            <div>Aqui para Devolverse al Dashboard</div>
-            <button className="BotonesNormales" onClick={() => navigate(`/dashboard`)}>Click!!!</button>
-            <div>Aqui para Modificar las habitaciones de tus Hoteles</div>
-            <button className="BotonesNormales" onClick={() => navigate(`/dashboardHabitaciones`)}>Habitaciones</button>
-        </div>
+            ))}</Grid><Grid item><Typography align="right">
+                                <Button className="BotonesNormales" variant="contained" onClick={() => navigate(`/dashboardHabitaciones`)}>Modificar Habitaciones <br/>de Hoteles</Button><br/><br/>
+            <Button variant="contained" onClick={() => navigate(`/dashboardHoteles/create`)}>Agregar nuevo Hotel</Button><br/><br/>
+            <Button className="BotonesNormales" variant="contained" onClick={() => navigate(`/dashboard`)}>Regresar</Button>
+            </Typography>
+        </Grid></Grid></div></div></div></div></div>
     );
 }
 

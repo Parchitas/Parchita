@@ -87,7 +87,7 @@ function DashboardCreateCiudades() {
                                         <option value="5">5</option>
                                     </Form.Select>
                                 </label>
-                                <br />
+                                
                             </Typography>
                             <label>
                                 <TextField type="text" id='text' label="Ambiente" name="ambiente" value={ciudad.ambiente ?? ""} onChange={onChange} required />
