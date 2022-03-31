@@ -55,15 +55,15 @@ function DashboardCreateCiudades(){
                         <form onSubmit={handleSubmit}>
                             
             
-                <TextField type="text" id='nombre' label="Nombre" defaultValue= {ciudad.nombre ?? ""} onChange={onChange} />
+                <TextField type="text" id='nombre' name="nombre" label="Nombre" defaultValue= {ciudad.nombre ?? ""} onChange={onChange} />
             <br/>
 
-                <TextField label="Descripcion" multiline defaultValue={ciudad.descripcion ?? ""} onChange={onChange} />
-            <br/>
-<Typography align="center">
+                <TextField label="Descripcion" name="descripcion" id='descripcion' multiline defaultValue={ciudad.descripcion ?? ""} onChange={onChange} />
+            <br/><br/>
+            <Typography align="center">
             <label >
                 Ranking:
-                <Form.Select name="ranking" value= {ciudad.ranking ?? ""} onChange={onChange}>
+                <Form.Select name="ranking" value={ciudad.ranking ?? ""} onChange={onChange}>
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -71,15 +71,16 @@ function DashboardCreateCiudades(){
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </Form.Select>
-            </label><br/>
-</Typography>
-                <TextField type="text" id='text' label="Ambiente" defaultValue= {ciudad.ambiente ?? ""} onChange={onChange} />
+                                </label><br />
+                                </Typography>
+
+                <TextField type="text" id='text' label="Ambiente" name='ambiente' defaultValue={ciudad.ambiente ?? ""} onChange={onChange} />
             <br/>
             
             <div className="arrayContainer">
                 <label className="arraysInput">
                     
-                    <TextField type="text" label="Lugares de Interes" defaultValue={lugarInteresInput} onChange={(e) => setLugarInteresInput(e.target.value)} />
+                    <TextField type="text" label="Lugares de Interes" name="lugaresInteres" defaultValue={lugarInteresInput} onChange={(e) => setLugarInteresInput(e.target.value)} />
                     <Button onClick={addLugarInteres} ><AddCircle/></Button>
                 </label><br/>
                 {ciudad.lugaresInteres.map((lugarInteres, index) => (
@@ -91,7 +92,7 @@ function DashboardCreateCiudades(){
             </div>
             <div className="arrayContainer">
                 <label className="arraysInput">
-                    <TextField type="text" label="URL de las Imagenes:" defaultValue={imagenesInput} onChange={(e) => setImagenesInput(e.target.value)} />
+                    <TextField type="text" label="URL de las Imagenes:" name="imagenes" defaultValue={imagenesInput} onChange={(e) => setImagenesInput(e.target.value)} />
                     <Button onClick={addImagenes} ><AddCircle/></Button>
                 </label><br/>
                 {ciudad.imagenes.map((imagenes, index) => (
@@ -100,14 +101,14 @@ function DashboardCreateCiudades(){
                         <button onClick={() => deleteImagenes(index)} type= "button">Delete</button>
                     </>
                 ))}
-                            </div>
+                            </div></form>
                             <Grid container justifyContent="center" spacing={1}>
                                 <Grid item>
 
             <Button variant="contained">Guardar</Button>
             </Grid><Grid item>
         <Button className="BotonesNormales" variant="contained" onClick={() => navigate(`/dashboardCiudades`)}>Volver</Button>
-                </Grid></Grid></form>
+                </Grid></Grid>
             </CardContent>    
                 </Card>
                 </Grid>

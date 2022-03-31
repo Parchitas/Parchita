@@ -88,11 +88,11 @@ function DashboardCiudadesPage(){
                     <div className="title">Agregar una nueva ciudad </div>
                     <form onSubmit={handleSubmit}>
                         
-                        <button className='button'onClick = {() => navigate(`/dashboardCiudades/create`)}>Submit</button>
+                        <button className='button'onClick = {() => navigate(`/dashboardCiudades/create`)}>Agregar</button>
                     </form> 
                     <br/>
                     <div>Volver al Dashboard</div>
-                    <button className='button' onClick={() => navigate(`/dashboard`)}>Click!!!</button>
+                    <button className='button' onClick={() => navigate(`/dashboard`)}>Volver</button>
                     </div>
                 </div>
             </div>    
