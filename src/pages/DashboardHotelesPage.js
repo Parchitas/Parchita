@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import swal from "sweetalert";
 import { Button, Grid, Typography } from "@mui/material";
 
+
 function DashboardHotelesPage() {
 
     const [hoteles, setHoteles] = React.useState([])
@@ -60,8 +61,8 @@ function DashboardHotelesPage() {
                     <div className="data">
                         <div className="hoteles">{nombre}</div>
                         <div className="botonesContainer"><Grid container justifyContent='center' spacing={0.5}>
-                            <Grid item><Button variant="contained" onClick={() => navigate(`/dashboardHoteles/${id}`)}> Editar </Button></Grid>
-                            <Grid item><Button variant="contained" onClick={(() => { handleDelete(id) })}> Eliminar </Button></Grid>
+                            <Grid item><Button variant="contained" color="success" onClick={() => navigate(`/dashboardHoteles/${id}`)}> Editar </Button></Grid>
+                            <Grid item><Button variant="contained" color="error" onClick={(() => { handleDelete(id) })}> Eliminar </Button></Grid>
                         </Grid></div>
                     </div>
                 </>

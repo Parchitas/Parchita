@@ -16,7 +16,7 @@ function DashboardPage(){
                     }}>
             <Card>
                 <CardContent>
-            <Typography ariant="h5" align="center">Que quieres modificar</Typography><br/>
+            <Typography ariant="h5" align="center">Que quieres modificar?</Typography><br/>
             <Grid container justifyContent="center" spacing={5}>
             <Grid item><Button size="big" variant="contained" onClick={()=> navigate("/dashboardCiudades")}>Ciudades</Button></Grid>
                 <Grid item><Button size="big" variant="contained" onClick={() => navigate("/dashboardHoteles")}>Hoteles</Button></Grid>

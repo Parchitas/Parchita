@@ -4,7 +4,7 @@ import { queryHoteles, updateNewHabitacion } from "../services/hoteles"
 import { createHab } from "../services/habitaciones";
 import { Grid, Card, CardContent, TextField, Button, Typography, } from "@material-ui/core";
 import { Form } from "react-bootstrap";
-import { AddCircle } from "@material-ui/icons";
+import { AddCircle, Block } from "@material-ui/icons";
 
 
 function DashboardCreateHabPage (){
@@ -108,7 +108,7 @@ function DashboardCreateHabPage (){
                 {tipoHabitaciones.comodidades.map((comodidad, index) => (
                     <><Grid container justifyContent="space-between">
                         <Grid item><span>{comodidad}</span></Grid>
-                        <Grid item><Button onClick={() => deletecomodidades(index)} type= "button">Delete</Button>
+                        <Grid item><Button onClick={() => deletecomodidades(index)} type= "button"><Block/></Button>
                     </Grid></Grid></>
                 ))}<br/>
             </div>

@@ -4,7 +4,7 @@ import { queryHotel, updateHoteles } from "../services/hoteles"
 import { queryHabitacion } from "../services/habitaciones";
 import { Grid, Card, CardContent, TextField, Button, Typography, } from "@material-ui/core";
 import { Form } from "react-bootstrap";
-import { AddCircle } from "@material-ui/icons";
+import { AddCircle, Block } from "@material-ui/icons";
 
 
 function DashboardEditHotelPage() {
@@ -113,7 +113,7 @@ function DashboardEditHotelPage() {
                 {hotel.instalaciones.map((instalacion, index) => (
                     <><Grid container justifyContent="space-between">
                         <Grid item><span>{instalacion}</span></Grid>
-                        <Grid item><Button onClick={() => deleteInstalacion(index)} type="button">Delete</Button>
+                        <Grid item><Button onClick={() => deleteInstalacion(index)} type="button"><Block/></Button>
                     </Grid></Grid></>
                 ))}<br/>
             </div>
@@ -126,14 +126,14 @@ function DashboardEditHotelPage() {
                 {hotel.tipoHabitaciones.map((tipoHabitacion, index) => (
                     <><Grid container justifyContent="space-between">
                         <Grid item><span>{getNombreHab(tipoHabitacion.id).nombre}</span></Grid>
-                        <Grid item><Button onClick={() => deleteTipoHabitacion(index)} type="button">Delete</Button>
+                        <Grid item><Button onClick={() => deleteTipoHabitacion(index)} type="button"><Block/></Button>
                     </Grid></Grid></>
                 ))}<br/>
             </div>
 <Grid container justifyContent="center" spacing={1}>
                                 <Grid item>
-            <Button onClick={handleSubmit}>Guardar</Button></Grid>
-            <Grid item><Button onClick={() => navigate(`/dashboardHoteles`)}>Regresar</Button></Grid>
+            <Button variant='contained' onClick={handleSubmit}>Guardar</Button></Grid>
+            <Grid item><Button variant='contained' onClick={() => navigate(`/dashboardHoteles`)}>Regresar</Button></Grid>
 </Grid>
         </form>
         </CardContent>

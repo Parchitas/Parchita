@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { queryCiudad, updateCiudad } from "../services/ciudades"
 import { Grid, Card, CardContent, TextField, Button, Typography, } from "@material-ui/core";
 import { Form } from "react-bootstrap";
-import { AddCircle } from "@material-ui/icons";
+import { AddCircle, Block } from "@material-ui/icons";
 
 function DashboardEditCiudadPage() {
     const navigate = useNavigate()
@@ -100,10 +100,10 @@ function DashboardEditCiudadPage() {
                                 </label>
                                 <br />
                                 {ciudad.lugaresInteres.map((lugarInteres, index) => (
-                                    <>
-                                        <span>{lugarInteres}</span>
-                                        <button onClick={() => deleteLugarInteres(index)} type="button">Delete</button>
-                                    </>
+                                    <><Grid container justifyContent="space-between">
+                                        <Grid item><span>{lugarInteres}</span></Grid>
+                                        <Grid item><Button onClick={() => deleteLugarInteres(index)} type="button"><Block/></Button>
+                                    </Grid></Grid></>
                                 ))}
                             </div>
                             <div className="arrayContainer">
@@ -112,10 +112,10 @@ function DashboardEditCiudadPage() {
                                     <Button onClick={addImagenes} ><AddCircle /></Button>
                                 </label><br />
                                 {ciudad.imagenes.map((imagenes, index) => (
-                                    <>
-                                        <span>{imagenes}</span>
-                                        <button onClick={() => deleteImagenes(index)} type="button">Delete</button>
-                                    </>
+                                    <><Grid container justifyContent="space-between">
+                                        <Grid item><span>{imagenes}</span></Grid>
+                                        <Grid item><Button onClick={() => deleteImagenes(index)} type="button"><Block/></Button>
+                                    </Grid></Grid></>
                                 ))}
             </div><br/>
                 <Grid container justifyContent="center" spacing={1}>
