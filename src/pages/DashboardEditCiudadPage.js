@@ -64,52 +64,59 @@ function DashboardEditCiudadPage() {
             <Card>
                 <CardContent>
         <form onSubmit={handleSubmit}>
-            <TextField type="text" id='nombre' name="nombre" label="Nombre" defaultValue= {ciudad.nombre ?? ""} onChange={onChange} />
-            <br/>
+                            <label>
+                                <TextField type="text" id='nombre' label="Nombre" name="nombre" value={ciudad.nombre ?? ""} onChange={onChange} required />
+                            </label>
+                            <br />
+                            <label>
+                                <TextField type="text" id="descripcion" label="Descripcion" name="descripcion" multiline value={ciudad.descripcion ?? ""} onChange={onChange} required />
+                            </label>
+                            <br />
 
-                <TextField label="Descripcion" name="descripcion" id='descripcion' multiline defaultValue={ciudad.descripcion ?? ""} onChange={onChange} />
-            <br/><br/>
+                            <Typography align="center">
+                                <label >
+                                    Ranking:
+                                    <Form.Select name="ranking" value={ciudad.ranking ?? ""} onChange={onChange} required>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </Form.Select>
+                                </label>
+                                <br />
+                            </Typography>
+                            <label>
+                                <TextField type="text" id='text' label="Ambiente" name="ambiente" value={ciudad.ambiente ?? ""} onChange={onChange} required />
+                            </label>
+                            <br />
 
-            <Typography align="center">
-            <label >
-                Ranking:
-                <Form.Select name="ranking" value={ciudad.ranking ?? ""} onChange={onChange}>
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </Form.Select>
+                            <div className="arrayContainer">
+                                <label className="arraysInput">
+
+                                    <TextField type="text" label="Lugares de Interes" name="lugaresInteres" value={lugarInteresInput} onChange={(e) => setLugarInteresInput(e.target.value)} />
+                                    <Button onClick={addLugarInteres} ><AddCircle /></Button>
+                                </label>
+                                <br />
+                                {ciudad.lugaresInteres.map((lugarInteres, index) => (
+                                    <>
+                                        <span>{lugarInteres}</span>
+                                        <button onClick={() => deleteLugarInteres(index)} type="button">Delete</button>
+                                    </>
+                                ))}
+                            </div>
+                            <div className="arrayContainer">
+                                <label className="arraysInput">
+                                    <TextField type="text" label="URL de las Imagenes:" name="imagenes" value={imagenesInput} onChange={(e) => setImagenesInput(e.target.value)} />
+                                    <Button onClick={addImagenes} ><AddCircle /></Button>
                                 </label><br />
-                                </Typography>
-
-           <TextField type="text" id='text' label="Ambiente" name='ambiente' defaultValue={ciudad.ambiente ?? ""} onChange={onChange} />
-            <br/>
-            
-            <div className="arrayContainer">
-                <label className="arraysInput">
-                    <TextField type="text" label="Lugares de Interes" name="lugaresInteres" defaultValue={lugarInteresInput} onChange={(e) => setLugarInteresInput(e.target.value)} />
-                    <Button onClick={addLugarInteres} ><AddCircle/></Button>
-                </label><br/>
-                {ciudad.lugaresInteres.map((lugarInteres, index) => (
-                    <>
-                        <span>{lugarInteres}</span>
-                        <button onClick={() => deleteLugarInteres(index)} type="button">Delete</button>
-                    </>
-                ))}
-            </div>
-            <div className="arrayContainer">
-                <label className="arraysInput">
-                    <TextField type="text" label="URL de las Imagenes:" name="imagenes" defaultValue={imagenesInput} onChange={(e) => setImagenesInput(e.target.value)} />
-                    <Button onClick={addImagenes} ><AddCircle/></Button>
-                </label>
-                {ciudad.imagenes.map((imagenes, index) => (
-                    <>
-                        <span>{imagenes}</span>
-                        <button onClick={() => deleteImagenes(index)} type="button">Delete</button>
-                    </>
-                ))}
+                                {ciudad.imagenes.map((imagenes, index) => (
+                                    <>
+                                        <span>{imagenes}</span>
+                                        <button onClick={() => deleteImagenes(index)} type="button">Delete</button>
+                                    </>
+                                ))}
             </div><br/>
                 <Grid container justifyContent="center" spacing={1}>
                                 <Grid item>
