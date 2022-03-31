@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useSearchParams, useNavigate } from "react-router-dom"
 import { ButtonGroup, Button, TextField, Typography } from "@mui/material"
+import SearchRounded from '@material-ui/icons/SearchRounded';
 
 function Search() {
     const [text, setText] = useState("");
@@ -18,7 +19,7 @@ function Search() {
             <Typography>
                 <ButtonGroup  variant="outlined" size="small" aria-label="outlined button group">
                     <TextField label="Buscar ciudad" variant="filled" onChange={(event) => setText(event.target.value)}  />
-                    <Button size="small" type="submit">Buscar ciudad</Button>      
+                    <Button size="small" type="submit"><SearchRounded/></Button>      
                 </ButtonGroup>
             </Typography>
         </form>);
