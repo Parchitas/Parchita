@@ -4,6 +4,7 @@ import { queryCiudad, updateCiudad } from "../services/ciudades"
 import { Grid, Card, CardContent, TextField, Button, Typography, } from "@material-ui/core";
 import { Form } from "react-bootstrap";
 import { AddCircle } from "@material-ui/icons";
+import { CircularProgress } from "@material-ui/core"
 
 function DashboardEditCiudadPage() {
     const navigate = useNavigate()
@@ -47,23 +48,35 @@ function DashboardEditCiudadPage() {
         setCiudad(prevCiudad => ({ ...prevCiudad, [formName]: formValue }));
     }
 
+    function validarArrays() {
+        if (ciudad.imagenes === 0 || ciudad.lugaresInteres === 0) {
+            return false;
+        } else {
+            return true
+        }
+
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
-        updateCiudad(ciudad, ciudadID).then(() => {
-            navigate("/dashboardCiudades");
-        }).catch(e => console.error({ error: e, msg: "ta malardo" }));
+        if (validarArrays()) {
+            updateCiudad(ciudad, ciudadID).then(() => {
+                navigate("/dashboardCiudades");
+            }).catch(e => console.error({ error: e, msg: "error" }));
+
+        }
     }
 
     if (loading) return (
-        <div> cargando </div>
+        <CircularProgress />
     )
 
     return (
-        <><br/><div>
+        <><br /><div>
             <Grid container justifyContent="center">
-            <Card>
-                <CardContent>
-        <form onSubmit={handleSubmit}>
+                <Card>
+                    <CardContent>
+                        <form onSubmit={handleSubmit}>
                             <label>
                                 <TextField type="text" id='nombre' label="Nombre" name="nombre" value={ciudad.nombre ?? ""} onChange={onChange} required />
                             </label>
@@ -110,25 +123,29 @@ function DashboardEditCiudadPage() {
                                 <label className="arraysInput">
                                     <TextField type="text" label="URL de las Imagenes:" name="imagenes" value={imagenesInput} onChange={(e) => setImagenesInput(e.target.value)} />
                                     <Button onClick={addImagenes} ><AddCircle /></Button>
-                                </label><br />
+                                </label>
+                                <br />
                                 {ciudad.imagenes.map((imagenes, index) => (
                                     <>
                                         <span>{imagenes}</span>
                                         <button onClick={() => deleteImagenes(index)} type="button">Delete</button>
                                     </>
                                 ))}
-            </div><br/>
-                <Grid container justifyContent="center" spacing={1}>
+                            </div><br />
+                            <Grid container justifyContent="center" spacing={1}>
                                 <Grid item>
-            <Button variant="contained">Guardar</Button>
-            </Grid><Grid item>
-            
-            <Button className="BotonesNormales" variant="contained" onClick={() => navigate(`/dashboardCiudades`)}>Regresar</Button>    
-                        </Grid></Grid></form>
-                        </CardContent>    
+                                    <Button onClick={handleSubmit} >Guardar</Button>
+                                </Grid>
+                                <Grid item>
+
+                                    <Button className="BotonesNormales" variant="contained" onClick={() => navigate(`/dashboardCiudades`)}>Regresar</Button>
+                                </Grid>
+                            </Grid>
+                        </form>
+                    </CardContent>
                 </Card>
             </Grid>
-            </div></>
+        </div></>
     )
 }
 

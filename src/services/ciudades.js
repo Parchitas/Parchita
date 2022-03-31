@@ -20,21 +20,19 @@ const queryCiudades = async () => {
 }
 
 const queryCiudades2 = async () => {
+
     const arr = [];
     await getDocs(collection(db, "ciudades"))
         .then((data) => {
-            
             data.docs.forEach((element) => {
                 arr.push({ id: element.id, ...element.data(), });
             });
+            return arr
         })
         .catch((error) => {
             console.log(error);
-        });;
-    return arr
-}
-
-const queryByName = async () =>{
+        });
+        console.log(arr)
     
 }
 

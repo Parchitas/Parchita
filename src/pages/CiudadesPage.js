@@ -6,7 +6,6 @@ import { useSearchParams } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core"
 import "../css/ciudadesPage.css"
 
-
 function CiudadesPage() {
     const [ciudades, setCiudades] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -28,6 +27,7 @@ function CiudadesPage() {
                 .catch((error) => {
                     console.log(error);
                 });;
+            
         } else {
             const q = query(collection(db, "ciudades"), where("nombrelower", "==", search.toLowerCase()));
 
@@ -45,6 +45,7 @@ function CiudadesPage() {
                     console.log(error);
                 });;
         }
+
 
     }
 

@@ -1,10 +1,9 @@
-import { map } from "@firebase/util";
 import React from "react";
-import CiudadesLista from "../components/CiudadesLista/CiudadesLista";
 import '../css/dashboardCiudades.css'
 import { queryCiudades, deleteCiudad, createCiudad } from "../services/ciudades"
 import { useNavigate } from 'react-router-dom';
 import swal from "sweetalert";
+import { CircularProgress } from "@material-ui/core"
 
 
 function DashboardCiudadesPage() {
@@ -64,59 +63,59 @@ function DashboardCiudadesPage() {
     }
 
     if (loading) return (
-        <h3>Cargando</h3>
+        <CircularProgress/>
     )
 
     return (
         <>
-        <div className="imagenFondo">
-            <div className="cont">
-                <div className="contenedor">
-                    <table className="tabla">
-                        <tr className="head">
+            <div className="imagenFondo">
+                <div className="cont">
+                    <div className="contenedor">
+                        <table className="tabla">
+                            <tr className="head">
 
-                            <th >Nombre</th>
+                                <th >Ciudad</th>
 
-                            <th>Accion</th>
+                                <th>Accion</th>
 
-        
 
-                        </tr>
-                        {loading ? <div>cargando</div> : null}
-                        {ciudades.map(({id,nombre})=>(
 
-                            <>
-                                <tr border>
-                                    <td className="Nombre">
-                                        {nombre}
-                                    </td>
-                                    <td>
-                                        <div className="botonesContainer">
-                                            <button className='button' onClick={() => navigate(`/dashboardCiudades/${id}`)}> Editar </button>
-                                            <button className='buttonE' onClick={(() => {handleDelete(id)})}> Eliminar </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                            </tr>
+                            {loading ? <CircularProgress/> : null}
+                            {ciudades.map(({ id, nombre }) => (
+
+                                <>
+                                    <tr border>
+                                        <td className="Nombre">
+                                            {nombre}
+                                        </td>
+                                        <td>
+                                            <div className="botonesContainer">
+                                                <button className='button' onClick={() => navigate(`/dashboardCiudades/${id}`)}> Editar </button>
+                                                <button className='buttonE' onClick={(() => { handleDelete(id) })}> Eliminar </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </>
+                            ))}
+                        </table>
+
+                        <div>
+
                             
-                            </>
-                        ))}
-                    </table>
+                            <form onSubmit={handleSubmit}>
 
-                <div>
-                    
-                    <div className="title">Agregar una nueva ciudad </div>
-                    <form onSubmit={handleSubmit}>
-                        
-                        <button className='button'onClick = {() => navigate(`/dashboardCiudades/create`)}>Agregar</button>
-                    </form> 
-                    <br/>
-                    <div>Volver al Dashboard</div>
-                    <button className='button' onClick={() => navigate(`/dashboard`)}>Volver</button>
+                                <button className='button' onClick={() => navigate(`/dashboardCiudades/create`)}>Agregar ciudad</button>
+                            </form>
+                            <br />
+                            
+                            <button className='button' onClick={() => navigate(`/dashboard`)}>Volver al dashboard</button>
+                        </div>
                     </div>
                 </div>
-            </div>    
-        </div>
-    </>
+            </div>
+        </>
     );
 
 }
