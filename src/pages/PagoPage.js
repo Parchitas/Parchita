@@ -13,7 +13,7 @@ function PagoPage() {
 
     const totalReserva = tipoHabitacion.precioNoche * (moment(reserva.fechaSalida).diff(moment(reserva.fechaEntrada), 'days')) 
 
-    return (<><p>Reservación exitosa.(Ahora se procede a pagar por paypal) </p>
+    return (<>
         <br /><div>
         <Box
             sx={{

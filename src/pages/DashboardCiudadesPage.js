@@ -2,18 +2,18 @@ import { map } from "@firebase/util";
 import React from "react";
 import CiudadesLista from "../components/CiudadesLista/CiudadesLista";
 import '../css/dashboardCiudades.css'
-import {queryCiudades, deleteCiudad, createCiudad} from "../services/ciudades"
+import { queryCiudades, deleteCiudad, createCiudad } from "../services/ciudades"
 import { useNavigate } from 'react-router-dom';
+import swal from "sweetalert";
 
 
-function DashboardCiudadesPage(){
+function DashboardCiudadesPage() {
 
     const [ciudades, setCiudades] = React.useState([])
     const [loading, setLoading] = React.useState(false)
     const navigate = useNavigate()
 
     React.useEffect(() => {
-
         setLoading(true)
         queryCiudades().then((response) => {
             setCiudades(response)
@@ -22,14 +22,33 @@ function DashboardCiudadesPage(){
 
     }, [])
 
-    
 
-    const handleDelete = (ciudadId) =>{
-        setLoading(true)
-        deleteCiudad(ciudadId).then(() => {
-            setCiudades(ciudades.filter( ciudad => ciudadId != ciudad.id))
-            setLoading(false)
+
+    const handleDelete = (ciudadId) => {
+        swal({
+            title: "¿Estás seguro?",
+            text: "Una vez eliminado, no se podrá recuperar los datos almacenados",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
         })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Se eliminó con exito.", {
+                        icon: "success",
+
+                    }
+
+                    );
+                    setLoading(true)
+                    deleteCiudad(ciudadId).then(() => {
+                        setCiudades(ciudades.filter(ciudad => ciudadId != ciudad.id))
+                        setLoading(false)
+                    })
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+            });
     }
 
 
