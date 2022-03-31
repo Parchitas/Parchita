@@ -1,18 +1,15 @@
 import React from 'react'
-import { CssBaseline, makeStyles, Button, Typography, Grid, Card, CardContent, Box, CardHeader } from '@material-ui/core'
+import { Typography, Grid, Card, CardContent, Box, CardHeader } from '@material-ui/core'
 import { Rating, Avatar } from '@mui/material'
 import Banner from '../components/Banner/Banner'
-import DatePicker from '../components/General/DatePicker'
-import {useState, useContext} from 'react'
-import { Link } from "react-router-dom"
+import { useContext } from 'react'
 import { sessionContext } from "../context/SessionContext"
 
 
 
 const HomePage = () => {
 
-  const {isAdmin} = useContext(sessionContext)
-
+  const { isAdmin } = useContext(sessionContext)
 
   return (
     <>
