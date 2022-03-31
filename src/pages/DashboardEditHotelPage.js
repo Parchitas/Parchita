@@ -2,6 +2,9 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { queryHotel, updateHoteles } from "../services/hoteles"
 import { queryHabitacion } from "../services/habitaciones";
+import { Grid, Card, CardContent, TextField, Button, Typography, } from "@material-ui/core";
+import { Form } from "react-bootstrap";
+import { AddCircle } from "@material-ui/icons";
 
 
 function DashboardEditHotelPage() {
@@ -75,62 +78,68 @@ function DashboardEditHotelPage() {
     )
 
     return (
+        <><br /><div>
+            <Grid container justifyContent="center">
+                <Card>
+                    <CardContent>
         <form onSubmit={handleSubmit}>
             <label >
-                Nombre:
-                <input type="text" id='nombre' name="nombre" value={hotel.nombre ?? ""} onChange={onChange} required />
-            </label>
+                <TextField type="text" id='nombre' label="Nombre" name="nombre" value={hotel.nombre ?? ""} onChange={onChange} required />
+            </label><br/>
 
             <label >
-                Imagen:
-                <input name="imagen" value={hotel.imagen ?? ""} onChange={onChange} required />
-            </label>
+                <TextField type="text" id='imagen' label="URL de Imagen" name="imagen" value={hotel.imagen ?? ""} onChange={onChange} required />
+            </label><br/><br/>
 
+            <Typography align="center">
             <label >
                 Ranking:
-                <select name="ranking" value={hotel.ranking ?? ""} onChange={onChange} required>
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </label>
+                                    <Form.Select name="ranking" value={hotel.ranking ?? ""} onChange={onChange} required>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </Form.Select>
+            </label></Typography><br/>
 
             <div className="arrayContainer">
                 <label className="arraysInput">
-                    <span>Instalaciones: </span>
-                    <input type="text" name="instalaciones" value={instalacionesInput} onChange={(e) => setInstalacionesInput(e.target.value)} />
-                    <button onClick={addInstalaciones} type="button">Add</button>
-                </label>
+                    
+                    <TextField type="text" id="instalaciones" name="instalaciones" label="Instalaciones" value={instalacionesInput} onChange={(e) => setInstalacionesInput(e.target.value)} />
+                    <Button onClick={addInstalaciones} type="button"><AddCircle /></Button>
+                </label><br/>
                 {hotel.instalaciones.map((instalacion, index) => (
-                    <>
-                        <span>{instalacion}</span>
-                        <button onClick={() => deleteInstalacion(index)} type="button">Delete</button>
-                    </>
-                ))}
+                    <><Grid container justifyContent="space-between">
+                        <Grid item><span>{instalacion}</span></Grid>
+                        <Grid item><Button onClick={() => deleteInstalacion(index)} type="button">Delete</Button>
+                    </Grid></Grid></>
+                ))}<br/>
             </div>
             <div className="arrayContainer">
                 <label className="arraysInput">
-                    <span>Tipo de Habitaciones: </span>
-                    <input type="text" name="tipoHabitaciones" value={tipoHabitacionesInput} onChange={(e) => setTipoHabitacionesInput(e.target.value)} />
-                    <button onClick={addTipoHabitaciones} type="button">Add</button>
-                </label>
+                    
+                    <TextField type="tipoHabitaciones" id='imagen' label="Tipo de Habitaciones" name="tipoHabitaciones" value={tipoHabitacionesInput} onChange={(e) => setTipoHabitacionesInput(e.target.value)} />
+                    <Button onClick={addTipoHabitaciones} type="button"><AddCircle /></Button>
+                </label><br/>
                 {hotel.tipoHabitaciones.map((tipoHabitacion, index) => (
-                    <>
-                        <span>{getNombreHab(tipoHabitacion.id).nombre}</span>
-                        <button onClick={() => deleteTipoHabitacion(index)} type="button">Delete</button>
-                    </>
-                ))}
+                    <><Grid container justifyContent="space-between">
+                        <Grid item><span>{getNombreHab(tipoHabitacion.id).nombre}</span></Grid>
+                        <Grid item><Button onClick={() => deleteTipoHabitacion(index)} type="button">Delete</Button>
+                    </Grid></Grid></>
+                ))}<br/>
             </div>
-
-            <button>Submit</button>
-
-            <div>Porsia te equivocaste de Hotel</div>
-            <button onClick={() => navigate(`/dashboardHoteles`)}>Regreso al DashboardHoteles</button>
-
+<Grid container justifyContent="center" spacing={1}>
+                                <Grid item>
+            <Button onClick={handleSubmit}>Guardar</Button></Grid>
+            <Grid item><Button onClick={() => navigate(`/dashboardHoteles`)}>Regresar</Button></Grid>
+</Grid>
         </form>
+        </CardContent>
+                </Card>
+            </Grid>
+        </div></>
 
     )
 }
