@@ -6,7 +6,6 @@ import { useSearchParams } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core"
 import "../css/ciudadesPage.css"
 
-
 function CiudadesPage() {
     const [ciudades, setCiudades] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -14,7 +13,7 @@ function CiudadesPage() {
     const search = consulta.get("search")
 
     const fetchCiudades = async () => {
-        if (search == null) {
+        if (search == null || search === "") {
             await getDocs(collection(db, "ciudades"))
                 .then((data) => {
                     const arr = [];
@@ -28,6 +27,7 @@ function CiudadesPage() {
                 .catch((error) => {
                     console.log(error);
                 });;
+            
         } else {
             const q = query(collection(db, "ciudades"), where("nombrelower", "==", search.toLowerCase()));
 
@@ -46,6 +46,7 @@ function CiudadesPage() {
                 });;
         }
 
+
     }
 
     useEffect(() => {
@@ -53,20 +54,29 @@ function CiudadesPage() {
     }, [search]);
 
 
-    return (<div className="contenedorCiudades">
+    return (
+    <>
+    
         {loading ? <CircularProgress /> :
-            <div className="contenedorInterno">
-                {(ciudades.length === 0) ? <div className="noSeEncuentra"><div className="centro">No se encontraron ciudades</div></div> :
-                    <div >
-                        <div className="titulo">
-                            <h1>CIUDADES</h1>
-                        </div>
-                        <CiudadesLista ciudades={ciudades} />
-                    </div>}
 
-            </div>
+            <>
+                {(ciudades.length === 0) ? <div className="noSeEncuentra"><div className="centro">No se encontraron ciudades</div></div> :
+                    <div className="contenedorCiudades">
+                        <div className="contenedorInterno">
+                            <div >
+                                <div className="titulo">
+                                    <h1>CIUDADES</h1>
+                                </div>
+                                <CiudadesLista ciudades={ciudades} />
+                            </div>
+                            </div>
+                    </div >
+                }
+
+           </>
         }
-    </div >);
+    
+    </>);
 }
 
 export default CiudadesPage;

@@ -1,7 +1,7 @@
 import React from "react"
 import { useParams, useLocation } from "react-router-dom";
 import Hotel from "../Hotel/Hotel"
-import { Card, CardActions, CardContent, CardMedia, Typography, Grid } from "@material-ui/core";
+import { Card, CardContent, CardMedia, Typography, Grid } from "@material-ui/core";
 import '../../css/CiudadDetalles.css'
 import { Rating } from "@mui/material";
 import { Carousel } from "react-bootstrap";
@@ -10,7 +10,6 @@ function CiudadDetalles() {
     const { ciudadID } = useParams();
     const location = useLocation()
     const { ciudad } = location.state
-    console.log("Location : ", location.state)
     const { id, nombre, descripcion, ambiente, ranking, lugaresInteres, imagenes, hoteles } = ciudad.props.ciudad
     return (
         <>
@@ -43,7 +42,7 @@ function CiudadDetalles() {
                         <h1>Hoteles</h1>
                     </div>
                     <div className="listaHoteles">
-                        
+
                         {hoteles ?
 
 
@@ -51,7 +50,7 @@ function CiudadDetalles() {
                                 <Grid container justifyContent="center" spacing={1}><Hotel key={hotel.id} hotel={hotel} /></Grid>
                             )
 
-                            
+
                             : <div>No se encuentran hoteles disponibles actualmente en esta ciudad</div>}
                     </div>
                 </div>

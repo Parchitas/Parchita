@@ -2,12 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { queryHoteles, updateNewHabitacion } from "../services/hoteles"
 import { createHab } from "../services/habitaciones";
+import { Grid, Card, CardContent, TextField, Button } from "@material-ui/core";
+import { Form } from "react-bootstrap";
+import { AddCircle, Block } from "@material-ui/icons";
+import { CircularProgress } from "@material-ui/core"
 
 
-function DashboardCreateHabPage (){
-   
+function DashboardCreateHabPage() {
+
     const navigate = useNavigate()
-    const [tipoHabitaciones, setTipoHabitaciones] = React.useState({ comodidades: [], reservaciones: []})
+    const [tipoHabitaciones, setTipoHabitaciones] = React.useState({ comodidades: [], reservaciones: [] })
     const [loading, setLoading] = React.useState(true)
     const [comodidadesInput, setcomodidadesInput] = React.useState("");
     const [hoteles, setHoteles] = React.useState([]);
@@ -34,84 +38,93 @@ function DashboardCreateHabPage (){
         setcomodidadesInput("");
     }
     function deletecomodidades(idx) {
-        setTipoHabitaciones({ ...tipoHabitaciones, comodidades: tipoHabitaciones.comodidades.filter((comodidades, index) => idx !== index )})
-    }       
+        setTipoHabitaciones({ ...tipoHabitaciones, comodidades: tipoHabitaciones.comodidades.filter((comodidades, index) => idx !== index) })
+    }
 
-    function GetHotelId(e){
-        console.log(e.target.value)
+    function GetHotelId(e) {
         setHotelID(e.target.value)
     }
 
-    function handleSubmit(e){
+    function validarArrays() {
+        if (tipoHabitaciones.comodidades.length === 0) {
+            return false
+        } else {
+            return true
+        }
+
+    }
+
+    function handleSubmit(e) {
         e.preventDefault();
-        createHab(tipoHabitaciones).then((response) =>{
-            updateNewHabitacion(response.id,hotelID)
-            navigate("/dashboardHabitaciones")
-        })
+
+        if (validarArrays()) {
+            createHab(tipoHabitaciones).then((response) => {
+                updateNewHabitacion(response.id, hotelID)
+                navigate("/dashboardHoteles")
+            })
+        }
     }
 
     if (loading) return (
-        <div>
-            Cargandou
-        </div>
+        <CircularProgress />
     )
 
-    return(
-        
-        <form onSubmit={handleSubmit}>
-            Selecciona el Hotel en donde vas a agregar la Habitacion
-            <select name="hotelID" value= {tipoHabitaciones.hotelID ?? ""} onChange={GetHotelId}>
-            {hoteles.map(({ id, nombre }) => (
-                <>
-                    <option value={id}>{nombre}</option>
-                </>
-            ))}
-            </select>
-            <label > 
-                Nombre:
-                <input type="text" id='nombre' name ="nombre" value= {tipoHabitaciones.nombre ?? ""} onChange={onChange} />
-            </label>
+    return (
+        <><br /><div>
+            <Grid container justifyContent="center">
+                <Card>
+                    <CardContent>
+                        <form onSubmit={handleSubmit}>
+                            Selecciona el Hotel en donde agregara la Habitacion
+                            <Form.Select name="hotelID" value={tipoHabitaciones.hotelID ?? ""} onChange={GetHotelId}>
+                                {hoteles.map(({ id, nombre }) => (
+                                    <>
+                                        <option value={id}>{nombre}</option>
+                                    </>
+                                ))}
+                            </Form.Select><br />
+                            <label >
+                                <TextField type="text" id='nombre' label="Nombre" name="nombre" value={tipoHabitaciones.nombre ?? ""} onChange={onChange} required />
+                            </label><br />
 
-            <label >
-                Camas:
-                <input name="camas" value= {tipoHabitaciones.camas ?? ""} onChange={onChange} />
-            </label>
-            <label >
-                Capacidad:
-                <input name="capacidad" value= {tipoHabitaciones.capacidad ?? ""} onChange={onChange} />
-            </label>
-            <label >
-                Cantidad:
-                <input name="cantidad" value= {tipoHabitaciones.cantidad ?? ""} onChange={onChange} />
-            </label>
-            <label >
-                precioNoche:
-                <input name="precioNoche" value= {tipoHabitaciones.precioNoche ?? ""} onChange={onChange} />
-            </label>
-            <label >
-                Imagen:
-                <input name="imagen" value= {tipoHabitaciones.imagen ?? ""} onChange={onChange} />
-            </label>
+                            <label >
+                                <TextField type='text' id='camas' label='Camas' name="camas" value={tipoHabitaciones.camas ?? ""} onChange={onChange} required />
+                            </label><br />
+                            <label >
+                                <TextField type='text' id='capacidad' label='Capacidad' name="capacidad" value={tipoHabitaciones.capacidad ?? ""} onChange={onChange} required />
+                            </label><br />
+                            <label >
+                                <TextField type='cantidad' id='cantidad' label='Cantidad' name="cantidad" value={tipoHabitaciones.cantidad ?? ""} onChange={onChange} required />
+                            </label><br />
+                            <label >
+                                <TextField type="number" id='precioNoche' label='Precio por Noche' name="precioNoche" value={tipoHabitaciones.precioNoche ?? ""} onChange={onChange} required />
+                            </label><br />
 
-            <div className="arrayContainer">
-                <label className="arraysInput">
-                    <span>Comodidades: </span>
-                    <input type="text" name="comodidades" value={comodidadesInput} onChange={(e) => setcomodidadesInput(e.target.value)} />
-                    <button onClick={addcomodidades} type="button">Add</button>
-                </label>
-                {tipoHabitaciones.comodidades.map((comodidad, index) => (
-                    <>
-                        <span>{comodidad}</span>
-                        <button onClick={() => deletecomodidades(index)} type= "button">Delete</button>
-                    </>
-                ))}
-            </div>
-
-            <button>Submit</button>
-            <div>Aqui para Devolverse al Dashboard de Hoteles</div>
-        <button className="BotonesNormales" onClick={() => navigate(`/dashboardHoteles`)}>Click!!!</button>
-        </form>
-
+                            <div className="arrayContainer">
+                                <label className="arraysInput">
+                                    <TextField type="text" id='comodidades' label='Comodidades' name="comodidades" value={comodidadesInput} onChange={(e) => setcomodidadesInput(e.target.value)} />
+                                    <Button onClick={addcomodidades} type="button"><AddCircle /></Button>
+                                </label>
+                                <br />
+                                {tipoHabitaciones.comodidades.map((comodidad, index) => (
+                                    <><Grid container justifyContent="space-between">
+                                        <Grid item><span>{comodidad}</span></Grid>
+                                        <Grid item><Button onClick={() => deletecomodidades(index)} type="button"><Block/></Button>
+                                        </Grid>
+                                    </Grid></>
+                                ))}
+                                <br />
+                            </div>
+                            <Grid container justifyContent="center" spacing={1}><Grid item>
+                                <Button variant="contained" onClick={handleSubmit}>Guardar</Button></Grid>
+                                <Grid item><Button variant="contained" className="BotonesNormales" onClick={() => navigate(`/dashboardHoteles`)}>Regresar</Button>
+                                </Grid>
+                            </Grid>
+                        </form>
+                    </CardContent>
+                </Card>
+            </Grid>
+        </div></>
     )
 }
 

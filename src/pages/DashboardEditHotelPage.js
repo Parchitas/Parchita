@@ -1,131 +1,243 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import {queryHotel, updateHoteles} from "../services/hoteles"
+import { queryHotel, updateHoteles } from "../services/hoteles";
 import { queryHabitacion } from "../services/habitaciones";
+import {
+  Grid,
+  Card,
+  CardContent,
+  TextField,
+  Button,
+  Typography,
+} from "@material-ui/core";
+import { Form } from "react-bootstrap";
+import { AddCircle, Block } from "@material-ui/icons";
+import { CircularProgress } from "@material-ui/core";
 
+function DashboardEditHotelPage() {
+  const navigate = useNavigate();
+  const { hotelID } = useParams();
+  const [hotel, setHotel] = React.useState();
+  const [loading, setLoading] = React.useState(true);
+  const [instalacionesInput, setInstalacionesInput] = React.useState("");
+  const [tipoHabitacionesInput, setTipoHabitacionesInput] = React.useState("");
 
+  React.useEffect(() => {
+    setLoading(true);
+    queryHotel(hotelID).then((response) => {
+      setHotel(response);
+      setLoading(false);
+    });
+  }, []);
 
-function DashboardEditHotelPage (){
-   
-    const navigate = useNavigate()
-    const { hotelID } = useParams();
-    const [hotel, setHotel] = React.useState()
-    const [loading, setLoading] = React.useState(true)
-    const [instalacionesInput, setInstalacionesInput] = React.useState("");
-    const [tipoHabitacionesInput, setTipoHabitacionesInput] = React.useState("");
+  function onChange(e) {
+    const formName = e.target.name;
+    const formValue = e.target.value;
 
-    React.useEffect(() => {
+    setHotel((prevHotel) => ({ ...prevHotel, [formName]: formValue }));
+  }
 
-        setLoading(true)
-        queryHotel(hotelID).then((response) => {
-            setHotel(response)
-            setLoading(false)
-        })
+  function addTipoHabitaciones() {
+    setHotel({
+      ...hotel,
+      tipoHabitaciones: hotel.tipoHabitaciones.concat(tipoHabitacionesInput),
+    });
+    setTipoHabitacionesInput("");
+  }
 
-    }, [])
+  function deleteTipoHabitacion(idx) {
+    setHotel({
+      ...hotel,
+      tipoHabitaciones: hotel.tipoHabitaciones.filter(
+        (tipoHabitaciones, index) => idx !== index
+      ),
+    });
+  }
 
-    function onChange(e) {
-        const formName = e.target.name;
-        const formValue = e.target.value;
+  function deleteInstalacion(idx) {
+    setHotel({
+      ...hotel,
+      instalaciones: hotel.instalaciones.filter(
+        (instalaciones, index) => idx !== index
+      ),
+    });
+  }
 
-        setHotel(prevHotel => ({ ...prevHotel, [formName]: formValue }));
+  function addInstalaciones() {
+    setHotel({
+      ...hotel,
+      instalaciones: hotel.instalaciones.concat(instalacionesInput),
+    });
+    setInstalacionesInput("");
+  }
+
+  function validarArrays() {
+    if (instalacionesInput.length === 0) {
+      return false;
+    } else {
+      return true;
     }
+  }
 
-    function addTipoHabitaciones() {
-        setHotel({ ...hotel, tipoHabitaciones: hotel.tipoHabitaciones.concat(tipoHabitacionesInput) })
-        setTipoHabitacionesInput("");
-    }
+  function handleSubmit(e) {
+    e.preventDefault();
 
-    function deleteTipoHabitacion(idx) {
-        setHotel({ ...hotel, tipoHabitaciones: hotel.tipoHabitaciones.filter((tipoHabitaciones, index) => idx !== index )})
-    } 
-    
+    updateHoteles(hotel, hotelID, hotel.ciudadID)
+      .then(() => {
+        navigate("/dashboardHoteles");
+      })
+      .catch((e) => console.error({ error: e, msg: "ta malardo" }));
+  }
 
-    function deleteInstalacion(idx) {
-        setHotel({ ...hotel, instalaciones: hotel.instalaciones.filter((instalaciones, index) => idx !== index )})
-    }       
+  const getNombreHab = async (id) => {
+    return await queryHabitacion(id);
+  };
 
-    function addInstalaciones() {
-        setHotel({ ...hotel, instalaciones: hotel.instalaciones.concat(instalacionesInput) })
-        setInstalacionesInput("");
-    }
+  if (loading) return <CircularProgress />;
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        updateHoteles(hotel,hotelID).then(() => {
-            navigate("/dashboardHoteles");
-        }).catch(e => console.error({ error: e, msg: "ta malardo" }));
-    }
-
-    const getNombreHab = async (id) => {
-        
-        return await queryHabitacion(id)
-    }
-
-    
-    if (loading) return (
-        <div> cargando </div>
-    )
-
-    return(
-        <form onSubmit={handleSubmit}>
-            <label > 
-                Nombre:
-                <input type="text" id='nombre' name ="nombre" value= {hotel.nombre ?? ""} onChange={onChange} />
-            </label>
-
-            <label >
-                Imagen:
-                <input name="imagen" value= {hotel.imagen ?? ""} onChange={onChange} />
-            </label>
-
-            <label >
-                Ranking:
-                <select name="ranking" value= {hotel.ranking ?? ""} onChange={onChange}>
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </label>
-            
-            <div className="arrayContainer">
-                <label className="arraysInput">
-                    <span>Instalaciones: </span>
-                    <input type="text" name="instalaciones" value={instalacionesInput} onChange={(e) => setInstalacionesInput(e.target.value)} />
-                    <button onClick={addInstalaciones} type="button">Add</button>
+  return (
+    <>
+      <br />
+      <div>
+        <Grid container justifyContent="center">
+          <Card>
+            <CardContent>
+              <form onSubmit={handleSubmit}>
+                <label>
+                  <TextField
+                    type="text"
+                    id="nombre"
+                    label="Nombre"
+                    name="nombre"
+                    value={hotel.nombre ?? ""}
+                    onChange={onChange}
+                    required
+                  />
                 </label>
-                {hotel.instalaciones.map((instalacion, index) => (
+                <br />
+
+                <label>
+                  <TextField
+                    type="text"
+                    id="imagen"
+                    label="URL de Imagen"
+                    name="imagen"
+                    value={hotel.imagen ?? ""}
+                    onChange={onChange}
+                    required
+                  />
+                </label>
+                <br />
+                <br />
+
+                <Typography align="center">
+                  <label>
+                    Ranking:
+                    <Form.Select
+                      name="ranking"
+                      value={hotel.ranking ?? ""}
+                      onChange={onChange}
+                      required
+                    >
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </Form.Select>
+                  </label>
+                </Typography>
+                <br />
+
+                <div className="arrayContainer">
+                  <label className="arraysInput">
+                    <TextField
+                      type="text"
+                      id="instalaciones"
+                      name="instalaciones"
+                      label="Instalaciones"
+                      value={instalacionesInput}
+                      onChange={(e) => setInstalacionesInput(e.target.value)}
+                    />
+                    <Button onClick={addInstalaciones} type="button">
+                      <AddCircle />
+                    </Button>
+                  </label>
+                  <br />
+                  {hotel.instalaciones.map((instalacion, index) => (
                     <>
-                        <span>{instalacion}</span>
-                        <button onClick={() => deleteInstalacion(index)} type= "button">Delete</button>
+                      <Grid container justifyContent="space-between">
+                        <Grid item>
+                          <span>{instalacion}</span>
+                        </Grid>
+                        <Grid item>
+                          <Button
+                            onClick={() => deleteInstalacion(index)}
+                            type="button"
+                          >
+                            <Block />
+                          </Button>
+                        </Grid>
+                      </Grid>
                     </>
-                ))}
-            </div>
-            <div className="arrayContainer">
-                <label className="arraysInput">
-                    <span>Tipo de Habitaciones: </span>
-                    <input type="text" name="tipoHabitaciones" value={tipoHabitacionesInput} onChange={(e) => setTipoHabitacionesInput(e.target.value)} />
-                    <button onClick={addTipoHabitaciones} type="button">Add</button>
-                </label>
-                {hotel.tipoHabitaciones.map((tipoHabitacion, index) => (
+                  ))}
+                  <br />
+                </div>
+                <div className="arrayContainer">
+                  <label className="arraysInput">
+                    <TextField
+                      type="tipoHabitaciones"
+                      id="imagen"
+                      label="Tipo de Habitaciones"
+                      name="tipoHabitaciones"
+                      value={tipoHabitacionesInput}
+                      onChange={(e) => setTipoHabitacionesInput(e.target.value)}
+                    />
+                    <Button onClick={addTipoHabitaciones} type="button">
+                      <AddCircle />
+                    </Button>
+                  </label>
+                  <br />
+                  {hotel.tipoHabitaciones.map((tipoHabitacion, index) => (
                     <>
-                        <span>{getNombreHab(tipoHabitacion.id).nombre}</span>
-                        <button onClick={() => deleteTipoHabitacion(index)} type= "button">Delete</button>
-                    </> 
-                ))} 
-            </div>
-
-            <button>Submit</button>
-
-            <div>Porsia te equivocaste de Hotel</div>
-            <button onClick={() => navigate(`/dashboardHoteles`)}>Regreso al DashboardHoteles</button>
-        
-        </form>
-          
-    )
+                      <Grid container justifyContent="space-between">
+                        <Grid item>
+                          <span>{getNombreHab(tipoHabitacion.id).nombre}</span>
+                        </Grid>
+                        <Grid item>
+                          <Button
+                            onClick={() => deleteTipoHabitacion(index)}
+                            type="button"
+                          ></Button>
+                        </Grid>
+                      </Grid>
+                    </>
+                  ))}
+                  <br />
+                </div>
+                <Grid container justifyContent="center" spacing={1}>
+                  <Grid item>
+                    <Button variant="contained" onClick={handleSubmit}>
+                      Guardar
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      onClick={() => navigate(`/dashboardHoteles`)}
+                    >
+                      Regresar
+                    </Button>
+                  </Grid>
+                </Grid>
+              </form>
+            </CardContent>
+          </Card>
+        </Grid>
+      </div>
+    </>
+  );
 }
 
-export default DashboardEditHotelPage; 
+export default DashboardEditHotelPage;

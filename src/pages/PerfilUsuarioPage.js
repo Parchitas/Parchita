@@ -6,7 +6,6 @@ import { Modal } from "react-bootstrap"
 import { useState } from "react";
 import {db} from '../firebase/credenciales';
 import { doc, updateDoc } from "firebase/firestore";
-import { RotateLeft } from "@material-ui/icons";
 
 const collectionDatos = "usuarios"
 
@@ -98,7 +97,7 @@ function PerfilUsuarioPage() {
                 </div>
                 <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>Editar perfil</Modal.Title>
                 </Modal.Header>
                 
            
@@ -112,7 +111,7 @@ function PerfilUsuarioPage() {
                         value={usuario.name} type="name" id='name' />
                     </label>
                     <label >
-                        correo
+                        Correo
                         <input  onChange={(e)=>setUsuario({
                             ...usuario,
                             correo:e.target.value,
@@ -120,7 +119,7 @@ function PerfilUsuarioPage() {
                         value={usuario.correo} type="email" id='email' />
                     </label>
                     <label >
-                        Telefono
+                        Teléfono
                         <input onChange={(e)=>setUsuario({
                             ...usuario,
                             telefono:e.target.value,
