@@ -68,7 +68,8 @@ const updateNewHotel = async (ciudadID,hotelID) => {
 
 
 const createCiudad = async (ciudad) => {
-
+    console.log(ciudad)
+    
     const newCiudad = {...ciudad, nombrelower: ciudad.nombre.toLowerCase()}
     const nuevaCiudad = await addDoc(collection(db, collectionCiudades), newCiudad)
     return nuevaCiudad
