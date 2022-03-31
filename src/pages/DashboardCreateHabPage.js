@@ -42,8 +42,18 @@ function DashboardCreateHabPage (){
         setHotelID(e.target.value)
     }
 
+    function validarArrays(){
+        if (tipoHabitaciones.comodidades === 0){
+            return false
+        } else{
+            return true
+        }
+    
+    }
+
     function handleSubmit(e){
         e.preventDefault();
+        
         createHab(tipoHabitaciones).then((response) =>{
             updateNewHabitacion(response.id,hotelID)
             navigate("/dashboardHabitaciones")
@@ -69,28 +79,24 @@ function DashboardCreateHabPage (){
             </select>
             <label > 
                 Nombre:
-                <input type="text" id='nombre' name ="nombre" value= {tipoHabitaciones.nombre ?? ""} onChange={onChange} />
+                <input type="text" id='nombre' name ="nombre" value= {tipoHabitaciones.nombre ?? ""} onChange={onChange} required/>
             </label>
 
             <label >
                 Camas:
-                <input name="camas" value= {tipoHabitaciones.camas ?? ""} onChange={onChange} />
+                <input name="camas" value= {tipoHabitaciones.camas ?? ""} onChange={onChange} required/>
             </label>
             <label >
                 Capacidad:
-                <input name="capacidad" value= {tipoHabitaciones.capacidad ?? ""} onChange={onChange} />
+                <input name="capacidad" value= {tipoHabitaciones.capacidad ?? ""} onChange={onChange} required/>
             </label>
             <label >
                 Cantidad:
-                <input name="cantidad" value= {tipoHabitaciones.cantidad ?? ""} onChange={onChange} />
+                <input name="cantidad" value= {tipoHabitaciones.cantidad ?? ""} onChange={onChange} required/>
             </label>
             <label >
                 precioNoche:
-                <input name="precioNoche" value= {tipoHabitaciones.precioNoche ?? ""} onChange={onChange} />
-            </label>
-            <label >
-                Imagen:
-                <input name="imagen" value= {tipoHabitaciones.imagen ?? ""} onChange={onChange} />
+                <input type="number" name="precioNoche" value= {tipoHabitaciones.precioNoche ?? ""} onChange={onChange} required/>
             </label>
 
             <div className="arrayContainer">

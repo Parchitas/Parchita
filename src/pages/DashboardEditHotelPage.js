@@ -1,12 +1,11 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import {queryHotel, updateHoteles} from "../services/hoteles"
+import { queryHotel, updateHoteles } from "../services/hoteles"
 import { queryHabitacion } from "../services/habitaciones";
 
 
+function DashboardEditHotelPage() {
 
-function DashboardEditHotelPage (){
-   
     const navigate = useNavigate()
     const { hotelID } = useParams();
     const [hotel, setHotel] = React.useState()
@@ -37,51 +36,59 @@ function DashboardEditHotelPage (){
     }
 
     function deleteTipoHabitacion(idx) {
-        setHotel({ ...hotel, tipoHabitaciones: hotel.tipoHabitaciones.filter((tipoHabitaciones, index) => idx !== index )})
-    } 
-    
+        setHotel({ ...hotel, tipoHabitaciones: hotel.tipoHabitaciones.filter((tipoHabitaciones, index) => idx !== index) })
+    }
+
 
     function deleteInstalacion(idx) {
-        setHotel({ ...hotel, instalaciones: hotel.instalaciones.filter((instalaciones, index) => idx !== index )})
-    }       
+        setHotel({ ...hotel, instalaciones: hotel.instalaciones.filter((instalaciones, index) => idx !== index) })
+    }
 
     function addInstalaciones() {
         setHotel({ ...hotel, instalaciones: hotel.instalaciones.concat(instalacionesInput) })
         setInstalacionesInput("");
     }
 
+    function validarArrays() {
+        if (instalacionesInput.length === 0) {
+            return false
+        } else {
+            return true
+        }
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
-        updateHoteles(hotel,hotelID).then(() => {
+        updateHoteles(hotel, hotelID).then(() => {
             navigate("/dashboardHoteles");
         }).catch(e => console.error({ error: e, msg: "ta malardo" }));
     }
 
     const getNombreHab = async (id) => {
-        
+
         return await queryHabitacion(id)
     }
 
-    
+
     if (loading) return (
         <div> cargando </div>
     )
 
-    return(
+    return (
         <form onSubmit={handleSubmit}>
-            <label > 
+            <label >
                 Nombre:
-                <input type="text" id='nombre' name ="nombre" value= {hotel.nombre ?? ""} onChange={onChange} />
+                <input type="text" id='nombre' name="nombre" value={hotel.nombre ?? ""} onChange={onChange} required />
             </label>
 
             <label >
                 Imagen:
-                <input name="imagen" value= {hotel.imagen ?? ""} onChange={onChange} />
+                <input name="imagen" value={hotel.imagen ?? ""} onChange={onChange} required />
             </label>
 
             <label >
                 Ranking:
-                <select name="ranking" value= {hotel.ranking ?? ""} onChange={onChange}>
+                <select name="ranking" value={hotel.ranking ?? ""} onChange={onChange} required>
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -90,7 +97,7 @@ function DashboardEditHotelPage (){
                     <option value="5">5</option>
                 </select>
             </label>
-            
+
             <div className="arrayContainer">
                 <label className="arraysInput">
                     <span>Instalaciones: </span>
@@ -100,7 +107,7 @@ function DashboardEditHotelPage (){
                 {hotel.instalaciones.map((instalacion, index) => (
                     <>
                         <span>{instalacion}</span>
-                        <button onClick={() => deleteInstalacion(index)} type= "button">Delete</button>
+                        <button onClick={() => deleteInstalacion(index)} type="button">Delete</button>
                     </>
                 ))}
             </div>
@@ -113,18 +120,18 @@ function DashboardEditHotelPage (){
                 {hotel.tipoHabitaciones.map((tipoHabitacion, index) => (
                     <>
                         <span>{getNombreHab(tipoHabitacion.id).nombre}</span>
-                        <button onClick={() => deleteTipoHabitacion(index)} type= "button">Delete</button>
-                    </> 
-                ))} 
+                        <button onClick={() => deleteTipoHabitacion(index)} type="button">Delete</button>
+                    </>
+                ))}
             </div>
 
             <button>Submit</button>
 
             <div>Porsia te equivocaste de Hotel</div>
             <button onClick={() => navigate(`/dashboardHoteles`)}>Regreso al DashboardHoteles</button>
-        
+
         </form>
-          
+
     )
 }
 

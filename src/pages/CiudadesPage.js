@@ -14,7 +14,7 @@ function CiudadesPage() {
     const search = consulta.get("search")
 
     const fetchCiudades = async () => {
-        if (search == null) {
+        if (search == null || search === "") {
             await getDocs(collection(db, "ciudades"))
                 .then((data) => {
                     const arr = [];

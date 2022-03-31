@@ -2,7 +2,7 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { queryCiudad, updateCiudad } from "../services/ciudades"
 
-function DashboardEditCiudadPage (){
+function DashboardEditCiudadPage() {
     const navigate = useNavigate()
     const { ciudadID } = useParams();
     const [ciudad, setCiudad] = React.useState()
@@ -20,17 +20,17 @@ function DashboardEditCiudadPage (){
     }, [])
 
     function deleteLugarInteres(idx) {
-        setCiudad({ ...ciudad, lugaresInteres: ciudad.lugaresInteres.filter((lugarInteres, index) => idx !== index )})
-    }       
+        setCiudad({ ...ciudad, lugaresInteres: ciudad.lugaresInteres.filter((lugarInteres, index) => idx !== index) })
+    }
 
     function addLugarInteres() {
         setCiudad({ ...ciudad, lugaresInteres: ciudad.lugaresInteres.concat(lugarInteresInput) })
         setLugarInteresInput("");
     }
-    
+
     function deleteImagenes(idx) {
-        setCiudad({ ...ciudad, imagenes: ciudad.imagenes.filter((lugarInteres, index) => idx !== index )})
-    }       
+        setCiudad({ ...ciudad, imagenes: ciudad.imagenes.filter((lugarInteres, index) => idx !== index) })
+    }
 
     function addImagenes() {
         setCiudad({ ...ciudad, imagenes: ciudad.imagenes.concat(imagenesInput) })
@@ -46,7 +46,7 @@ function DashboardEditCiudadPage (){
 
     function handleSubmit(e) {
         e.preventDefault();
-        updateCiudad(ciudad,ciudadID).then(() => {
+        updateCiudad(ciudad, ciudadID).then(() => {
             navigate("/dashboardCiudades");
         }).catch(e => console.error({ error: e, msg: "ta malardo" }));
     }
@@ -55,21 +55,21 @@ function DashboardEditCiudadPage (){
         <div> cargando </div>
     )
 
-    return(
+    return (
         <form onSubmit={handleSubmit}>
-            <label > 
+            <label >
                 Nombre:
-                <input type="text" id='nombre' name ="nombre" value= {ciudad.nombre ?? ""} onChange={onChange} />
+                <input type="text" id='nombre' name="nombre" value={ciudad.nombre ?? ""} onChange={onChange} required />
             </label>
 
             <label >
                 Descripcion:
-                <textarea name="descripcion" value= {ciudad.descripcion ?? ""} onChange={onChange} />
+                <textarea name="descripcion" value={ciudad.descripcion ?? ""} onChange={onChange} required />
             </label>
 
             <label >
                 Ranking:
-                <select name="ranking" value= {ciudad.ranking ?? ""} onChange={onChange}>
+                <select name="ranking" value={ciudad.ranking ?? ""} onChange={onChange} required>
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -81,9 +81,9 @@ function DashboardEditCiudadPage (){
 
             <label >
                 Ambiente:
-                <input type="text" id='text' name="ambiente" value= {ciudad.ambiente ?? ""} onChange={onChange} />
+                <input type="text" id='text' name="ambiente" value={ciudad.ambiente ?? ""} onChange={onChange} required />
             </label>
-            
+
             <div className="arrayContainer">
                 <label className="arraysInput">
                     <span>Lugares de Interes: </span>
@@ -93,7 +93,7 @@ function DashboardEditCiudadPage (){
                 {ciudad.lugaresInteres.map((lugarInteres, index) => (
                     <>
                         <span>{lugarInteres}</span>
-                        <button onClick={() => deleteLugarInteres(index)} type= "button">Delete</button>
+                        <button onClick={() => deleteLugarInteres(index)} type="button">Delete</button>
                     </>
                 ))}
             </div>
@@ -106,15 +106,15 @@ function DashboardEditCiudadPage (){
                 {ciudad.imagenes.map((imagenes, index) => (
                     <>
                         <span>{imagenes}</span>
-                        <button onClick={() => deleteImagenes(index)} type= "button">Delete</button>
+                        <button onClick={() => deleteImagenes(index)} type="button">Delete</button>
                     </>
                 ))}
             </div>
 
-            <button>SUUU</button>
-            
+            <button>Editar</button>
+
             <div>Porsia te equivocaste de Ciudad</div>
-            <button className="BotonesNormales" onClick={() => navigate(`/dashboardCiudades`)}>Regreso al DashboardHoteles</button>    
+            <button className="BotonesNormales" onClick={() => navigate(`/dashboardCiudades`)}>Regreso al DashboardHoteles</button>
         </form>
     )
 }
