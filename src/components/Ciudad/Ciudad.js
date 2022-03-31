@@ -6,9 +6,7 @@ import Rating from '@mui/material/Rating';
 function Ciudad(props) {
     
     const { id, nombre, ambiente, ranking, imagenes } = props.ciudad;
-    // const [imagen, setImagen] = React.useState("https://economipedia.com/wp-content/uploads/test-de-estr%C3%A9s.png")
-    //const nombreUrl = nombre.toLowerCase().replace(" ","-")
-    
+     
     return (
         <Grid item><br />
             <Link to={"/ciudades/" + id} state={{ ciudad: { props } }}>

@@ -39,11 +39,12 @@
 }
 .head th{
     
-    font-size: 50px;
+    font-size: 2rem;
 
 }
 .Nombre{
-    font-size: 25px;
+    font-size: 1.5rem;
+    padding: 0.5rem;
 
 
 }
@@ -62,7 +63,7 @@
 .button {
     display: inline-block;
     padding: 1px 20px;
-    font-size: 24px;
+    font-size: 1.5rem;
     cursor: pointer;
     text-align: center;	
     text-decoration: none;

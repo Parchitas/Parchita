@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/credenciales"
 import { useNavigate } from "react-router-dom"
-import { Card, CardContent, Typography, Box, Grid, Button, CircularProgress } from '@mui/material'
+import { Card, CardContent, Typography, Grid, Button, CircularProgress } from '@mui/material'
 
 function TipoHabitacion(props) {
 
@@ -24,12 +24,10 @@ function TipoHabitacion(props) {
     useEffect(() => {
         fetchTipoHab();
     }, []);
-    console.log(tipoHab)
+
     const { nombre, camas, capacidad, comodidades, precioNoche, reservaciones } = tipoHab
 
     const handleClick = () => {
-        console.log("Reservando...")
-        console.log(id)
         navigate("../reservar", {
             state: {
                 tipoHabitacion: { ...tipoHab, id: id, nombreHotel: nombreHotel }
@@ -60,15 +58,5 @@ function TipoHabitacion(props) {
             </div></Grid>}
     </div>);
 }
-
-//Codigo de Michelle (respaldo)
-/*<li style={{ margin: "20px" }}>
-                    <h3><strong>{nombre}</strong></h3>
-                    <h3>$ {precioNoche}</h3>
-                    <h3>{camas}</h3>
-                    <h3>Capacidad: {capacidad}</h3>
-                    <h3>Comodidades: {comodidades.join(", ")}</h3>
-                    <button onClick={handleClick}>Reservar</button>
-                </li>} */
 
 export default TipoHabitacion;

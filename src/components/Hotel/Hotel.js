@@ -24,7 +24,6 @@ function Hotel(props) {
     useEffect(() => {
         fetchHotel();
     }, []);
-    console.log("Pueba")
 
     return (
         <div>

@@ -4,13 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { Typography, Grid, Button, Card, CardContent, Box } from "@material-ui/core";
 
 
-function DashboardPage(){
-    
+function DashboardPage() {
+
     const navigate = useNavigate()
 
-    return(<><br/>
-        <div><Grid container justifyContent="center">
-            <Box sx={{
+    return (
+        <>
+            <br />
+            <div>
+                <Grid container justifyContent="center">
+                    <Box sx={{
                         width: 300,
                         height: 200,
                     }}>
@@ -20,9 +23,10 @@ function DashboardPage(){
             <Grid container justifyContent="center" spacing={5}>
             <Grid item><Button size="big" variant="contained" onClick={()=> navigate("/dashboardCiudades")}>Ciudades</Button></Grid>
                 <Grid item><Button size="big" variant="contained" onClick={() => navigate("/dashboardHoteles")}>Hoteles</Button></Grid>
-                </Grid>
-                </CardContent></Card></Box>
-        </Grid></div></>
+                            </Grid></CardContent></Card>
+                            </Box></Grid>
+            </div>
+        </>
     );
 
 }
