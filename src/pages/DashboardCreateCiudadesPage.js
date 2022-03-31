@@ -40,7 +40,7 @@ function DashboardCreateCiudades() {
         setImagenesInput("");
     }
     function validarArrays() {
-        if (ciudad.hoteles.length === 0 || ciudad.imagenes === 0 || ciudad.lugaresInteres === 0) {
+        if (ciudad.imagenes.length === 0 || ciudad.lugaresInteres.length === 0) {
             return false;
         } else {
             return true
