@@ -34,10 +34,10 @@ const queryHotel = async (id) => {
 
 }
 
-const updateHoteles = async (hotel,hotelID,ciudadID) => {
+const updateHoteles = async (hotel,hotelID,cityID) => {
     const cityRef = doc(db, collectionHoteles, hotelID)
     await updateDoc(cityRef, {
-        ciudadID: ciudadID,
+        ciudadID: cityID,
         nombre: hotel.nombre,
         imagen: hotel.imagen,
         tipoHabitaciones: hotel.tipoHabitaciones,
@@ -46,15 +46,15 @@ const updateHoteles = async (hotel,hotelID,ciudadID) => {
     });
 }
 
-const updateNewHabitacion = async (tipoHabitaciones,tipoHabitacionesID,hotelID) => {
+const updateNewHabitacion = async (tipoHabitacionesID,hotelID) => {
     const hotelRef = doc(db, collectionHoteles, hotelID)
     const docSnap = await getDoc(hotelRef);
     const hotel = docSnap.data();
     await updateDoc(hotelRef, {
-        ciudadID: hotelID,
-        nombre: hotel.nombre,
+        ciudadID: hotel.ciudadID,
         imagen: hotel.imagen,
         nombre: hotel.nombre,
+        instalaciones: hotel.instalaciones,
         tipoHabitaciones: [...hotel.tipoHabitaciones, {id: tipoHabitacionesID}]
     });
 }
